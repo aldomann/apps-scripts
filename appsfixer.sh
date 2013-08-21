@@ -4,7 +4,6 @@ echo "Select the fix you want to apply"
 echo "1)  Bashrc - Add 'Binaries' to PATH"
 echo "2)  *Directories - Create symbolic links"
 echo "3)  Broadcom Wireless - Install firmware"
-echo "14) *Fonts - Add Roboto to root"
 echo ""
 echo "4)  Google Earth - Appearance"
 echo "5)  VLC - Media keys"
@@ -14,13 +13,16 @@ echo "8)  Wine - Smooth Fonts"
 echo ""
 echo "9)  Faience Icons - Extra icons"
 echo "10) Faience GNOME Shell - Fonts"
-echo "11) *Applications - Add .desktop and .menu"
-echo "12) GNOME Shell - Set-up app folders"
-echo "13) *Nautilus - Add scripts"
+echo "11) Applications - Add .desktop,.directory, .menu"
+echo "12) Nautilus - Add scripts"
+echo "13) GNOME Shell - Set-up app folders"
+echo "14) GNOME - Set Faience/Roboto UI"
+echo "15) GNOME - Set GNOME UI"
+echo "16) GNOME Shell - Change window button layout [All:]"
 read CHOICE
 
 case $CHOICE in
-  1)
+	1)
 		echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
 		echo ''>>'.bashrc'
 		echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
@@ -34,11 +36,6 @@ case $CHOICE in
 		sudo aptitude install b43-fwcutter firmware-b43-installer
 		sudo rfkill unblock all
 		# type into terminal: 'cat /etc/modprobe.d/* | grep bcm' and see if the term 'blacklist bcm43xx' is there; if it is, type 'sudo gedit /etc/modprobe.d/blacklist.conf' and put a # in front of the line: 'blacklist bcm43xx'
-		;;
-	14)
-		echo "WIP: copy"
-		# cd /usr/share/fonts/
-		# sudo chmod -R 755 Roboto
 		;;
 # --------------------------------------------------
 	4)
@@ -200,7 +197,7 @@ case $CHOICE in
 # --------------------------------------------------	
 	9)
 		wget http://dl.dropbox.com/u/1564319/faience-extra.tar.gz
-		tar xzf faience-extra.tar.gz
+		tar -xzf faience-extra.tar.gz
 		cd faience-extra
 		sudo cp -r Faience/. /usr/share/icons/Faience/
 		sudo cp -r Faenza/. /usr/share/icons/Faenza/
@@ -212,22 +209,43 @@ case $CHOICE in
 		sudo sed -i 's/font-family: ubuntu, cantarell, sans-serif;/font-family: roboto, droid sans, ubuntu, cantarell, sans-serif;/g' '/usr/share/themes/Faience/gnome-shell/gnome-shell.css'
 			;;
 	11)
+		# Apps Desktops
 		wget http://dl.dropbox.com/u/1564319/apps-desktops.tar.gz
-		tar xzf apps-desktops.tar.gz
+		tar -xzf apps-desktops.tar.gz
 		cd apps-desktops
-		cp -r applications.menu $HOME/.config/menus
+		cp -r gnome-applications.menu $HOME/.config/menus
 		cp -r *.desktop $HOME/.local/share/applications
 		gtk-update-icon-cache
 		cd $HOME
 		rm -rf apps-desktops apps-desktops.tar.gz
-		echo "WIP: directories"
+		# Directories
+		wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
+		tar -xzf desktop-directories.tar.gz
+		rm -rf $HOME/.local/share/desktop-directories
+		mv desktop-directories $HOME/.local/share/desktop-directories
+		rm -rf desktop-directories desktop-directories.tar.gz
 		;;
 	12)
-		gsettings set org.gnome.shell app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
+		wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
+		tar -xzf nautilus-scripts.tar.gz
+		rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
+		rm -rf nautilus-scripts nautilus-scripts.tar.gz
+		nautilus -q
 		;;
 	13)
-		echo "WIP"
+		gsettings set org.gnome.shell app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
 		;;
+	14)
+		dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Faience'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Faience'" && dconf write /org/gnome/desktop/interface/icon-theme "'Faience'"
+		;;
+	15)
+		dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'cantarell 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+		;;
+	16)
+		dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
+		;;
+
+
 	*) 
 		echo "Choose a valid option"
 		exit 1
