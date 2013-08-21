@@ -1,21 +1,21 @@
 #!/bin/bash
 # Author: Alfredo Hernández <aldomann@gmail.com>
 echo "Select the PPAs you want to add"
-echo "1) Basic PPAs         [5]"
-echo "2) Exclusive PPAs     [5]"
+echo "1) Basic PPAs         [6]"
+echo "2) Exclusive PPAs     [2]"
 echo "3) Extra repositories [8]"
 echo "4) Delete duplicated  [*]"
 read CHOICE
 
 case $CHOICE in
-  1)
-		sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:tiheum/equinox && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+	1)
+		sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:tiheum/equinox && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 		;;
 	2)
-		 sudo add-apt-repository ppa:menulibre-dev/devel && sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo add-apt-repository ppa:nuvola-player-builders/unstable && sudo add-apt-repository ppa:tombeckmann && sudo add-apt-repository ppa:webupd8team/sublime-text-2
+		sudo add-apt-repository ppa:nuvola-player-builders/unstable && sudo add-apt-repository ppa:webupd8team/sublime-text-3
 		;;
 	3)
-		echo 'deb http://linux.dropbox.com/ubuntu precise main #Dropbox'>>'extras.list'
+		echo 'deb http://linux.dropbox.com/ubuntu quantal main #Dropbox'>>'extras.list'
 		echo 'deb http://archive.getdeb.net/ubuntu quantal-getdeb apps #Getdeb Apps'>>'extras.list'
 		echo 'deb http://archive.getdeb.net/ubuntu quantal-getdeb games #Getdeb Games'>>'extras.list'
 		echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
@@ -37,13 +37,4 @@ case $CHOICE in
 		echo "Choose a valid option"
 		exit 1
 		;;
-	# Eventuals [4]
-		# ppa:libreoffice
-		# ppa:otto-kesselgulasch/gimp
-		# ppa:videolan/master-daily
-		# ppa:gnome3-team/staging
-
-	# Not updated yet [2]
-		# ppa:mohanr2222/circle
-		# ppa:w-vollprecht
 esac
