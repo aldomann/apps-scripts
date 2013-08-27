@@ -239,7 +239,7 @@ case $CHOICE in
 		dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Faience'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Faience'" && dconf write /org/gnome/desktop/interface/icon-theme "'Faience'"
 		;;
 	15)
-		dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'cantarell 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+		dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
 		;;
 	16)
 		dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
