@@ -9,16 +9,17 @@ echo "4)  Google Earth - Appearance"
 echo "5)  VLC - Media keys"
 echo "6)  VLC - GNOME interface"
 echo "7)  Inkscape - Icons"
-echo "8)  Wine - Smooth Fonts"
+echo "8)  LibreOffice - Icons"
+echo "9)  Wine - Smooth Fonts"
 echo ""
-echo "9)  Faience Icons - Extra icons"
-echo "10) Faience GNOME Shell - Fonts"
-echo "11) Applications - Add .desktop,.directory, .menu"
-echo "12) Nautilus - Add scripts"
-echo "13) GNOME Shell - Set-up app folders"
-echo "14) GNOME - Set Faience/Roboto UI"
-echo "15) GNOME - Set GNOME UI"
-echo "16) GNOME Shell - Change window button layout [All:]"
+echo "10) Faience Icons - Extra icons"
+echo "11) Faience GNOME Shell - Fonts"
+echo "12) Applications - Add .desktop,.directory, .menu"
+echo "13) Nautilus - Add scripts"
+echo "14) GNOME Shell - Set-up app folders"
+echo "15) GNOME - Set Faience/Roboto UI"
+echo "16) GNOME - Set GNOME UI"
+echo "17) GNOME Shell - Change window button layout [All:]"
 read CHOICE
 
 case $CHOICE in
@@ -117,6 +118,12 @@ case $CHOICE in
 		sudo mv inkscape-icons.svg '/usr/share/inkscape/icons/icons.svg'
 		;;
 	8)
+		sudo aptitude install libreoffice-style-crystal
+		cd /tmp
+		wget https://github.com/hotice/myfiles/raw/master/images_flat.zip
+		sudo cp images_flat.zip /usr/share/libreoffice/share/config/images_crystal.zip
+		;;
+	9)
 		WINE=${WINE:-wine}
 		WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
 		DIALOG=whiptail
@@ -193,55 +200,62 @@ case $CHOICE in
 		rm -f $TMPFILE
 
 		echo Ok
+		notify-send "Wine smooth fonts have been applied"
 		;;
 # --------------------------------------------------	
-	9)
+	10)
+		cd /tmp
 		wget http://dl.dropbox.com/u/1564319/faience-extra.tar.gz
 		tar -xzf faience-extra.tar.gz
 		cd faience-extra
 		sudo cp -r Faience/. /usr/share/icons/Faience/
 		sudo cp -r Faenza/. /usr/share/icons/Faenza/
 		gtk-update-icon-cache		
-		cd $HOME
-		rm -rf faience-extra faience-extra.tar.gz
+		# cd $HOME
+		# rm -rf faience-extra faience-extra.tar.gz
 		;;
-	10)
+	11)
 		sudo sed -i 's/font-family: ubuntu, cantarell, sans-serif;/font-family: roboto, droid sans, ubuntu, cantarell, sans-serif;/g' '/usr/share/themes/Faience/gnome-shell/gnome-shell.css'
 			;;
-	11)
+	12)
 		# Apps Desktops
+		cd /tmp
 		wget http://dl.dropbox.com/u/1564319/apps-desktops.tar.gz
 		tar -xzf apps-desktops.tar.gz
 		cd apps-desktops
 		cp -r gnome-applications.menu $HOME/.config/menus
 		cp -r *.desktop $HOME/.local/share/applications
 		gtk-update-icon-cache
-		cd $HOME
-		rm -rf apps-desktops apps-desktops.tar.gz
+		# cd $HOME
+		# rm -rf apps-desktops apps-desktops.tar.gz
 		# Directories
+		cd /tmp
 		wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
 		tar -xzf desktop-directories.tar.gz
 		rm -rf $HOME/.local/share/desktop-directories
 		mv desktop-directories $HOME/.local/share/desktop-directories
-		rm -rf desktop-directories desktop-directories.tar.gz
+		# rm -rf desktop-directories desktop-directories.tar.gz
 		;;
-	12)
+	13)
+		cd /tmp
 		wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
 		tar -xzf nautilus-scripts.tar.gz
 		rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
-		rm -rf nautilus-scripts nautilus-scripts.tar.gz
+		# rm -rf nautilus-scripts nautilus-scripts.tar.gz
 		nautilus -q
 		;;
-	13)
+	14)
 		gsettings set org.gnome.shell app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
 		;;
-	14)
-		dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Faience'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Faience'" && dconf write /org/gnome/desktop/interface/icon-theme "'Faience'"
-		;;
 	15)
-		dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+		dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Faience'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Faience'" && dconf write /org/gnome/desktop/interface/icon-theme "'Faience'"
+		notify-send "UI set to Faience"
 		;;
 	16)
+		dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+		notify-send "UI set to GNOME"
+		;;
+	17)
 		dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
 		;;
 # --------------------------------------------------	
