@@ -3,7 +3,7 @@
 echo "Select the PPAs you want to add"
 echo "1) Basic PPAs         [6]"
 echo "2) Exclusive PPAs     [3]"
-echo "3) Extra repositories [8]"
+echo "3) Extra repositories [7]"
 echo "4) Delete duplicated  [*]"
 read CHOICE
 
@@ -22,7 +22,6 @@ case $CHOICE in
 		echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 		echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 		echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
-		echo 'deb http://repository.spotify.com stable non-free #Spotify'>>'extras.list'
 		chmod 644 'extras.list'
 		sudo chown root:root 'extras.list'
 		sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'

@@ -17,6 +17,7 @@ echo "11) Faience GNOME Shell - Fonts"
 echo "12) Applications - Add .desktop,.directory, .menu"
 echo "13) Nautilus - Add scripts"
 echo "14) GNOME Shell - Set-up app folders"
+echo ""
 echo "15) GNOME - Set Faience/Roboto UI"
 echo "16) GNOME - Set GNOME UI"
 echo "17) GNOME Shell - Change window button layout [All:]"
@@ -244,6 +245,7 @@ case $CHOICE in
 		# rm -rf nautilus-scripts nautilus-scripts.tar.gz
 		nautilus -q
 		;;
+# --------------------------------------------------	
 	14)
 		gsettings set org.gnome.shell app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
 		;;
