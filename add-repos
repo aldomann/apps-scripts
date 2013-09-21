@@ -25,11 +25,12 @@ case $CHOICE in
 		chmod 644 'extras.list'
 		sudo chown root:root 'extras.list'
 		sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-		sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59
+		sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
 		;;
 	4)
 		cd /etc/apt/sources.list.d/
 		sudo rm -rf *.save
+		sudo rm -rf *.list~
 		sudo rm -rf *dropbox*.list *google*.list
 		;;
 	*)
