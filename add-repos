@@ -44,8 +44,4 @@ case $CHOICE in
 		# ppa:otto-kesselgulasch/gimp
 		# ppa:tombeckmann
 		# ppa:videolan/master-daily
-
-	# Not updated yet [2]
-		# ppa:mohanr2222/circle
-		# ppa:w-vollprecht
 esac
