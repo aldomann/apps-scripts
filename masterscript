@@ -56,7 +56,7 @@ echo '#-------------------------------------------#'
     echo ''
     echo "1) Enable basic PPAs         [7]"
     echo "2) Enable extra repositories [7]"
-    echo "3) Enable exclusive PPAs     [4]"
+    echo "3) Enable exclusive PPAs     [5]"
     echo "4) Delete duplicated repos   [*]"
     echo 'r) Return?'
     echo ''
@@ -99,19 +99,19 @@ echo '#-------------------------------------------#'
         echo 'Enabling repositories...'
         echo ''
         echo 'Current repositories list: 
-        Dropbox    
-        Getdeb Apps
-        Getdeb Games
-        Google Chrome
-        Google Earth
-        Google Music Manager
-        Google Talk Plug-in'
+        Dropbox (saucy)
+        Getdeb Apps (saucy)
+        Getdeb Games (saucy)
+        Google Chrome (stable)
+        Google Earth (stable)
+        Google Music Manager (stable)
+        Google Talk Plug-in (stable)'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            echo 'deb http://linux.dropbox.com/ubuntu raring main #Dropbox'>>'extras.list'
+            echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
             echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
             echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
             echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
@@ -144,13 +144,14 @@ echo '#-------------------------------------------#'
         moka/faba-icon-theme
         moka/moka-gtk-theme
         moka/moka-icon-theme
+        rgibert/ebook
         webupd8team/sublime-text-3'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+            sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:rgibert/ebook && sudo add-apt-repository ppa:webupd8team/sublime-text-3
             notify-send "Repositories added successfully"
             clear && repositories
             ;;
@@ -211,7 +212,7 @@ echo '#-------------------------------------------#'
     function applications {
     echo ''
     echo '1) Install basic apps?         [39]'
-    echo '2) Install exclusive apps?     [13]'
+    echo '2) Install exclusive apps?     [14]'
     echo '3) Install games?              [2]'
     echo '4) Uninstall unnecessary apps? [4]'
     echo 'r) Return?'
@@ -247,13 +248,13 @@ echo '#-------------------------------------------#'
     2)
         echo 'Installing exclusive apps...'
         echo ''
-        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-icon-theme ppa-purge sublime-text-installer thunar vlc-plugin-fluidsynth'
+        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-icon-theme ppa-purge sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-icon-theme ppa-purge sublime-text-installer thunar vlc-plugin-fluidsynth
+            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-icon-theme ppa-purge sigil sublime-text-installer thunar vlc-plugin-fluidsynth
             echo 'Done.'
             notify-send "Installation was successful"
             clear && applications
@@ -279,7 +280,7 @@ echo '#-------------------------------------------#'
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo aptitude install gameconqueror vbam-gtk zsnes
+            sudo aptitude install vbam-gtk zsnes
             echo 'Done.'
             notify-send "Installation was successful"
             clear && applications
@@ -321,10 +322,10 @@ echo '#-------------------------------------------#'
             ;;
         esac
         ;;
-    # Not in use [~30]
-        # adobe-flashplugin arista gelemental gnac cutemupen mupen64plus cantor chromium-browser easytag faience-icon-theme faience-theme gnome-break-timer google-earth-stable gtk-vector-screenshot gameconqueror gwoffice hardinfo hedgewars menulibre minitube miro musique nuvolaplayer screenkey screenruler sparkleshare tucan unetbootin unoconv wesnoth
-    # Quarantine [4]
-        # gnome-clocks pitivi uberwriter pdfjam
+    # Not in use [28]
+        # arista cantor chromium-browser cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler uberwriter unetbootin wesnoth
+    # Quarantine [1]
+        # pdfjam
     # Return
     [Rr]*) 
         clear && main;;
@@ -334,7 +335,7 @@ echo '#-------------------------------------------#'
     esac
     }
 # --------------------------------------------------
-# FIX APPS
+# FIX APPLICATIONS
     function fixapps {
     echo ''
     echo "1) Install Broadcom Wireless firmware?"
@@ -395,7 +396,7 @@ echo '#-------------------------------------------#'
                 echo 'LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./googleearth-bin "$@"'>>'/opt/google/earth/free/googleearth'
                 sudo chown root '/opt/google/earth/free/googleearth'
                 sudo chmod 755 '/opt/google/earth/free/googleearth'
-            # Libraries
+            # Install libraries
                 # sudo aptitude install libqtwebkit4 libcurl4-openssl-dev
             notify-send "Google Earth" "The native appearance has been fixed successfully" -i google-earth
             clear && fixapps
@@ -803,7 +804,7 @@ echo '#-------------------------------------------#'
     esac
     }
 # --------------------------------------------------
-# ADVANCED CONFIG
+# ADVANCED CONFIGURATION
     function advanced {
     echo ''
     echo "1) Add 'Binaries' to PATH?"
@@ -920,10 +921,9 @@ echo '#-------------------------------------------#'
     function hardware {
     echo ''
     echo '1) Show disk usage?'
-    echo '2) Show kernel and system version?'
-    echo '3) Show system information?'
-    echo '4) Show CPU information?'
-    echo '5) Show memory information?'
+    echo '2) Show kernel version?'
+    echo '3) Show system controllers?'
+    echo '4) Show CPU, RAM and architecture information?'
     echo 'r) Return?'
     echo ''
     read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -933,9 +933,10 @@ echo '#-------------------------------------------#'
         df -h
         hardware
         ;;
-    # Show kernel and system version
+    # Show kernel version
     2)
-        uname -a
+        uname -r 
+        # uname -a shows kernel and arch info
         hardware
         ;;
     # Show system information
@@ -943,14 +944,9 @@ echo '#-------------------------------------------#'
         lspci -v
         hardware
         ;;
-    # Show CPU information
+    # Show CPU, RAM, arch information
     4)
-        cat /proc/cpuinfo
-        hardware
-        ;;
-    # Show memory information
-    5)
-        cat /proc/meminfo
+        grep "model name" /proc/cpuinfo && grep MemTotal /proc/meminfo && lscpu
         hardware
         ;;
     # Return
@@ -962,7 +958,7 @@ echo '#-------------------------------------------#'
     esac
     }
 # --------------------------------------------------
-# CLEANUP SYSTEM
+# SYSTEM CLEANUP
     function cleanup {
     echo ''
     echo '1) Remove unused pre-installed packages?'
@@ -974,21 +970,21 @@ echo '#-------------------------------------------#'
     echo ''
     read -p 'What would you like to do? (Enter your choice): ' REPLY
     case $REPLY in
-    # Remove Unused Pre-installed Packages
+    # Remove unused pre-installed packages
     1)
         echo 'Removing selected pre-installed applications...'
         sudo apt-get purge 
         echo 'Done.'
         cleanup
         ;;
-    # Remove Old Kernel
+    # Remove old kernel(s)
     2)
         echo 'Removing old Kernel(s)...'
         sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
         echo 'Done.'
         cleanup
         ;;
-    # Remove Orphaned Packages
+    # Remove orphaned packages
     3)
         echo 'Removing orphaned packages...'
         sudo apt-get autoremove -y
@@ -1002,7 +998,7 @@ echo '#-------------------------------------------#'
         echo 'Done.'
         cleanup
         ;;
-    # Clean Package Cache
+    # Clean package cache
     5)
         echo 'Cleaning package cache...'
         sudo aptitude clean
@@ -1045,13 +1041,13 @@ echo '#-------------------------------------------#'
     read -p 'What would you like to do? (Enter your choice): ' REPLY
     case $REPLY in
         1) sysupgrade;; # System Upgrade
-        2) clear && repositories;; # Enable repositories
+        2) clear && repositories;; # Enable repos
         3) clear && applications;; # Install apps
         4) clear && fixapps;; # Fix apps
-        5) clear && layout;; # Config layout
+        5) clear && layout;; # Change layouts
         6) clear && advanced;; # Advanced config
         7) clear && hardware;; # Hardware info
-        8) clear && cleanup;; # Cleanup System
+        8) clear && cleanup;; # System cleanup
         [Qq]* ) echo '' && quit;; # Quit
         * ) clear && echo 'Not an option, try again.' && main;;
     esac
