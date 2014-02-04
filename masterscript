@@ -145,7 +145,7 @@ echo '#-------------------------------------------#'
         moka/moka-gnome-shell-theme
         moka/moka-gtk-theme
         moka/moka-icon-theme
-        rgibert/ebook
+        rgibert/ebook (the system does not recognise it)
         webupd8team/sublime-text-3'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -212,7 +212,7 @@ echo '#-------------------------------------------#'
 # INSTALL APPLICATIONS
     function applications {
     echo ''
-    echo '1) Install basic apps?         [39]'
+    echo '1) Install basic apps?         [40]'
     echo '2) Install exclusive apps?     [16]'
     echo '3) Install games?              [2]'
     echo '4) Uninstall unnecessary apps? [4]'
@@ -224,13 +224,13 @@ echo '#-------------------------------------------#'
     1)
         echo 'Installing basic apps...'
         echo ''
-        echo 'Current package list: alacarte bleachbit fonts-droid fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-unstable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+        echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo aptitude install alacarte bleachbit fonts-droid fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-unstable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+            sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
             notify-send "Installation was successful"
             clear && applications
             ;;
