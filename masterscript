@@ -214,7 +214,7 @@ echo '#-------------------------------------------#'
     function applications {
     echo ''
     echo '1) Install basic apps?         [40]'
-    echo '2) Install exclusive apps?     [16]'
+    echo '2) Install exclusive apps?     [17]'
     echo '3) Install games?              [2]'
     echo '4) Uninstall unnecessary apps? [4]'
     echo 'r) Return?'
@@ -250,13 +250,13 @@ echo '#-------------------------------------------#'
     2)
         echo 'Installing exclusive apps...'
         echo ''
-        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
+        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge sigil sublime-text-installer thunar vlc-plugin-fluidsynth
+            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth
             echo 'Done.'
             notify-send "Installation was successful"
             clear && applications
