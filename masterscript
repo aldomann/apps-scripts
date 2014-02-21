@@ -145,14 +145,14 @@ echo '#-------------------------------------------#'
         moka/moka-gnome-shell-theme
         moka/moka-gtk-theme
         moka/moka-icon-theme
-        rgibert/ebook (the system does not recognise it)
+        moka/orchis-gtk-theme
         webupd8team/sublime-text-3'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:rgibert/ebook && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+            sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
             notify-send "Repositories added successfully"
             clear && repositories
             ;;
@@ -214,7 +214,7 @@ echo '#-------------------------------------------#'
     function applications {
     echo ''
     echo '1) Install basic apps?         [40]'
-    echo '2) Install exclusive apps?     [17]'
+    echo '2) Install exclusive apps?     [18]'
     echo '3) Install games?              [2]'
     echo '4) Uninstall unnecessary apps? [4]'
     echo 'r) Return?'
@@ -250,13 +250,13 @@ echo '#-------------------------------------------#'
     2)
         echo 'Installing exclusive apps...'
         echo ''
-        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
+        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
         echo ''
         read -p 'Proceed? (Y)es, (N)o : ' REPLY
         case $REPLY in
         # Positive action
         [Yy]* )
-            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth
+            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth
             echo 'Done.'
             notify-send "Installation was successful"
             clear && applications
@@ -328,6 +328,8 @@ echo '#-------------------------------------------#'
         # arista cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
     # Quarantine [2]
         # gparted pdfjam
+    # LaTeX [4]
+        # asymptote gummi texlive texlive-latex-extra
     # Return
     [Rr]*) 
         clear && main;;
