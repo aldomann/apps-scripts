@@ -21,1042 +21,1005 @@ echo '#-------------------------------------------#'
 #----- FUNCTIONS -----#
 
 # SYSTEM UPGRADE
-    function sysupgrade {
-    # Perform system upgrade
-    echo ''
-    read -p 'Proceed with system upgrade? (Y)es, (N)o : ' REPLY
-    case $REPLY in
-    # Positive action
-    [Yy]* )
-        # Update repository information
-        echo 'Updating repository information...'
-        sudo aptitude update
-        notify-send "Repository information has been updated" -i system-software-update
-        # Dist-Upgrade
-        echo 'Performing system upgrade...'
-        sudo aptitude full-upgrade
-        echo 'Done.'
-        notify-send "System upgrade was successful" -i system-software-update 
-        main
-        ;;
-    # Negative action
-    [Nn]* )
-        clear && main
-        ;;
-    # Error
-    * )
-        clear && echo 'Sorry, try again.'
-        sysupgrade
-        ;;
-    esac
-    }
+	function sysupgrade {
+	# Perform system upgrade
+	echo ''
+	read -p 'Proceed with system upgrade? (Y)es, (N)o : ' REPLY
+	case $REPLY in
+	# Positive action
+	[Yy]* )
+		# Update repository information
+		echo 'Updating repository information...'
+		sudo aptitude update
+		notify-send "Repository information has been updated" -i system-software-update
+		# Dist-Upgrade
+		echo 'Performing system upgrade...'
+		sudo aptitude full-upgrade
+		echo 'Done.'
+		notify-send "System upgrade was successful" -i system-software-update 
+		main
+		;;
+	# Negative action
+	[Nn]* )
+		clear && main
+		;;
+	# Error
+	* )
+		clear && echo 'Sorry, try again.'
+		sysupgrade
+		;;
+	esac
+	}
 # --------------------------------------------------
 # ENABLE REPOSITORIES
-    function repositories {
-    echo ''
-    echo "1) Enable basic PPAs         [6]"
-    echo "2) Enable extra repositories [7]"
-    echo "3) Enable exclusive PPAs     [6]"
-    echo "4) Delete duplicated repos   [*]"
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Basic PPAs
-    1)
-        echo 'Enabling repositories...'
-        echo ''
-        echo 'Current repositories list: 
-        cybolic/vineyard-testing 
-        gnome3-team/gnome3 
-        gnome3-team/gnome3-next 
-        gnome3-team/gnome3-staging 
-        tiheum/equinox 
-        ubuntu-wine 
-        webupd8team/java'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
-            notify-send "Repositories added successfully"
-            clear && repositories
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && repositories
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            repositories
-            ;;
-        esac
-        ;;
-    # Extra repositories
-    2)
-        echo 'Enabling repositories...'
-        echo ''
-        echo 'Current repositories list: 
-        Dropbox (saucy)
-        Getdeb Apps (saucy)
-        Getdeb Games (saucy)
-        Google Chrome (stable)
-        Google Earth (stable)
-        Google Music Manager (stable)
-        Google Talk Plug-in (stable)'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
-            echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
-            echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
-            echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
-            echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
-            echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
-            echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
-            chmod 644 'extras.list'
-            sudo chown root:root 'extras.list'
-            sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
-            notify-send "Repositories added successfully"
-            clear && repositories
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && repositories
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            repositories
-            ;;
-        esac
-        ;;
-    # Exclusive PPAs
-    3)
-        echo 'Enabling repositories...'
-        echo ''
-        echo 'Current repositories list: 
-        moka/faba-icon-theme
-        moka/moka-gnome-shell-theme
-        moka/moka-gtk-theme
-        moka/moka-icon-theme
-        moka/orchis-gtk-theme
-        webupd8team/sublime-text-3'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
-            notify-send "Repositories added successfully"
-            clear && repositories
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && repositories
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            repositories
-            ;;
-        esac
-        ;;
-    # Delete repositories
-    4)
-        echo 'Deleting repositories...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            cd /etc/apt/sources.list.d/
-            sudo rm -rf *.save
-            sudo rm -rf *.list~
-            sudo rm -rf *dropbox*.list *google*.list
-            notify-send "Repositories cleaned-up successfully"
-            clear && repositories
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && repositories
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            repositories
-            ;;
-        esac
-        ;;
-    # Eventuals [7]
-        # ppa:brainbreak/experimental
-        # ppa:libreoffice
-        # ppa:nilarimogard/webupd8
-        # ppa:otto-kesselgulasch/gimp
-        # ppa:tiheum/equinox
-        # ppa:tombeckmann
-        # ppa:videolan/master-daily
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && repositories;;
-    esac
-    }
+	function repositories {
+	echo ''
+	echo "1) Enable basic PPAs         [6]"
+	echo "2) Enable extra repositories [7]"
+	echo "3) Enable exclusive PPAs     [6]"
+	echo "4) Delete duplicated repos   [*]"
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Basic PPAs
+	1)
+		echo 'Enabling repositories...'
+		echo ''
+		echo 'Current repositories list: 
+		cybolic/vineyard-testing (not trusty) 
+		gnome3-team/gnome3 
+		gnome3-team/gnome3-next 
+		gnome3-team/gnome3-staging 
+		tiheum/equinox (not trusty)
+		ubuntu-wine 
+		webupd8team/java'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			notify-send "Repositories added successfully"
+			clear && repositories
+			;;
+		# Negative action
+		[Nn]* )
+			clear && repositories
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			repositories
+			;;
+		esac
+		;;
+	# Extra repositories
+	2)
+		echo 'Enabling repositories...'
+		echo ''
+		echo 'Current repositories list: 
+		Dropbox (saucy)
+		Getdeb Apps (saucy)
+		Getdeb Games (saucy)
+		Google Chrome (stable)
+		Google Earth (stable)
+		Google Music Manager (stable)
+		Google Talk Plug-in (stable)'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
+			chmod 644 'extras.list'
+			sudo chown root:root 'extras.list'
+			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
+			notify-send "Repositories added successfully"
+			clear && repositories
+			;;
+		# Negative action
+		[Nn]* )
+			clear && repositories
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			repositories
+			;;
+		esac
+		;;
+	# Exclusive PPAs
+	3)
+		echo 'Enabling repositories...'
+		echo ''
+		echo 'Current repositories list: 
+		moka/faba-icon-theme
+		moka/moka-gnome-shell-theme
+		moka/moka-gtk-theme
+		moka/moka-icon-theme
+		moka/orchis-gtk-theme
+		webupd8team/sublime-text-3'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			notify-send "Repositories added successfully"
+			clear && repositories
+			;;
+		# Negative action
+		[Nn]* )
+			clear && repositories
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			repositories
+			;;
+		esac
+		;;
+	# Delete repositories
+	4)
+		echo 'Deleting repositories...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			cd /etc/apt/sources.list.d/
+			sudo rm -rf *.save
+			sudo rm -rf *.list~
+			sudo rm -rf *dropbox*.list *google*.list
+			notify-send "Repositories cleaned-up successfully"
+			clear && repositories
+			;;
+		# Negative action
+		[Nn]* )
+			clear && repositories
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			repositories
+			;;
+		esac
+		;;
+	# Eventuals [7]
+		# ppa:brainbreak/experimental
+		# ppa:libreoffice
+		# ppa:nilarimogard/webupd8
+		# ppa:otto-kesselgulasch/gimp
+		# ppa:tiheum/equinox
+		# ppa:tombeckmann
+		# ppa:videolan/master-daily
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && repositories;;
+	esac
+	}
 # --------------------------------------------------
 # INSTALL APPLICATIONS
-    function applications {
-    echo ''
-    echo '1) Install basic apps?         [40]'
-    echo '2) Install exclusive apps?     [18]'
-    echo '3) Install games?              [2]'
-    echo '4) Uninstall unnecessary apps? [4]'
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Install basic apps
-    1)
-        echo 'Installing basic apps...'
-        echo ''
-        echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
-            notify-send "Installation was successful"
-            clear && applications
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && applications
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            applications
-            ;;
-        esac
-        ;;
-    # Install extra apps
-    2)
-        echo 'Installing exclusive apps...'
-        echo ''
-        echo 'Current package list: bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude install bzr comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-gtk-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sigil sublime-text-installer thunar vlc-plugin-fluidsynth
-            echo 'Done.'
-            notify-send "Installation was successful"
-            clear && applications
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && applications
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            applications
-            ;;
-        esac
-        ;;
-    # Install games
-    3)
-        echo 'Installing games...'
-        echo ''
-        echo 'Current package list: vbam-gtk zsnes'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude install vbam-gtk zsnes
-            echo 'Done.'
-            notify-send "Installation was successful"
-            clear && applications
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && applications
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            applications
-            ;;
-        esac
-        ;;
-    # Uninstall apps
-    4)
-        echo 'Uninstalling unnecessary apps...'
-        echo ''
-        echo 'Current package list: firefox firefox-locale-en firefox-locale-es xul-ext-ubufox'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
-            echo 'Done.'
-            notify-send "Uninstallation was successful"
-            clear && applications
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && applications
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            applications
-            ;;
-        esac
-        ;;
-    # Not in use [26]
-        # arista cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
-    # Quarantine [2]
-        # gparted pdfjam
-    # LaTeX [4]
-        # asymptote gummi texlive texlive-latex-extra
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && applications;;
-    esac
-    }
+	function applications {
+	echo ''
+	echo '1) Install basic apps?         [40]'
+	echo '2) Install exclusive apps?     [15]'
+	echo '3) Install games?              [2]'
+	echo '4) Uninstall unnecessary apps? [4]'
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Install basic apps
+	1)
+		echo 'Installing basic apps...'
+		echo ''
+		echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Install extra apps
+	2)
+		echo 'Installing exclusive apps...'
+		echo ''
+		echo 'Current package list: comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			echo 'Done.'
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Install games
+	3)
+		echo 'Installing games...'
+		echo ''
+		echo 'Current package list: vbam-gtk zsnes'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install vbam-gtk zsnes
+			echo 'Done.'
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Uninstall apps
+	4)
+		echo 'Uninstalling unnecessary apps...'
+		echo ''
+		echo 'Current package list: firefox firefox-locale-en firefox-locale-es xul-ext-ubufox'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
+			echo 'Done.'
+			notify-send "Uninstallation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Not in use [28]
+		# arista bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars menulibre minitube miro moka-gtk-theme mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
+	# Quarantine [2]
+		# gparted pdfjam
+	# LaTeX [4]
+		# asymptote gummi texlive texlive-latex-extra
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && applications;;
+	esac
+	}
 # --------------------------------------------------
 # FIX APPLICATIONS
-    function fixapps {
-    echo ''
-    echo "1) Install Broadcom Wireless firmware?"
-    echo "2) Fix Google Earth appearance?"
-    echo "3) Enable media keys and GNOME interface for VLC"
-    echo "4) Use symbolic icons in Inkscape?"
-    echo "5) Use symbolic icons in LibreOffice?"
-    echo "6) Enable smooth fonts in Wine?"
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Install Broadcom Wireless
-    1)
-        echo 'Installing Broadcom Wireless firmware...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude install b43-fwcutter firmware-b43-installer
-            sudo rfkill unblock all
-            # type into terminal: 'cat /etc/modprobe.d/* | grep bcm' and see if the term 'blacklist bcm43xx' is there; if it is, type 'sudo gedit /etc/modprobe.d/blacklist.conf' and put a # in front of the line: 'blacklist bcm43xx'
-            notify-send "Broadcom Wireless firmware installed successfully" -i network-wireless
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    #Google Earth fix
-    2)
-        echo 'Applying fix for Google Earth...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            # Delete files
-                cd /opt/google/earth/free
-                sudo rm -rf libcurl.so.4 libGLU.so.1 libnss_mdns4_minimal.so.2 libQtCore.so.4 libQtGui.so.4 libQtNetwork.so.4 libQtWebKit.so.4
-                cd $HOME
-            # Replace libfreeimage
-                wget http://ubuntuone.com/4eMEQzuvi3GYedUe8UBhLS
-                sudo mv 4eMEQzuvi3GYedUe8UBhLS '/opt/google/earth/free/libfreeimage.so.3'
-                sudo chown $USERNAME:$USERNAME '/opt/google/earth/free/googleearth'
-                sudo chmod 777 '/opt/google/earth/free/googleearth'
-                sudo sed -i '43 d' '/opt/google/earth/free/googleearth'
-                sudo sed -i '42 d' '/opt/google/earth/free/googleearth'
-                echo 'export LD_PRELOAD=libfreeimage.so.3'>>'/opt/google/earth/free/googleearth'
-                echo 'LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./googleearth-bin "$@"'>>'/opt/google/earth/free/googleearth'
-                sudo chown root '/opt/google/earth/free/googleearth'
-                sudo chmod 755 '/opt/google/earth/free/googleearth'
-            # Install libraries
-                # sudo aptitude install libqtwebkit4 libcurl4-openssl-dev
-            notify-send "Google Earth" "The native appearance has been fixed successfully" -i google-earth
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    #VLC fixes
-    3)
-        echo 'Applying fixes for VLC...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            #VLC Media Keys
-                vlcrc="$HOME/.config/vlc/vlcrc"
-                sed -i 's/#global-key-play-pause=/global-key-play-pause=Media Play Pause/' $vlcrc
-                sed -i 's/#global-key-next=/global-key-next=Media Next Track/' $vlcrc
-                sed -i 's/#global-key-prev=/global-key-prev=Media Prev Track/' $vlcrc
-                sed -i 's/#global-key-stop=/global-key-stop=Media Stop/' $vlcrc
-            #VLC GNOME Interface
-                cd $HOME/.config/vlc/
-                rm -rf vlc-qt-interface.conf
-                echo '[General]'>>'vlc-qt-interface.conf'
-                echo 'IsFirstRun=0'>>'vlc-qt-interface.conf'
-                echo 'geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x1\0\0\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\0\0\0\0)'>>'vlc-qt-interface.conf'
-                echo ''>>'vlc-qt-interface.conf'
-                echo '[MainWindow]'>>'vlc-qt-interface.conf'
-                echo 'pl-dock-status=true'>>'vlc-qt-interface.conf'
-                echo 'status-bar-visible=false'>>'vlc-qt-interface.conf'
-                echo 'playlist-visible=false'>>'vlc-qt-interface.conf'
-                echo 'adv-controls=0'>>'vlc-qt-interface.conf'
-                echo 'bgSize=@Size(489 0)'>>'vlc-qt-interface.conf'
-                echo 'playlistSize=@Size(-1 -1)'>>'vlc-qt-interface.conf'
-                echo 'MainToolbar1="64;39-5;64;38-5;65;"'>>'vlc-qt-interface.conf'
-                echo 'MainToolbar2="3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;"'>>'vlc-qt-interface.conf'
-                echo 'AdvToolbar="12-5;11-5;13-5;14-5;"'>>'vlc-qt-interface.conf'
-                echo 'FSCtoolbar="64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
-                echo 'InputToolbar='>>'vlc-qt-interface.conf'
-                echo 'ToolbarPos=0'>>'vlc-qt-interface.conf'
-                echo ''>>'vlc-qt-interface.conf'
-                echo '[ToolbarProfiles]'>>'vlc-qt-interface.conf'
-                echo '1\ProfileName=VLC 2.x.x Style'>>'vlc-qt-interface.conf'
-                echo '1\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;9;64;10;20;19;64-4;37;65;35-4;|12;11;13;14;|43;33-4;44;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-                echo '2\ProfileName=VLC 1.1.x Style'>>'vlc-qt-interface.conf'
-                echo '2\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;10;9;64-4;20;19;64-4;37;65;35-4;|12;11;13;14;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-                echo '3\ProfileName=VLC 0.8.x Style'>>'vlc-qt-interface.conf'
-                echo '3\Value="1|64;39-1;64;38;|2-1;32-4;0-5;1-5;32-5;3-5;5-5;6-5;4-5;32-5;10-1;64-1;35-1;65;|12-1;11-1;13-1;14-1;|33;37-4;|0-5;1-5;32-1;1-5;5-1;6-1;4-5;32-1;12-5;11-1;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
-                echo '4\ProfileName=Minimalist Style'>>'vlc-qt-interface.conf'
-                echo '4\Value="0|64;65;|0-7;64;3-1;1-5;4-1;64;12-5;64-5;37-5;38-5;64-4;10-1;65;36-4;|11-5;13-5;14-5;|5-1;33;6-1;|0-5;64;3-5;1-5;4-5;64;12-5;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
-                echo '5\ProfileName=One-Liner Style'>>'vlc-qt-interface.conf'
-                echo '5\Value="0|64;38;65;|0-4;64;3;1;4;64;7;10;9;64-4;39;64-4;37;65;36-4;|12;11;14;13;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-                echo '6\ProfileName=Simplest Style'>>'vlc-qt-interface.conf'
-                echo '6\Value="0||36-4;65-4;0-7;4-5;1-5;65-4;7-5;|12-4;11;13;||36-4;65-4;0-5;4-5;1-5;65;8-5;"'>>'vlc-qt-interface.conf'
-                echo '7\ProfileName=GNOME'>>'vlc-qt-interface.conf'
-                echo '7\Value="0|64;39-5;64;38-5;65;|3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;|12-5;11-5;13-5;14-5;||64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
-                echo 'size=7'>>'vlc-qt-interface.conf'
-                echo ''>>'vlc-qt-interface.conf'
-                echo '[FullScreen]'>>'vlc-qt-interface.conf'
-                echo 'pos=@Point(0 0)'>>'vlc-qt-interface.conf'
-                echo 'screen=@Rect(0 0 0 0)'>>'vlc-qt-interface.conf'
-                echo 'wide=false'>>'vlc-qt-interface.conf'
-            cd $HOME
-            notify-send "VLC media player" "Desktop integration applied successfully" -i vlc
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    #Inkscape icons
-    4)
-        echo 'Applying fix for Inkscape...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            # Backup icons-old.svg
-                sudo mv '/usr/share/inkscape/icons/icons-old.svg' '/usr/share/inkscape/icons/icons.svg' 
-                sudo mv '/usr/share/inkscape/icons/icons.svg' '/usr/share/inkscape/icons/icons-old.svg' 
-                # sudo cp '/usr/share/inkscape/icons/tango_icons.svg' '/usr/share/inkscape/icons/icons.svg'
-            # Download new icons 
-                wget https://raw.github.com/gnome-design-team/gnome-icons/master/inkscape-symbolic/inkscape-icons.svg
-                sudo mv inkscape-icons.svg '/usr/share/inkscape/icons/icons.svg'
-            notify-send "Inkscape" "Symbolic icons have been installed successfully" -i inkscape
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    #LibreOffice icons
-    5)
-        echo 'Applying fix for LibreOffice...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            sudo aptitude install libreoffice-style-crystal
-            cd /tmp
-            wget https://github.com/hotice/myfiles/raw/master/images_flat.zip
-            sudo cp images_flat.zip /usr/share/libreoffice/share/config/images_crystal.zip
-            notify-send "LibreOffice" "Symbolic icons have been installed successfully" -i libreoffice-main
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    #Wine fonts
-    6)
-        echo 'Applying fix for Wine...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            WINE=${WINE:-wine}
-            WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
-            DIALOG=whiptail
+	function fixapps {
+	echo ''
+	echo "1) Install Broadcom Wireless firmware?"
+	echo "2) Fix Google Earth appearance?"
+	echo "3) Enable media keys and GNOME interface for VLC"
+	echo "4) Use symbolic icons in Inkscape?"
+	echo "5) Enable smooth fonts in Wine?"
+	echo "6) Crack Sublime Text 3 License?"
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Install Broadcom Wireless
+	1)
+		echo 'Installing Broadcom Wireless firmware...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install b43-fwcutter firmware-b43-installer
+			sudo rfkill unblock all
+			# type into terminal: 'cat /etc/modprobe.d/* | grep bcm' and see if the term 'blacklist bcm43xx' is there; if it is, type 'sudo gedit /etc/modprobe.d/blacklist.conf' and put a # in front of the line: 'blacklist bcm43xx'
+			notify-send "Broadcom Wireless firmware installed successfully" -i network-wireless
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	#Google Earth fix
+	2)
+		echo 'Applying fix for Google Earth...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Delete files
+				cd /opt/google/earth/free
+				sudo rm -rf libcurl.so.4 libGLU.so.1 libnss_mdns4_minimal.so.2 libQtCore.so.4 libQtGui.so.4 libQtNetwork.so.4 libQtWebKit.so.4
+				cd $HOME
+			# Replace libfreeimage
+				wget http://ubuntuone.com/4eMEQzuvi3GYedUe8UBhLS
+				sudo mv 4eMEQzuvi3GYedUe8UBhLS '/opt/google/earth/free/libfreeimage.so.3'
+				sudo chown $USERNAME:$USERNAME '/opt/google/earth/free/googleearth'
+				sudo chmod 777 '/opt/google/earth/free/googleearth'
+				sudo sed -i '43 d' '/opt/google/earth/free/googleearth'
+				sudo sed -i '42 d' '/opt/google/earth/free/googleearth'
+				echo 'export LD_PRELOAD=libfreeimage.so.3'>>'/opt/google/earth/free/googleearth'
+				echo 'LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./googleearth-bin "$@"'>>'/opt/google/earth/free/googleearth'
+				sudo chown root '/opt/google/earth/free/googleearth'
+				sudo chmod 755 '/opt/google/earth/free/googleearth'
+			# Install libraries
+				# sudo aptitude install libqtwebkit4 libcurl4-openssl-dev
+			notify-send "Google Earth" "The native appearance has been fixed successfully" -i google-earth
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	#VLC fixes
+	3)
+		echo 'Applying fixes for VLC...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			#VLC Media Keys
+				vlcrc="$HOME/.config/vlc/vlcrc"
+				sed -i 's/#global-key-play-pause=/global-key-play-pause=Media Play Pause/' $vlcrc
+				sed -i 's/#global-key-next=/global-key-next=Media Next Track/' $vlcrc
+				sed -i 's/#global-key-prev=/global-key-prev=Media Prev Track/' $vlcrc
+				sed -i 's/#global-key-stop=/global-key-stop=Media Stop/' $vlcrc
+			#VLC GNOME Interface
+				cd $HOME/.config/vlc/
+				rm -rf vlc-qt-interface.conf
+				echo '[General]'>>'vlc-qt-interface.conf'
+				echo 'IsFirstRun=0'>>'vlc-qt-interface.conf'
+				echo 'geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x1\0\0\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\0\0\0\0)'>>'vlc-qt-interface.conf'
+				echo ''>>'vlc-qt-interface.conf'
+				echo '[MainWindow]'>>'vlc-qt-interface.conf'
+				echo 'pl-dock-status=true'>>'vlc-qt-interface.conf'
+				echo 'status-bar-visible=false'>>'vlc-qt-interface.conf'
+				echo 'playlist-visible=false'>>'vlc-qt-interface.conf'
+				echo 'adv-controls=0'>>'vlc-qt-interface.conf'
+				echo 'bgSize=@Size(489 0)'>>'vlc-qt-interface.conf'
+				echo 'playlistSize=@Size(-1 -1)'>>'vlc-qt-interface.conf'
+				echo 'MainToolbar1="64;39-5;64;38-5;65;"'>>'vlc-qt-interface.conf'
+				echo 'MainToolbar2="3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;"'>>'vlc-qt-interface.conf'
+				echo 'AdvToolbar="12-5;11-5;13-5;14-5;"'>>'vlc-qt-interface.conf'
+				echo 'FSCtoolbar="64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
+				echo 'InputToolbar='>>'vlc-qt-interface.conf'
+				echo 'ToolbarPos=0'>>'vlc-qt-interface.conf'
+				echo ''>>'vlc-qt-interface.conf'
+				echo '[ToolbarProfiles]'>>'vlc-qt-interface.conf'
+				echo '1\ProfileName=VLC 2.x.x Style'>>'vlc-qt-interface.conf'
+				echo '1\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;9;64;10;20;19;64-4;37;65;35-4;|12;11;13;14;|43;33-4;44;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
+				echo '2\ProfileName=VLC 1.1.x Style'>>'vlc-qt-interface.conf'
+				echo '2\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;10;9;64-4;20;19;64-4;37;65;35-4;|12;11;13;14;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
+				echo '3\ProfileName=VLC 0.8.x Style'>>'vlc-qt-interface.conf'
+				echo '3\Value="1|64;39-1;64;38;|2-1;32-4;0-5;1-5;32-5;3-5;5-5;6-5;4-5;32-5;10-1;64-1;35-1;65;|12-1;11-1;13-1;14-1;|33;37-4;|0-5;1-5;32-1;1-5;5-1;6-1;4-5;32-1;12-5;11-1;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
+				echo '4\ProfileName=Minimalist Style'>>'vlc-qt-interface.conf'
+				echo '4\Value="0|64;65;|0-7;64;3-1;1-5;4-1;64;12-5;64-5;37-5;38-5;64-4;10-1;65;36-4;|11-5;13-5;14-5;|5-1;33;6-1;|0-5;64;3-5;1-5;4-5;64;12-5;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
+				echo '5\ProfileName=One-Liner Style'>>'vlc-qt-interface.conf'
+				echo '5\Value="0|64;38;65;|0-4;64;3;1;4;64;7;10;9;64-4;39;64-4;37;65;36-4;|12;11;14;13;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
+				echo '6\ProfileName=Simplest Style'>>'vlc-qt-interface.conf'
+				echo '6\Value="0||36-4;65-4;0-7;4-5;1-5;65-4;7-5;|12-4;11;13;||36-4;65-4;0-5;4-5;1-5;65;8-5;"'>>'vlc-qt-interface.conf'
+				echo '7\ProfileName=GNOME'>>'vlc-qt-interface.conf'
+				echo '7\Value="0|64;39-5;64;38-5;65;|3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;|12-5;11-5;13-5;14-5;||64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
+				echo 'size=7'>>'vlc-qt-interface.conf'
+				echo ''>>'vlc-qt-interface.conf'
+				echo '[FullScreen]'>>'vlc-qt-interface.conf'
+				echo 'pos=@Point(0 0)'>>'vlc-qt-interface.conf'
+				echo 'screen=@Rect(0 0 0 0)'>>'vlc-qt-interface.conf'
+				echo 'wide=false'>>'vlc-qt-interface.conf'
+			cd $HOME
+			notify-send "VLC media player" "Desktop integration applied successfully" -i vlc
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	#Inkscape icons
+	4)
+		echo 'Applying fix for Inkscape...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Backup icons-old.svg
+				sudo mv '/usr/share/inkscape/icons/icons-old.svg' '/usr/share/inkscape/icons/icons.svg' 
+				sudo mv '/usr/share/inkscape/icons/icons.svg' '/usr/share/inkscape/icons/icons-old.svg' 
+				# sudo cp '/usr/share/inkscape/icons/tango_icons.svg' '/usr/share/inkscape/icons/icons.svg'
+			# Download new icons 
+				wget https://raw.github.com/gnome-design-team/gnome-icons/master/inkscape-symbolic/inkscape-icons.svg
+				sudo mv inkscape-icons.svg '/usr/share/inkscape/icons/icons.svg'
+			notify-send "Inkscape" "Symbolic icons have been installed successfully" -i inkscape
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	#Wine fonts
+	5)
+		echo 'Applying fix for Wine...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			WINE=${WINE:-wine}
+			WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
+			DIALOG=whiptail
 
-            if [ ! -x "`which "$WINE"`" ]
-            then
-                echo "Wine was not found. Is it really installed? ($WINE)"
-                exit 1
-            fi
+			if [ ! -x "`which "$WINE"`" ]
+			then
+				echo "Wine was not found. Is it really installed? ($WINE)"
+				exit 1
+			fi
 
-            if [ ! -x "`which "$DIALOG"`" ]
-            then
-                DIALOG=dialog
-            fi
+			if [ ! -x "`which "$DIALOG"`" ]
+			then
+				DIALOG=dialog
+			fi
 
-            TMPFILE=`mktemp` || exit 1
+			TMPFILE=`mktemp` || exit 1
 
-            $DIALOG --menu \
-                "Please select font smoothing mode for wine programs:" 13 51\
-                4\
-                    1 "Smoothing disabled"\
-                    2 "Grayscale smoothing"\
-                    3 "Subpixel smoothing (ClearType) RGB"\
-                    4 "Subpixel smoothing (ClearType) BGR" 2> $TMPFILE
+			$DIALOG --menu \
+				"Please select font smoothing mode for wine programs:" 13 51\
+				4\
+					1 "Smoothing disabled"\
+					2 "Grayscale smoothing"\
+					3 "Subpixel smoothing (ClearType) RGB"\
+					4 "Subpixel smoothing (ClearType) BGR" 2> $TMPFILE
 
-            STATUS=$?
-            ANSWER=`cat $TMPFILE`
+			STATUS=$?
+			ANSWER=`cat $TMPFILE`
 
-            if [ $STATUS != 0 ]
-            then 
-                rm -f $TMPFILE
-                exit 1
-            fi
+			if [ $STATUS != 0 ]
+			then 
+				rm -f $TMPFILE
+				exit 1
+			fi
 
-            MODE=0 # 0 = disabled; 2 = enabled
-            TYPE=0 # 1 = regular;  2 = subpixel
-            ORIENTATION=1 # 0 = BGR; 1 = RGB
+			MODE=0 # 0 = disabled; 2 = enabled
+			TYPE=0 # 1 = regular;  2 = subpixel
+			ORIENTATION=1 # 0 = BGR; 1 = RGB
 
-            case $ANSWER in
-                1) # disable
-                    ;;
-                2) # enable
-                    MODE=2
-                    TYPE=1
-                    ;;
-                3) # enable cleartype rgb
-                    MODE=2
-                    TYPE=2
-                    ;;
-                4) # enable cleartype bgr
-                    MODE=2
-                    TYPE=2
-                    ORIENTATION=0
-                    ;;
-                *)
-                    rm -f $TMPFILE
-                    echo Unexpected option: $ANSWER
-                    exit 1
-                    ;;
-            esac
+			case $ANSWER in
+				1) # disable
+					;;
+				2) # enable
+					MODE=2
+					TYPE=1
+					;;
+				3) # enable cleartype rgb
+					MODE=2
+					TYPE=2
+					;;
+				4) # enable cleartype bgr
+					MODE=2
+					TYPE=2
+					ORIENTATION=0
+					;;
+				*)
+					rm -f $TMPFILE
+					echo Unexpected option: $ANSWER
+					exit 1
+					;;
+			esac
 
-            echo "REGEDIT4
+			echo "REGEDIT4
 
-            [HKEY_CURRENT_USER\Control Panel\Desktop]
-            \"FontSmoothing\"=\"$MODE\"
-            \"FontSmoothingOrientation\"=dword:0000000$ORIENTATION
-            \"FontSmoothingType\"=dword:0000000$TYPE
-            \"FontSmoothingGamma\"=dword:00000578" > $TMPFILE
+			[HKEY_CURRENT_USER\Control Panel\Desktop]
+			\"FontSmoothing\"=\"$MODE\"
+			\"FontSmoothingOrientation\"=dword:0000000$ORIENTATION
+			\"FontSmoothingType\"=dword:0000000$TYPE
+			\"FontSmoothingGamma\"=dword:00000578" > $TMPFILE
 
-            echo -n "Updating configuration..."
+			echo -n "Updating configuration..."
 
-            $WINE regedit $TMPFILE 2> /dev/null
+			$WINE regedit $TMPFILE 2> /dev/null
 
-            rm -f $TMPFILE
-            notify-send "Wine" "Font rendering has been fixed successfully" -i wine
-            clear && fixapps
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && fixapps
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            fixapps
-            ;;
-        esac
-        ;;
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && fixapps;;
-    esac
-    }
+			rm -f $TMPFILE
+			notify-send "Wine" "Font rendering has been fixed successfully" -i wine
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	6)
+		echo 'Cracking Sublime Text license...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Source: https://gist.github.com/vertexclique/8073029
+			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_only_x32
+			sudo mv sublime_text_linux_sled2_only_x32 '/opt/sublime_text/sublime_text'
+			sudo chmod 755 '/opt/sublime_text/sublime_text'
+			notify-send "Sublime Text" "The license has been installed successfully" -i sublime-text
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && fixapps;;
+	esac
+	}
 # --------------------------------------------------
 # CHANGE LAYOUTS
-    function layout {
-    echo ''
-    echo "1) Set-up GNOME Shell app folders?"
-    echo "2) Set Faience/Roboto UI?"
-    echo "3) Set Moka/Roboto UI?"
-    echo "4) Set GNOME UI?"
-    echo "5) Set button layout [All:]?"
-    echo "6) Set-up Nautilus layout?"
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # GNOME Shell app folders
-    1)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
-            notify-send "GNOME Shell app folders set-up successfully"
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    # Faience UI
-    2)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Faience'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Faience'" && dconf write /org/gnome/desktop/interface/icon-theme "'Faience'"
-            notify-send "UI set to Faience successfully"
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    # Moka UI
-    3)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Moka'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-            notify-send "UI set to Moka successfully"
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    # GNOME UI
-    4)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-            notify-send "UI set to GNOME successfully"
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    #[All:] button layout
-    5)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
-            notify-send "Button layout changed successfully"
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    #Nautilus layout
-    6)
-        echo 'Changing dconf files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && dconf write /org/gnome/nautilus/window-state/sidebar-width "'170'"
-            sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'170'"
-            notify-send "Nautilus" "The layout has been configured successfully" -i system-file-manager 
-            clear && layout
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && layout
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            layout
-            ;;
-        esac
-        ;;
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && layout;;
-    esac
-    }
+	function layout {
+	echo ''
+	echo "1) Set-up GNOME Shell app folders?"
+	echo "2) Set Moka/Roboto UI?"
+	echo "3) Set GNOME UI?"
+	echo "4) Set button layout [All:]?"
+	echo "5) Set-up Nautilus layout?"
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# GNOME Shell app folders
+	1)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
+			notify-send "GNOME Shell app folders set-up successfully"
+			clear && layout
+			;;
+		# Negative action
+		[Nn]* )
+			clear && layout
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			layout
+			;;
+		esac
+		;;
+	# Moka UI
+	2)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Moka'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
+			notify-send "UI set to Moka successfully"
+			clear && layout
+			;;
+		# Negative action
+		[Nn]* )
+			clear && layout
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			layout
+			;;
+		esac
+		;;
+	# GNOME UI
+	3)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+			notify-send "UI set to GNOME successfully"
+			clear && layout
+			;;
+		# Negative action
+		[Nn]* )
+			clear && layout
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			layout
+			;;
+		esac
+		;;
+	#[All:] button layout
+	4)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
+			notify-send "Button layout changed successfully"
+			clear && layout
+			;;
+		# Negative action
+		[Nn]* )
+			clear && layout
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			layout
+			;;
+		esac
+		;;
+	#Nautilus layout
+	5)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+			sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+			notify-send "Nautilus" "The layout has been configured successfully" -i system-file-manager 
+			clear && layout
+			;;
+		# Negative action
+		[Nn]* )
+			clear && layout
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			layout
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && layout;;
+	esac
+	}
 # --------------------------------------------------
 # ADVANCED CONFIGURATION
-    function advanced {
-    echo ''
-    echo "1) Add 'Binaries' to PATH?"
-    echo "2) Add Nautilus scripts?"
-    echo "3) Add .desktop, .directory and .menu files?"
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Binaries to PATH
-    1)
-        echo 'Adding Binaries to PATH...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
-        echo ''>>'.bashrc'
-        echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
-        echo 'source ~/.bash_profile'>>'.bashrc'
-        echo 'fi'>>'.bashrc'
-            notify-send "Binaries added to PATH successfully" -i application-x-executable
-            clear && advanced
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && advanced
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            advanced
-            ;;
-        esac
-        ;;
-    #Nautilus scripts
-    2)
-        echo 'Adding scripts...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            cd /tmp
-            wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
-            tar -xzf nautilus-scripts.tar.gz
-            rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
-            # rm -rf nautilus-scripts nautilus-scripts.tar.gz
-            nautilus -q
-            notify-send "Nautilus" "Scripts have been added successfully" -i system-file-manager
-            clear && advanced
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && advanced
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            advanced
-            ;;
-        esac
-        ;;
-    #Desktop files
-    3)
-        echo 'Adding desktop and directory files...'
-        echo ''
-        read -p 'Proceed? (Y)es, (N)o : ' REPLY
-        case $REPLY in
-        # Positive action
-        [Yy]* )
-            # Apps Desktops
-                cd /tmp
-                wget http://dl.dropbox.com/u/1564319/apps-desktops.tar.gz
-                tar -xzf apps-desktops.tar.gz
-                cd apps-desktops
-                cp -r gnome-applications.menu $HOME/.config/menus
-                cp -r *.desktop $HOME/.local/share/applications
-                gtk-update-icon-cache
-                # cd $HOME
-                # rm -rf apps-desktops apps-desktops.tar.gz
-            # Directories
-                cd /tmp
-                wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
-                tar -xzf desktop-directories.tar.gz
-                rm -rf $HOME/.local/share/desktop-directories
-                mv desktop-directories $HOME/.local/share/desktop-directories
-                # rm -rf desktop-directories desktop-directories.tar.gz
-            notify-send "Files have been added successfully"
-            clear && advanced
-            ;;
-        # Negative action
-        [Nn]* )
-            clear && advanced
-            ;;
-        # Error
-        * )
-            clear && echo 'Sorry, try again.'
-            advanced
-            ;;
-        esac
-        ;;
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && advanced;;
-    esac
-    }
+	function advanced {
+	echo ''
+	echo "1) Add 'Binaries' to PATH?"
+	echo "2) Add Nautilus scripts?"
+	echo "3) Add .desktop, .directory and .menu files?"
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Binaries to PATH
+	1)
+		echo 'Adding Binaries to PATH...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
+		echo ''>>'.bashrc'
+		echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
+		echo 'source ~/.bash_profile'>>'.bashrc'
+		echo 'fi'>>'.bashrc'
+			notify-send "Binaries added to PATH successfully" -i application-x-executable
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	#Nautilus scripts
+	2)
+		echo 'Adding scripts...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			cd /tmp
+			wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
+			tar -xzf nautilus-scripts.tar.gz
+			rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
+			# rm -rf nautilus-scripts nautilus-scripts.tar.gz
+			nautilus -q
+			notify-send "Nautilus" "Scripts have been added successfully" -i system-file-manager
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	#Desktop files
+	3)
+		echo 'Adding desktop and directory files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Apps Desktops
+				cd /tmp
+				wget http://dl.dropbox.com/u/1564319/apps-desktops.tar.gz
+				tar -xzf apps-desktops.tar.gz
+				cd apps-desktops
+				cp -r gnome-applications.menu $HOME/.config/menus
+				cp -r *.desktop $HOME/.local/share/applications
+				gtk-update-icon-cache
+				# cd $HOME
+				# rm -rf apps-desktops apps-desktops.tar.gz
+			# Directories
+				cd /tmp
+				wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
+				tar -xzf desktop-directories.tar.gz
+				rm -rf $HOME/.local/share/desktop-directories
+				mv desktop-directories $HOME/.local/share/desktop-directories
+				# rm -rf desktop-directories desktop-directories.tar.gz
+			notify-send "Files have been added successfully"
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && advanced;;
+	esac
+	}
 # --------------------------------------------------
 # HARDWARE INFO
-    function hardware {
-    echo ''
-    echo '1) Show disk usage?'
-    echo '2) Show kernel version?'
-    echo '3) Show system controllers?'
-    echo '4) Show CPU, RAM and architecture information?'
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Show disk usage
-    1)
-        df -h
-        hardware
-        ;;
-    # Show kernel version
-    2)
-        uname -r 
-        # uname -a shows kernel and arch info
-        hardware
-        ;;
-    # Show system information
-    3)
-        lspci -v
-        hardware
-        ;;
-    # Show CPU, RAM, arch information
-    4)
-        grep "model name" /proc/cpuinfo && grep MemTotal /proc/meminfo && lscpu
-        hardware
-        ;;
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && hardware;;
-    esac
-    }
+	function hardware {
+	echo ''
+	echo '1) Show disk usage?'
+	echo '2) Show kernel version?'
+	echo '3) Show system controllers?'
+	echo '4) Show CPU, RAM and architecture information?'
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Show disk usage
+	1)
+		df -h
+		hardware
+		;;
+	# Show kernel version
+	2)
+		uname -r 
+		# uname -a shows kernel and arch info
+		hardware
+		;;
+	# Show system information
+	3)
+		lspci -v
+		hardware
+		;;
+	# Show CPU, RAM, arch information
+	4)
+		grep "model name" /proc/cpuinfo && grep MemTotal /proc/meminfo && lscpu
+		hardware
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && hardware;;
+	esac
+	}
 # --------------------------------------------------
 # SYSTEM CLEANUP
-    function cleanup {
-    echo ''
-    echo '1) Remove unused pre-installed packages?'
-    echo '2) Remove old kernel(s)?'
-    echo '3) Remove orphaned packages?'
-    echo '4) Remove leftover configuration files?'
-    echo '5) Clean package cache?'
-    echo 'r) Return?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-    # Remove unused pre-installed packages
-    1)
-        echo 'Removing selected pre-installed applications...'
-        sudo apt-get purge 
-        echo 'Done.'
-        cleanup
-        ;;
-    # Remove old kernel(s)
-    2)
-        echo 'Removing old Kernel(s)...'
-        sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
-        echo 'Done.'
-        cleanup
-        ;;
-    # Remove orphaned packages
-    3)
-        echo 'Removing orphaned packages...'
-        sudo apt-get autoremove -y
-        echo 'Done.'
-        cleanup
-        ;;
-    # Remove residual config files?
-    4)
-        echo 'Removing leftover configuration files...'
-        sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)
-        echo 'Done.'
-        cleanup
-        ;;
-    # Clean package cache
-    5)
-        echo 'Cleaning package cache...'
-        sudo aptitude clean
-        echo 'Done.'
-        cleanup
-        ;;
-    # Return
-    [Rr]*) 
-        clear && main;;
-    # Invalid choice
-    * ) 
-        clear && echo 'Not an option, try again.' && cleanup;;
-    esac
-    }
-# --------------------------------------------------
-# QUIT
-    # Quit
-    # function quit {
-    # read -p "Are you sure you want to quit? (Y)es, (N)o " REPLY
-    # case $REPLY in
-        # [Yy]* ) exit 99;;
-        # [Nn]* ) clear && main;;
-        # * ) clear && echo 'Sorry, try again.' && quit;;
-    # esac
-    # }
+	function cleanup {
+	echo ''
+	echo '1) Remove unused pre-installed packages?'
+	echo '2) Remove old kernel(s)?'
+	echo '3) Remove orphaned packages?'
+	echo '4) Remove leftover configuration files?'
+	echo '5) Clean package cache?'
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Remove unused pre-installed packages
+	1)
+		echo 'Removing selected pre-installed applications...'
+		sudo apt-get purge 
+		echo 'Done.'
+		cleanup
+		;;
+	# Remove old kernel(s)
+	2)
+		echo 'Removing old Kernel(s)...'
+		sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
+		echo 'Done.'
+		cleanup
+		;;
+	# Remove orphaned packages
+	3)
+		echo 'Removing orphaned packages...'
+		sudo apt-get autoremove -y
+		echo 'Done.'
+		cleanup
+		;;
+	# Remove residual config files?
+	4)
+		echo 'Removing leftover configuration files...'
+		sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)
+		echo 'Done.'
+		cleanup
+		;;
+	# Clean package cache
+	5)
+		echo 'Cleaning package cache...'
+		sudo aptitude clean
+		echo 'Done.'
+		cleanup
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && cleanup;;
+	esac
+	}
 # --------------------------------------------------
 #----- MAIN FUNCTION -----#
-    function main {
-    echo ''
-    echo '1) Perform system update & upgrade?'
-    echo '2) Enable extra repositories?'
-    echo '3) Install favourite applications?'
-    echo '4) Fix apps behaviour and appearance?'
-    echo '5) Configure visual layout?'
-    echo '6) Perform advanced configurations?'
-    echo '7) View hardware information?'
-    echo '8) Cleanup the system?'
-    echo 'q) Quit?'
-    echo ''
-    read -p 'What would you like to do? (Enter your choice): ' REPLY
-    case $REPLY in
-        1) sysupgrade;; # System Upgrade
-        2) clear && repositories;; # Enable repos
-        3) clear && applications;; # Install apps
-        4) clear && fixapps;; # Fix apps
-        5) clear && layout;; # Change layouts
-        6) clear && advanced;; # Advanced config
-        7) clear && hardware;; # Hardware info
-        8) clear && cleanup;; # System cleanup
-        [Qq]* ) exit 99;; # Quit
-        # [Qq]* ) echo '' && quit;; # Quit
-        * ) clear && echo 'Not an option, try again.' && main;;
-    esac
-    }
+	function main {
+	echo ''
+	echo '1) Perform system update & upgrade?'
+	echo '2) Enable extra repositories?'
+	echo '3) Install favourite applications?'
+	echo '4) Fix apps behaviour and appearance?'
+	echo '5) Configure visual layout?'
+	echo '6) Perform advanced configurations?'
+	echo '7) View hardware information?'
+	echo '8) Cleanup the system?'
+	echo 'q) Quit?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+		1) sysupgrade;; # System Upgrade
+		2) clear && repositories;; # Enable repos
+		3) clear && applications;; # Install apps
+		4) clear && fixapps;; # Fix apps
+		5) clear && layout;; # Change layouts
+		6) clear && advanced;; # Advanced config
+		7) clear && hardware;; # Hardware info
+		8) clear && cleanup;; # System cleanup
+		[Qq]* ) exit 99;; # Quit
+		* ) clear && echo 'Not an option, try again.' && main;;
+	esac
+	}
 
 #----- RUN MAIN FUNCTION -----#
 main
