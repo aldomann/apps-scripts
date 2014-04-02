@@ -15,7 +15,6 @@
 
 #TODO: 
 	# nautilus scripts in En and Es.
-	# hidden apps @layout.
 	# review @layout function.
 	# fuse layout and fixapps.
 	# add custom bashrc instead of add binaries @advanced.
@@ -86,7 +85,6 @@ echo '#-------------------------------------------#'
 		[Yy]* )
 			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
 			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
-			notify-send "Repositories added successfully"
 			clear && repositories
 			;;
 		# Negative action
@@ -128,7 +126,6 @@ echo '#-------------------------------------------#'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
 			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
-			notify-send "Repositories added successfully"
 			clear && repositories
 			;;
 		# Negative action
@@ -158,7 +155,6 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
-			notify-send "Repositories added successfully"
 			clear && repositories
 			;;
 		# Negative action
@@ -184,7 +180,6 @@ echo '#-------------------------------------------#'
 			sudo rm -rf *.save
 			sudo rm -rf *.list~
 			sudo rm -rf *dropbox*.list *google*.list
-			notify-send "Repositories cleaned-up successfully"
 			clear && repositories
 			;;
 		# Negative action
@@ -702,7 +697,6 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
-			notify-send "GNOME Shell app folders set-up successfully"
 			clear && layout
 			;;
 		# Negative action
@@ -725,7 +719,6 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Moka'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-			notify-send "UI set to Moka successfully"
 			clear && layout
 			;;
 		# Negative action
@@ -748,7 +741,6 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-			notify-send "UI set to GNOME successfully"
 			clear && layout
 			;;
 		# Negative action
@@ -771,7 +763,6 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
-			notify-send "Button layout changed successfully"
 			clear && layout
 			;;
 		# Negative action
@@ -795,7 +786,6 @@ echo '#-------------------------------------------#'
 		[Yy]* )
 			dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 			sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
-			notify-send "Nautilus" "The layout has been configured successfully" -i system-file-manager 
 			clear && layout
 			;;
 		# Negative action
@@ -824,6 +814,7 @@ echo '#-------------------------------------------#'
 	echo "1) Add 'Binaries' to PATH?"
 	echo "2) Add Nautilus scripts?"
 	echo "3) Add .desktop, .directory and .menu files?"
+	echo "4) Add hidden .desktop files?"
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -841,7 +832,6 @@ echo '#-------------------------------------------#'
 		echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
 		echo 'source ~/.bash_profile'>>'.bashrc'
 		echo 'fi'>>'.bashrc'
-			notify-send "Binaries added to PATH successfully" -i application-x-executable
 			clear && advanced
 			;;
 		# Negative action
@@ -869,7 +859,6 @@ echo '#-------------------------------------------#'
 			rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
 			# rm -rf nautilus-scripts nautilus-scripts.tar.gz
 			nautilus -q
-			notify-send "Nautilus" "Scripts have been added successfully" -i system-file-manager
 			clear && advanced
 			;;
 		# Negative action
@@ -908,7 +897,25 @@ echo '#-------------------------------------------#'
 				rm -rf $HOME/.local/share/desktop-directories
 				mv desktop-directories $HOME/.local/share/desktop-directories
 				# rm -rf desktop-directories desktop-directories.tar.gz
-			notify-send "Files have been added successfully"
+			clear && advanced
+			;;
+		#Desktop files
+	4)
+		echo 'Adding hidden desktop files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Apps Desktops
+			cd /tmp
+			wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.gz
+			tar -xzf hidden-apps.tar.gz
+			cd hidden-apps
+			cp -r *.desktop $HOME/.local/share/applications
+			gtk-update-icon-cache
+			# cd $HOME
+			# rm -rf apps-desktops apps-desktops.tar.gz
 			clear && advanced
 			;;
 		# Negative action
