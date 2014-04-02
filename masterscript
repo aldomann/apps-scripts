@@ -13,6 +13,13 @@
 #
 #   You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 
+#TODO: 
+	# nautilus scripts in En and Es.
+	# hidden apps @layout.
+	# review @layout function.
+	# fuse layout and fixapps.
+	# add custom bashrc instead of add binaries @advanced.
+
 echo ''
 echo '#-------------------------------------------#'
 echo '#     Ubuntu GNOME Post-Install Script      #'
@@ -54,7 +61,7 @@ echo '#-------------------------------------------#'
 # ENABLE REPOSITORIES
 	function repositories {
 	echo ''
-	echo "1) Enable basic PPAs         [6]"
+	echo "1) Enable basic PPAs         [5]"
 	echo "2) Enable extra repositories [7]"
 	echo "3) Enable exclusive PPAs     [6]"
 	echo "4) Delete duplicated repos   [*]"
@@ -67,11 +74,9 @@ echo '#-------------------------------------------#'
 		echo 'Enabling repositories...'
 		echo ''
 		echo 'Current repositories list: 
-		cybolic/vineyard-testing (not trusty) 
 		gnome3-team/gnome3 
 		gnome3-team/gnome3-next 
 		gnome3-team/gnome3-staging 
-		tiheum/equinox (not trusty) 
 		ubuntu-wine 
 		webupd8team/java'
 		echo ''
@@ -79,7 +84,8 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
+			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			notify-send "Repositories added successfully"
 			clear && repositories
 			;;
@@ -143,7 +149,6 @@ echo '#-------------------------------------------#'
 		echo 'Current repositories list: 
 		moka/faba-icon-theme
 		moka/moka-gnome-shell-theme
-		moka/moka-gtk-theme
 		moka/moka-icon-theme
 		moka/orchis-gtk-theme
 		webupd8team/sublime-text-3'
@@ -152,7 +157,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-gtk-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			notify-send "Repositories added successfully"
 			clear && repositories
 			;;
@@ -193,12 +198,15 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Eventuals [7]
+	# Eventuals [10]
 		# ppa:brainbreak/experimental
+		# ppa:cybolic/vineyard-testing (not trusty) 
 		# ppa:libreoffice
+		# ppa:moka/moka-gtk-theme
 		# ppa:nilarimogard/webupd8
 		# ppa:otto-kesselgulasch/gimp
 		# ppa:tiheum/equinox
+		# ppa:tiheum/equinox (not trusty)
 		# ppa:tombeckmann
 		# ppa:videolan/master-daily
 	# Return
@@ -216,7 +224,8 @@ echo '#-------------------------------------------#'
 	echo '1) Install basic apps?         [40]'
 	echo '2) Install exclusive apps?     [15]'
 	echo '3) Install games?              [2]'
-	echo '4) Uninstall unnecessary apps? [4]'
+	echo '4) Install apps for newcomers? [30]'
+	echo '5) Uninstall unnecessary apps? [4]'
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -225,13 +234,13 @@ echo '#-------------------------------------------#'
 	1)
 		echo 'Installing basic apps...'
 		echo ''
-		echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java7-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -298,8 +307,33 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Uninstall apps
+	# Install apps for newcomers
 	4)
+		echo 'Installing guest apps...'
+		echo ''
+		echo 'Current package list: fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Uninstall apps
+	5)
 		echo 'Uninstalling unnecessary apps...'
 		echo ''
 		echo 'Current package list: firefox firefox-locale-en firefox-locale-es xul-ext-ubufox'
