@@ -71,7 +71,7 @@ echo '#-------------------------------------------#'
 		gnome3-team/gnome3 
 		gnome3-team/gnome3-next 
 		gnome3-team/gnome3-staging 
-		tiheum/equinox (not trusty)
+		tiheum/equinox (not trusty) 
 		ubuntu-wine 
 		webupd8team/java'
 		echo ''
@@ -620,8 +620,9 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			# Source: https://gist.github.com/vertexclique/8073029
-			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_only_x32
-			sudo mv sublime_text_linux_sled2_only_x32 '/opt/sublime_text/sublime_text'
+			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_only_x32
+			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_3_x64
+			sudo mv sublime_text_linux_sled2_3_x64 '/opt/sublime_text/sublime_text'
 			sudo chmod 755 '/opt/sublime_text/sublime_text'
 			notify-send "Sublime Text" "The license has been installed successfully" -i sublime-text
 			clear && fixapps
