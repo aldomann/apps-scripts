@@ -16,7 +16,6 @@
 #TODO: 
 	# nautilus scripts in En and Es.
 	# review @layout function.
-	# fuse layout and fixapps.
 	# add custom bashrc instead of add binaries @advanced.
 
 echo ''
@@ -102,19 +101,22 @@ echo '#-------------------------------------------#'
 	2)
 		echo 'Enabling repositories...'
 		echo ''
-		echo 'Current repositories list: 
+		echo 'Current repositories list:
+		Canonical Partners (trusty)
 		Dropbox (saucy)
 		Getdeb Apps (saucy)
 		Getdeb Games (saucy)
 		Google Chrome (stable)
 		Google Earth (stable)
 		Google Music Manager (stable)
-		Google Talk Plug-in (stable)'
+		Google Talk Plug-in (stable)
+		Steam (precise)'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
+			echo 'deb http://archive.canonical.com/ubuntu trusty partner #Canonical Partners' >> 'extras.list'
 			echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
 			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
 			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
@@ -122,6 +124,7 @@ echo '#-------------------------------------------#'
 			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
+			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam'>>'extras.list'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
@@ -179,7 +182,7 @@ echo '#-------------------------------------------#'
 			cd /etc/apt/sources.list.d/
 			sudo rm -rf *.save
 			sudo rm -rf *.list~
-			sudo rm -rf *dropbox*.list *google*.list
+			sudo rm -rf *dropbox*.list *google*.list steam.list
 			clear && repositories
 			;;
 		# Negative action
@@ -218,9 +221,8 @@ echo '#-------------------------------------------#'
 	echo ''
 	echo '1) Install basic apps?         [40]'
 	echo '2) Install exclusive apps?     [15]'
-	echo '3) Install games?              [2]'
-	echo '4) Install apps for newcomers? [30]'
-	echo '5) Uninstall unnecessary apps? [4]'
+	echo '3) Install games?              [3]'
+	echo '4) Uninstall unnecessary apps? [4]'
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -286,7 +288,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install vbam-gtk zsnes
+			sudo aptitude install steam-launcher vbam-gtk zsnes
 			echo 'Done.'
 			notify-send "Installation was successful"
 			clear && applications
@@ -302,33 +304,8 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Install apps for newcomers
-	4)
-		echo 'Installing guest apps...'
-		echo ''
-		echo 'Current package list: fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
-		echo ''
-		read -p 'Proceed? (Y)es, (N)o : ' REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo aptitude install fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
-			notify-send "Installation was successful"
-			clear && applications
-			;;
-		# Negative action
-		[Nn]* )
-			clear && applications
-			;;
-		# Error
-		* )
-			clear && echo 'Sorry, try again.'
-			applications
-			;;
-		esac
-		;;
 	# Uninstall apps
-	5)
+	4)
 		echo 'Uninstalling unnecessary apps...'
 		echo ''
 		echo 'Current package list: firefox firefox-locale-en firefox-locale-es xul-ext-ubufox'
@@ -377,6 +354,11 @@ echo '#-------------------------------------------#'
 	echo "4) Use symbolic icons in Inkscape?"
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
+	echo "7) Set Moka/Roboto UI?"
+	echo "8) Set GNOME UI?"
+	echo "9) Set button layout [All:]?"
+	echo "10) Set-up Nautilus layout?"
+	echo "11) Set-up GNOME Shell app folders?"
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -667,73 +649,30 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Return
-	[Rr]*) 
-		clear && main;;
-	# Invalid choice
-	* ) 
-		clear && echo 'Not an option, try again.' && fixapps;;
-	esac
-	}
-# --------------------------------------------------
-# CHANGE LAYOUTS
-	function layout {
-	echo ''
-	echo "1) Set-up GNOME Shell app folders?"
-	echo "2) Set Moka/Roboto UI?"
-	echo "3) Set GNOME UI?"
-	echo "4) Set button layout [All:]?"
-	echo "5) Set-up Nautilus layout?"
-	echo 'r) Return?'
-	echo ''
-	read -p 'What would you like to do? (Enter your choice): ' REPLY
-	case $REPLY in
-	# GNOME Shell app folders
-	1)
-		echo 'Changing dconf files...'
-		echo ''
-		read -p 'Proceed? (Y)es, (N)o : ' REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
-			clear && layout
-			;;
-		# Negative action
-		[Nn]* )
-			clear && layout
-			;;
-		# Error
-		* )
-			clear && echo 'Sorry, try again.'
-			layout
-			;;
-		esac
-		;;
 	# Moka UI
-	2)
+	7)
 		echo 'Changing dconf files...'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 10'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 10'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Moka'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-			clear && layout
+			dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Droid Sans Mono 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && layout
+			clear && fixapps
 			;;
 		# Error
 		* )
 			clear && echo 'Sorry, try again.'
-			layout
+			fixapps
 			;;
 		esac
 		;;
 	# GNOME UI
-	3)
+	8)
 		echo 'Changing dconf files...'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -741,21 +680,21 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-			clear && layout
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && layout
+			clear && fixapps
 			;;
 		# Error
 		* )
 			clear && echo 'Sorry, try again.'
-			layout
+			fixapps
 			;;
 		esac
 		;;
 	#[All:] button layout
-	4)
+	9)
 		echo 'Changing dconf files...'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -763,21 +702,21 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
-			clear && layout
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && layout
+			clear && fixapps
 			;;
 		# Error
 		* )
 			clear && echo 'Sorry, try again.'
-			layout
+			fixapps
 			;;
 		esac
 		;;
 	#Nautilus layout
-	5)
+	10)
 		echo 'Changing dconf files...'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -786,16 +725,38 @@ echo '#-------------------------------------------#'
 		[Yy]* )
 			dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 			sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
-			clear && layout
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && layout
+			clear && fixapps
 			;;
 		# Error
 		* )
 			clear && echo 'Sorry, try again.'
-			layout
+			fixapps
+			;;
+		esac
+		;;
+	# GNOME Shell app folders
+	11)
+		echo 'Changing dconf files...'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			fixapps
 			;;
 		esac
 		;;
@@ -804,7 +765,7 @@ echo '#-------------------------------------------#'
 		clear && main;;
 	# Invalid choice
 	* ) 
-		clear && echo 'Not an option, try again.' && layout;;
+		clear && echo 'Not an option, try again.' && fixapps;;
 	esac
 	}
 # --------------------------------------------------
@@ -899,7 +860,18 @@ echo '#-------------------------------------------#'
 				# rm -rf desktop-directories desktop-directories.tar.gz
 			clear && advanced
 			;;
-		#Desktop files
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	#Hidden Desktop files
 	4)
 		echo 'Adding hidden desktop files...'
 		echo ''
@@ -934,7 +906,7 @@ echo '#-------------------------------------------#'
 		clear && main;;
 	# Invalid choice
 	* ) 
-		clear && echo 'Not an option, try again.' && advanced;;
+		clear && echo 'Not an option, try again.' && hardware;;
 	esac
 	}
 # --------------------------------------------------
@@ -1034,6 +1006,144 @@ echo '#-------------------------------------------#'
 		clear && echo 'Not an option, try again.' && cleanup;;
 	esac
 	}
+
+#---------------------------------------------------
+# NEWCOMERS	
+	function newcomers {
+	echo ''
+	echo "1) Enable PPAs?                  [11]"
+	echo "2) Enable extra repositories?    [10]"
+	echo '3) Install applications?         [30]'
+	echo '4) Remove unused apps and repos? []'
+	echo 'r) Return?'
+	echo ''
+	read -p 'What would you like to do? (Enter your choice): ' REPLY
+	case $REPLY in
+	# Basic PPAs
+	1)
+		echo 'Enabling repositories...'
+		echo ''
+		echo 'Current repositories list: 
+		gnome3-team/gnome3 
+		gnome3-team/gnome3-next 
+		gnome3-team/gnome3-staging 
+		moka/faba-icon-theme
+		moka/moka-gnome-shell-theme
+		moka/moka-icon-theme
+		moka/orchis-gtk-theme
+		ubuntu-wine 
+		webupd8team/java
+		webupd8team/sublime-text-3'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
+			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3 && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			clear && newcomers
+			;;
+		# Negative action
+		[Nn]* )
+			clear && newcomers
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			newcomers
+			;;
+		esac
+		;;
+	# Extra repositories
+	2)
+		echo 'Enabling repositories...'
+		echo ''
+		echo 'Current repositories list:
+		Canonical Partners (trusty)
+		Dropbox (saucy)
+		Getdeb Apps (saucy)
+		Getdeb Games (saucy)
+		Google Chrome (stable)
+		Google Earth (stable)
+		Google Music Manager (stable)
+		Google Talk Plug-in (stable)
+		Steam (precise)'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo 'deb http://archive.canonical.com/ubuntu trusty partner #Canonical Partners' >> 'extras.list'
+			echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
+			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
+			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam'>>'extras.list'
+			chmod 644 'extras.list'
+			sudo chown root:root 'extras.list'
+			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
+			clear && newcomers
+			;;
+		# Negative action
+		[Nn]* )
+			clear && newcomers
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			newcomers
+			;;
+		esac
+		;;
+	# Install apps for newcomers
+	3)
+		echo 'Installing guest apps...'
+		echo ''
+		echo 'Current package list: fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo ''
+		read -p 'Proceed? (Y)es, (N)o : ' REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo aptitude install fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			notify-send "Installation was successful"
+			clear && newcomers
+			;;
+		# Negative action
+		[Nn]* )
+			clear && newcomers
+			;;
+		# Error
+		* )
+			clear && echo 'Sorry, try again.'
+			newcomers
+			;;
+		esac
+		;;
+	# Delete repositories
+	4)
+		echo 'Deleting repositories...'
+		cd /etc/apt/sources.list.d/
+		sudo rm -rf *.save
+		sudo rm -rf *.list~
+		sudo rm -rf *dropbox*.list *google*.list steam.list
+		echo 'Deleting applications...'
+		sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
+		clear && repositories
+		;;
+	# Return
+	[Rr]*) 
+		clear && main;;
+	# Invalid choice
+	* ) 
+		clear && echo 'Not an option, try again.' && cleanup;;
+	esac
+	}
+
 # --------------------------------------------------
 #----- MAIN FUNCTION -----#
 	function main {
@@ -1042,10 +1152,10 @@ echo '#-------------------------------------------#'
 	echo '2) Enable extra repositories?'
 	echo '3) Install favourite applications?'
 	echo '4) Fix apps behaviour and appearance?'
-	echo '5) Configure visual layout?'
-	echo '6) Perform advanced configurations?'
-	echo '7) View hardware information?'
-	echo '8) Cleanup the system?'
+	echo '5) Perform advanced configurations?'
+	echo '6) View hardware information?'
+	echo '7) Cleanup the system?'
+	echo '8) Install and config newcomers system?'
 	echo 'q) Quit?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -1054,10 +1164,10 @@ echo '#-------------------------------------------#'
 		2) clear && repositories;; # Enable repos
 		3) clear && applications;; # Install apps
 		4) clear && fixapps;; # Fix apps
-		5) clear && layout;; # Change layouts
-		6) clear && advanced;; # Advanced config
-		7) clear && hardware;; # Hardware info
-		8) clear && cleanup;; # System cleanup
+		5) clear && advanced;; # Advanced config
+		6) clear && hardware;; # Hardware info
+		7) clear && cleanup;; # System cleanup
+		8) clear && newcomers;; # Newcomers
 		[Qq]* ) exit 99;; # Quit
 		* ) clear && echo 'Not an option, try again.' && main;;
 	esac
