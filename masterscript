@@ -128,7 +128,8 @@ echo '#-------------------------------------------#'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 F24AEA9FB05498B7
+
 			clear && repositories
 			;;
 		# Negative action
@@ -401,8 +402,8 @@ echo '#-------------------------------------------#'
 				sudo rm -rf libcurl.so.4 libGLU.so.1 libnss_mdns4_minimal.so.2 libQtCore.so.4 libQtGui.so.4 libQtNetwork.so.4 libQtWebKit.so.4
 				cd $HOME
 			# Replace libfreeimage
-				wget http://ubuntuone.com/4eMEQzuvi3GYedUe8UBhLS
-				sudo mv 4eMEQzuvi3GYedUe8UBhLS '/opt/google/earth/free/libfreeimage.so.3'
+				wget https://dl.dropboxusercontent.com/u/1564319/libfreeimage.so.3
+				sudo mv libfreeimage.so.3 '/opt/google/earth/free/libfreeimage.so.3'
 				sudo chown $USERNAME:$USERNAME '/opt/google/earth/free/googleearth'
 				sudo chmod 777 '/opt/google/earth/free/googleearth'
 				sudo sed -i '43 d' '/opt/google/earth/free/googleearth'
@@ -1011,10 +1012,10 @@ echo '#-------------------------------------------#'
 # NEWCOMERS	
 	function newcomers {
 	echo ''
-	echo "1) Enable PPAs?                  [11]"
-	echo "2) Enable extra repositories?    [10]"
+	echo "1) Enable PPAs?                  [4]"
+	echo "2) Enable extra repositories?    [9]"
 	echo '3) Install applications?         [30]'
-	echo '4) Remove unused apps and repos? []'
+	echo '4) Remove unused apps and repos? [*]'
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -1024,23 +1025,17 @@ echo '#-------------------------------------------#'
 		echo 'Enabling repositories...'
 		echo ''
 		echo 'Current repositories list: 
-		gnome3-team/gnome3 
-		gnome3-team/gnome3-next 
-		gnome3-team/gnome3-staging 
 		moka/faba-icon-theme
-		moka/moka-gnome-shell-theme
 		moka/moka-icon-theme
-		moka/orchis-gtk-theme
 		ubuntu-wine 
-		webupd8team/java
-		webupd8team/sublime-text-3'
+		webupd8team/java'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
 			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
-			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3 && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			clear && newcomers
 			;;
 		# Negative action
@@ -1081,7 +1076,6 @@ echo '#-------------------------------------------#'
 			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
-			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam'>>'extras.list'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
@@ -1103,14 +1097,13 @@ echo '#-------------------------------------------#'
 	3)
 		echo 'Installing guest apps...'
 		echo ''
-		echo 'Current package list: fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: faba-icon-theme-symbolic fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install fonts-droid fonts-lato fonts-lmodern fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es oracle-java8-installer p7zip pdftk rar skype vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
-			notify-send "Installation was successful"
+			sudo apt-get install faba-icon-theme-symbolic fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			clear && newcomers
 			;;
 		# Negative action
@@ -1133,14 +1126,14 @@ echo '#-------------------------------------------#'
 		sudo rm -rf *dropbox*.list *google*.list steam.list
 		echo 'Deleting applications...'
 		sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
-		clear && repositories
+		clear && newcomers
 		;;
 	# Return
 	[Rr]*) 
 		clear && main;;
 	# Invalid choice
 	* ) 
-		clear && echo 'Not an option, try again.' && cleanup;;
+		clear && echo 'Not an option, try again.' && newcomers;;
 	esac
 	}
 
