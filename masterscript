@@ -14,9 +14,10 @@
 #   You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 
 #TODO: 
-	# nautilus scripts in En and Es.
+	# nautilus scripts in En and Es @advanced.
 	# review @layout function.
 	# add custom bashrc instead of add binaries @advanced.
+	# gtk-decoration-layout = ",close:"﻿ << settings.ini 
 
 echo ''
 echo '#-------------------------------------------#'
@@ -59,9 +60,9 @@ echo '#-------------------------------------------#'
 # ENABLE REPOSITORIES
 	function repositories {
 	echo ''
-	echo "1) Enable basic PPAs         [5]"
-	echo "2) Enable extra repositories [7]"
-	echo "3) Enable exclusive PPAs     [6]"
+	echo "1) Enable basic PPAs         [6]"
+	echo "2) Enable extra repositories [9]"
+	echo "3) Enable exclusive PPAs     [1]"
 	echo "4) Delete duplicated repos   [*]"
 	echo 'r) Return?'
 	echo ''
@@ -75,6 +76,7 @@ echo '#-------------------------------------------#'
 		gnome3-team/gnome3 
 		gnome3-team/gnome3-next 
 		gnome3-team/gnome3-staging 
+		moka/stable
 		ubuntu-wine 
 		webupd8team/java'
 		echo ''
@@ -83,7 +85,7 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
-			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
 			;;
 		# Negative action
@@ -148,17 +150,13 @@ echo '#-------------------------------------------#'
 		echo 'Enabling repositories...'
 		echo ''
 		echo 'Current repositories list: 
-		moka/faba-icon-theme
-		moka/moka-gnome-shell-theme
-		moka/moka-icon-theme
-		moka/orchis-gtk-theme
 		webupd8team/sublime-text-3'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-gnome-shell-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:moka/orchis-gtk-theme && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
 			;;
 		# Negative action
@@ -257,13 +255,13 @@ echo '#-------------------------------------------#'
 	2)
 		echo 'Installing exclusive apps...'
 		echo ''
-		echo 'Current package list: comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo 'Current package list: comix dropbox faba-icon-theme gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install comix dropbox faba-icon-theme-symbolic gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			sudo aptitude install comix dropbox faba-icon-theme gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
 			echo 'Done.'
 			notify-send "Installation was successful"
 			clear && applications
@@ -1103,7 +1101,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo apt-get install faba-icon-theme-symbolic fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo apt-get update && sudo apt-get install aptitude && sudo aptitude upgrade && sudo aptitude install faba-icon-theme-symbolic fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libreoffice-l10n-es moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			clear && newcomers
 			;;
 		# Negative action
