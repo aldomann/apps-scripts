@@ -13,11 +13,11 @@
 #
 #   You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 
-#TODO: 
+#TODO:
 	# nautilus scripts in En and Es @advanced.
 	# review @layout function.
 	# add custom bashrc instead of add binaries @advanced.
-	# gtk-decoration-layout = ",close:"﻿ << settings.ini 
+	# gtk-decoration-layout = ",close:"﻿ << settings.ini
 
 echo ''
 echo '#-------------------------------------------#'
@@ -37,12 +37,12 @@ echo '#-------------------------------------------#'
 		# Update repository information
 		echo 'Updating repository information...'
 		sudo aptitude update
-		notify-send "Repository information has been updated" -i system-software-update
+		# notify-send "Repository information has been updated" -i system-software-update
 		# Dist-Upgrade
 		echo 'Performing system upgrade...'
 		sudo aptitude full-upgrade
 		echo 'Done.'
-		notify-send "System upgrade was successful" -i system-software-update 
+		notify-send "System upgrade was successful" -i system-software-update
 		main
 		;;
 	# Negative action
@@ -72,19 +72,19 @@ echo '#-------------------------------------------#'
 	1)
 		echo 'Enabling repositories...'
 		echo ''
-		echo 'Current repositories list: 
-		gnome3-team/gnome3 
-		gnome3-team/gnome3-next 
-		gnome3-team/gnome3-staging 
+		echo 'Current repositories list:
+		gnome3-team/gnome3
+		gnome3-team/gnome3-next
+		gnome3-team/gnome3-staging
 		moka/stable
-		ubuntu-wine 
+		ubuntu-wine
 		webupd8team/java'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
+			# sudo add-apt-repository ppa:cybolic/vineyard-testing &&
 			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
 			;;
@@ -149,14 +149,15 @@ echo '#-------------------------------------------#'
 	3)
 		echo 'Enabling repositories...'
 		echo ''
-		echo 'Current repositories list: 
+		echo 'Current repositories list:
+		webupd8team/atom
 		webupd8team/sublime-text-3'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			 sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			 sudo add-apt-repository ppa:webupd8team/atom && sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
 			;;
 		# Negative action
@@ -195,22 +196,16 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Eventuals [10]
-		# ppa:brainbreak/experimental
-		# ppa:cybolic/vineyard-testing (not trusty) 
-		# ppa:libreoffice
-		# ppa:moka/moka-gtk-theme
+	# Eventuals [4]
+		# ppa:cybolic/vineyard-testing (not trusty)
 		# ppa:nilarimogard/webupd8
 		# ppa:otto-kesselgulasch/gimp
-		# ppa:tiheum/equinox
 		# ppa:tiheum/equinox (not trusty)
-		# ppa:tombeckmann
-		# ppa:videolan/master-daily
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && repositories;;
 	esac
 	}
@@ -336,10 +331,10 @@ echo '#-------------------------------------------#'
 	# LaTeX [4]
 		# asymptote gummi texlive texlive-latex-extra
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && applications;;
 	esac
 	}
@@ -506,10 +501,10 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			# Backup icons-old.svg
-				sudo mv '/usr/share/inkscape/icons/icons-old.svg' '/usr/share/inkscape/icons/icons.svg' 
-				sudo mv '/usr/share/inkscape/icons/icons.svg' '/usr/share/inkscape/icons/icons-old.svg' 
+				sudo mv '/usr/share/inkscape/icons/icons-old.svg' '/usr/share/inkscape/icons/icons.svg'
+				sudo mv '/usr/share/inkscape/icons/icons.svg' '/usr/share/inkscape/icons/icons-old.svg'
 				# sudo cp '/usr/share/inkscape/icons/tango_icons.svg' '/usr/share/inkscape/icons/icons.svg'
-			# Download new icons 
+			# Download new icons
 				wget https://raw.github.com/gnome-design-team/gnome-icons/master/inkscape-symbolic/inkscape-icons.svg
 				sudo mv inkscape-icons.svg '/usr/share/inkscape/icons/icons.svg'
 			notify-send "Inkscape" "Symbolic icons have been installed successfully" -i inkscape
@@ -563,7 +558,7 @@ echo '#-------------------------------------------#'
 			ANSWER=`cat $TMPFILE`
 
 			if [ $STATUS != 0 ]
-			then 
+			then
 				rm -f $TMPFILE
 				exit 1
 			fi
@@ -760,10 +755,10 @@ echo '#-------------------------------------------#'
 		esac
 		;;
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && fixapps;;
 	esac
 	}
@@ -901,10 +896,10 @@ echo '#-------------------------------------------#'
 		esac
 		;;
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && hardware;;
 	esac
 	}
@@ -927,7 +922,7 @@ echo '#-------------------------------------------#'
 		;;
 	# Show kernel version
 	2)
-		uname -r 
+		uname -r
 		# uname -a shows kernel and arch info
 		hardware
 		;;
@@ -942,10 +937,10 @@ echo '#-------------------------------------------#'
 		hardware
 		;;
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && hardware;;
 	esac
 	}
@@ -965,7 +960,7 @@ echo '#-------------------------------------------#'
 	# Remove unused pre-installed packages
 	1)
 		echo 'Removing selected pre-installed applications...'
-		sudo apt-get purge 
+		sudo apt-get purge
 		echo 'Done.'
 		cleanup
 		;;
@@ -998,16 +993,16 @@ echo '#-------------------------------------------#'
 		cleanup
 		;;
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && cleanup;;
 	esac
 	}
 
 #---------------------------------------------------
-# NEWCOMERS	
+# NEWCOMERS
 	function newcomers {
 	echo ''
 	echo "1) Enable PPAs?                  [4]"
@@ -1022,17 +1017,17 @@ echo '#-------------------------------------------#'
 	1)
 		echo 'Enabling repositories...'
 		echo ''
-		echo 'Current repositories list: 
+		echo 'Current repositories list:
 		moka/faba-icon-theme
 		moka/moka-icon-theme
-		ubuntu-wine 
+		ubuntu-wine
 		webupd8team/java'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# sudo add-apt-repository ppa:cybolic/vineyard-testing && 
+			# sudo add-apt-repository ppa:cybolic/vineyard-testing &&
 			sudo add-apt-repository ppa:moka/faba-icon-theme && sudo add-apt-repository ppa:moka/moka-icon-theme && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			clear && newcomers
 			;;
@@ -1127,10 +1122,10 @@ echo '#-------------------------------------------#'
 		clear && newcomers
 		;;
 	# Return
-	[Rr]*) 
+	[Rr]*)
 		clear && main;;
 	# Invalid choice
-	* ) 
+	* )
 		clear && echo 'Not an option, try again.' && newcomers;;
 	esac
 	}
