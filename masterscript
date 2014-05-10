@@ -60,9 +60,9 @@ echo '#-------------------------------------------#'
 # ENABLE REPOSITORIES
 	function repositories {
 	echo ''
-	echo "1) Enable basic PPAs         [6]"
+	echo "1) Enable basic PPAs         [7]"
 	echo "2) Enable extra repositories [9]"
-	echo "3) Enable exclusive PPAs     [1]"
+	echo "3) Enable exclusive PPAs     [2]"
 	echo "4) Delete duplicated repos   [*]"
 	echo 'r) Return?'
 	echo ''
@@ -73,6 +73,7 @@ echo '#-------------------------------------------#'
 		echo 'Enabling repositories...'
 		echo ''
 		echo 'Current repositories list:
+		cybolic/vineyard-testing
 		gnome3-team/gnome3
 		gnome3-team/gnome3-next
 		gnome3-team/gnome3-staging
@@ -84,8 +85,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# sudo add-apt-repository ppa:cybolic/vineyard-testing &&
-			sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
 			;;
 		# Negative action
@@ -105,13 +105,13 @@ echo '#-------------------------------------------#'
 		echo ''
 		echo 'Current repositories list:
 		Canonical Partners (trusty)
-		Dropbox (saucy)
-		Getdeb Apps (saucy)
-		Getdeb Games (saucy)
+		Getdeb Apps (trusty)
+		Getdeb Games (trusty)
 		Google Chrome (stable)
 		Google Earth (stable)
 		Google Music Manager (stable)
 		Google Talk Plug-in (stable)
+		Dropbox (trusty)
 		Steam (precise)'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -119,14 +119,14 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			echo 'deb http://archive.canonical.com/ubuntu trusty partner #Canonical Partners' >> 'extras.list'
-			echo 'deb http://linux.dropbox.com/ubuntu saucy main #Dropbox'>>'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb apps #Getdeb Apps'>>'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu saucy-getdeb games #Getdeb Games'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb apps #Getdeb Apps'>>'extras.list'
+			echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb games #Getdeb Games'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
-			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam'>>'extras.list'
+			echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
+			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
@@ -196,9 +196,7 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Eventuals [4]
-		# ppa:cybolic/vineyard-testing (not trusty)
-		# ppa:nilarimogard/webupd8
+	# Not in use [2]
 		# ppa:otto-kesselgulasch/gimp
 		# ppa:tiheum/equinox (not trusty)
 	# Return
@@ -214,7 +212,7 @@ echo '#-------------------------------------------#'
 	function applications {
 	echo ''
 	echo '1) Install basic apps?         [40]'
-	echo '2) Install exclusive apps?     [15]'
+	echo '2) Install exclusive apps?     [11]'
 	echo '3) Install games?              [3]'
 	echo '4) Uninstall unnecessary apps? [4]'
 	echo 'r) Return?'
@@ -225,13 +223,13 @@ echo '#-------------------------------------------#'
 	1)
 		echo 'Installing basic apps...'
 		echo ''
-		echo 'Current package list: alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install alacarte bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape libreoffice-l10n-es nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo aptitude install bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -250,13 +248,13 @@ echo '#-------------------------------------------#'
 	2)
 		echo 'Installing exclusive apps...'
 		echo ''
-		echo 'Current package list: comix dropbox faba-icon-theme gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo 'Current package list: comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install comix dropbox faba-icon-theme gcolor2 git google-musicmanager-beta gtk-3-examples moka-gnome-shell-theme moka-icon-theme orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			sudo aptitude install comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples orchis-gtk-theme ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
 			echo 'Done.'
 			notify-send "Installation was successful"
 			clear && applications
@@ -324,8 +322,8 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	# Not in use [28]
-		# arista bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars menulibre minitube miro moka-gtk-theme mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
+	# Not in use [30]
+		# alacarte arista bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gelemental gnac gnome-clocks google-earth-stable gtk-vector-screenshot gwoffice hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro moka-gtk-theme mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
 	# Quarantine [2]
 		# gparted pdfjam
 	# LaTeX [4]
