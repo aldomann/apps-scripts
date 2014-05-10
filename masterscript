@@ -14,10 +14,10 @@
 #   You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
 
 #TODO:
-	# nautilus scripts in En and Es @advanced.
-	# review @layout function.
-	# add custom bashrc instead of add binaries @advanced.
-	# gtk-decoration-layout = ",close:"﻿ << settings.ini
+	# @advanced nautilus scripts in En and Es.
+	# @fixapps, 11) review GNOME Shell apps.
+	# @fixapps, 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
+	# @layout review function.
 
 echo ''
 echo '#-------------------------------------------#'
@@ -340,7 +340,7 @@ echo '#-------------------------------------------#'
 # FIX APPLICATIONS
 	function fixapps {
 	echo ''
-	echo "1) Install Broadcom Wireless firmware?"
+	echo "1) Install Broadcom Wireless firmware (DELL)?"
 	echo "2) Fix Google Earth appearance?"
 	echo "3) Enable media keys and GNOME interface for VLC"
 	echo "4) Use symbolic icons in Inkscape?"
@@ -624,6 +624,7 @@ echo '#-------------------------------------------#'
 		[Yy]* )
 			# Source: https://gist.github.com/vertexclique/8073029
 			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_only_x32
+			# sudo mv sublime_text_linux_sled2_only_x32 '/opt/sublime_text/sublime_text'
 			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_3_x64
 			sudo mv sublime_text_linux_sled2_3_x64 '/opt/sublime_text/sublime_text'
 			sudo chmod 755 '/opt/sublime_text/sublime_text'
@@ -781,10 +782,12 @@ echo '#-------------------------------------------#'
 		# Positive action
 		[Yy]* )
 			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
-		echo ''>>'.bashrc'
-		echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
-		echo 'source ~/.bash_profile'>>'.bashrc'
-		echo 'fi'>>'.bashrc'
+			wget https://dl.dropboxusercontent.com/u/1564319/bashrc
+			mv bashrc $HOME/.bashrc
+			# echo ''>>'.bashrc'
+			# echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
+			# echo 'source ~/.bash_profile'>>'.bashrc'
+			# echo 'fi'>>'.bashrc'
 			clear && advanced
 			;;
 		# Negative action
@@ -825,7 +828,7 @@ echo '#-------------------------------------------#'
 			;;
 		esac
 		;;
-	#Desktop files
+	#Desktop files (directories are commented)
 	3)
 		echo 'Adding desktop and directory files...'
 		echo ''
@@ -844,11 +847,11 @@ echo '#-------------------------------------------#'
 				# cd $HOME
 				# rm -rf apps-desktops apps-desktops.tar.gz
 			# Directories
-				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
-				tar -xzf desktop-directories.tar.gz
-				rm -rf $HOME/.local/share/desktop-directories
-				mv desktop-directories $HOME/.local/share/desktop-directories
+				# cd /tmp
+				# wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
+				# tar -xzf desktop-directories.tar.gz
+				# rm -rf $HOME/.local/share/desktop-directories
+				# mv desktop-directories $HOME/.local/share/desktop-directories
 				# rm -rf desktop-directories desktop-directories.tar.gz
 			clear && advanced
 			;;
