@@ -61,7 +61,7 @@ echo '#-------------------------------------------#'
 	function repositories {
 	echo ''
 	echo "1) Enable basic PPAs         [7]"
-	echo "2) Enable extra repositories [9]"
+	echo "2) Enable extra repositories [10]"
 	echo "3) Enable exclusive PPAs     [2]"
 	echo "4) Delete duplicated repos   [*]"
 	echo 'r) Return?'
@@ -112,6 +112,7 @@ echo '#-------------------------------------------#'
 		Google Music Manager (stable)
 		Google Talk Plug-in (stable)
 		Dropbox (trusty)
+		Spotify (stable)
 		Steam (precise)'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -126,11 +127,12 @@ echo '#-------------------------------------------#'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
 			echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
+			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
 			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 F24AEA9FB05498B7
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59 F24AEA9FB05498B7
 
 			clear && repositories
 			;;
@@ -1007,7 +1009,7 @@ echo '#-------------------------------------------#'
 	function newcomers {
 	echo ''
 	echo "1) Enable PPAs?                  [4]"
-	echo "2) Enable extra repositories?    [9]"
+	echo "2) Enable extra repositories?    [10]"
 	echo '3) Install applications?         [35]'
 	echo '4) Remove unused apps and repos? [*]'
 	echo 'r) Return?'
@@ -1055,6 +1057,7 @@ echo '#-------------------------------------------#'
 		Google Music Manager (stable)
 		Google Talk Plug-in (stable)
 		Dropbox (trusty)
+		Spotify (stable)
 		Steam (precise)'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
@@ -1069,11 +1072,12 @@ echo '#-------------------------------------------#'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
 			echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
+			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
 			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
 			chmod 644 'extras.list'
 			sudo chown root:root 'extras.list'
 			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 F24AEA9FB05498B7
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59 F24AEA9FB05498B7
 			clear && newcomers
 			;;
 		# Negative action
