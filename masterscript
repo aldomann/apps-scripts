@@ -43,7 +43,7 @@ echo '#-------------------------------------------#'
 		sudo aptitude full-upgrade
 		echo 'Done.'
 		notify-send "System upgrade was successful" -i system-software-update
-		main
+		exit
 		;;
 	# Negative action
 	[Nn]* )
@@ -213,7 +213,7 @@ echo '#-------------------------------------------#'
 # INSTALL APPLICATIONS
 	function applications {
 	echo ''
-	echo '1) Install basic apps?         [40]'
+	echo '1) Install basic apps?         [42]'
 	echo '2) Install exclusive apps?     [11]'
 	echo '3) Install games?              [3]'
 	echo '4) Uninstall unnecessary apps? [4]'
@@ -225,13 +225,13 @@ echo '#-------------------------------------------#'
 	1)
 		echo 'Installing basic apps...'
 		echo ''
-		echo 'Current package list: bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo aptitude install bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -624,7 +624,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Source: https://gist.github.com/vertexclique/8073029
+			# Source: https://gist.github.com/vertexclique/9839383
 			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_only_x32
 			# sudo mv sublime_text_linux_sled2_only_x32 '/opt/sublime_text/sublime_text'
 			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_sled2_3_x64
@@ -1010,7 +1010,7 @@ echo '#-------------------------------------------#'
 	echo ''
 	echo "1) Enable PPAs?                  [4]"
 	echo "2) Enable extra repositories?    [10]"
-	echo '3) Install applications?         [35]'
+	echo '3) Install applications?         [37]'
 	echo '4) Remove unused apps and repos? [*]'
 	echo 'r) Return?'
 	echo ''
@@ -1095,13 +1095,13 @@ echo '#-------------------------------------------#'
 	3)
 		echo 'Installing guest apps...'
 		echo ''
-		echo 'Current package list: faba-icon-theme fonts-droid fonts-lato fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: faba-icon-theme fonts-droid fonts-lato fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo apt-get update && sudo apt-get install aptitude && sudo aptitude upgrade && sudo aptitude install faba-icon-theme fonts-droid fonts-lato fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo apt-get update && sudo apt-get install aptitude && sudo aptitude upgrade && sudo aptitude install faba-icon-theme fonts-droid fonts-lato fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype synaptic vineyard vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			clear && newcomers
 			;;
 		# Negative action
