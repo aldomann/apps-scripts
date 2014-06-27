@@ -15,7 +15,6 @@
 
 #TODO:
 	# @advanced nautilus scripts in En and Es.
-	# @fixapps, 11) review GNOME Shell apps.
 	# @fixapps, 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
 	# @layout review function.
 
@@ -126,6 +125,7 @@ echo '#-------------------------------------------#'
 			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
+			# echo 'deb http://dl.google.com/linux/webdesigner/deb/ stable main #Google Website Designer'>>'extras.list'
 			echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
 			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
 			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
@@ -153,13 +153,14 @@ echo '#-------------------------------------------#'
 		echo ''
 		echo 'Current repositories list:
 		webupd8team/atom
+		webupd8team/popcorntime
 		webupd8team/sublime-text-3'
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			 sudo add-apt-repository ppa:webupd8team/atom && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			 sudo add-apt-repository ppa:webupd8team/atom && sudo add-apt-repository ppa:webupd8team/popcorntime && sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
 			;;
 		# Negative action
@@ -215,7 +216,7 @@ echo '#-------------------------------------------#'
 	echo '1) Install basic apps?         [43]'
 	echo '2) Install exclusive apps?     [13]'
 	echo '3) Install games?              [3]'
-	echo '4) Uninstall unnecessary apps? [4]'
+	echo '4) Uninstall unnecessary apps? [5]'
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -307,7 +308,7 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
+			sudo aptitude purge firefox firefox-locale-en firefox-locale-es ttf-mscorefonts-installer xul-ext-ubufox
 			echo 'Done.'
 			notify-send "Uninstallation was successful"
 			clear && applications
@@ -740,7 +741,11 @@ echo '#-------------------------------------------#'
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/shell/app-folder-categories "['Accessories', 'Games', 'Graphics', 'Internet', 'Multimedia', 'Office', 'System', 'Utilities']"
+			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Utilities']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Games"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['gnome-sudoku.desktop', 'gnomine.desktop', 'gvbam.desktop', 'mahjongg.desktop', 'minecraft.desktop', 'sol.desktop', 'steam.desktop', 'zsnes.desktop', 'battlenet.desktop.desktop', 'war3roc.desktop', 'war3tft.desktop', 'Worms Reloaded.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit.desktop', 'dconf-editor.desktop', 'gdebi.desktop', 'gnome-disks.desktop', 'gnome-tweak-tool.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop']"
 			clear && fixapps
 			;;
 		# Negative action
