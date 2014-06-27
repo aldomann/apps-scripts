@@ -16,12 +16,11 @@
 #TODO:
 	# @advanced nautilus scripts in En and Es.
 	# @fixapps, 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
-	# @layout review function.
 
 echo ''
-echo '#-------------------------------------------#'
-echo '#     Ubuntu GNOME Post-Install Script      #'
-echo '#-------------------------------------------#'
+echo '#------------------------------------------#'
+echo '#     Ubuntu GNOME Post-Install Script     #'
+echo '#------------------------------------------#'
 
 #----- FUNCTIONS -----#
 
@@ -348,11 +347,12 @@ echo '#-------------------------------------------#'
 	echo "4) Use symbolic icons in Inkscape?"
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
-	echo "7) Set Moka/Roboto UI?"
-	echo "8) Set GNOME UI?"
-	echo "9) Set button layout [All:]?"
-	echo "10) Set-up Nautilus layout?"
-	echo "11) Set-up GNOME Shell app folders?"
+	echo ''
+	echo "7)  Set Moka/Roboto UI?"
+	echo "8)  Set GNOME UI?"
+	echo "9)  Set button layout [All:]?"
+	echo "10) Set up Nautilus layout?"
+	echo "11) Set up GNOME Shell app folders?"
 	echo 'r) Return?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -790,10 +790,6 @@ echo '#-------------------------------------------#'
 			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
 			wget https://dl.dropboxusercontent.com/u/1564319/bashrc
 			mv bashrc $HOME/.bashrc
-			# echo ''>>'.bashrc'
-			# echo 'if [ -f ~/.bash_profile ]; then'>>'.bashrc'
-			# echo 'source ~/.bash_profile'>>'.bashrc'
-			# echo 'fi'>>'.bashrc'
 			clear && advanced
 			;;
 		# Negative action
@@ -1008,137 +1004,6 @@ echo '#-------------------------------------------#'
 	esac
 	}
 
-#---------------------------------------------------
-# NEWCOMERS
-	function newcomers {
-	echo ''
-	echo "1) Enable PPAs?                  [4]"
-	echo "2) Enable extra repositories?    [10]"
-	echo '3) Install applications?         [34]'
-	echo '4) Remove unused apps and repos? [*]'
-	echo 'r) Return?'
-	echo ''
-	read -p 'What would you like to do? (Enter your choice): ' REPLY
-	case $REPLY in
-	# Basic PPAs
-	1)
-		echo 'Enabling repositories...'
-		echo ''
-		echo 'Current repositories list:
-		cybolic/vineyard-testing
-		moka/stable
-		ubuntu-wine
-		webupd8team/java'
-		echo ''
-		read -p 'Proceed? (Y)es, (N)o : ' REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
-			clear && newcomers
-			;;
-		# Negative action
-		[Nn]* )
-			clear && newcomers
-			;;
-		# Error
-		* )
-			clear && echo 'Sorry, try again.'
-			newcomers
-			;;
-		esac
-		;;
-	# Extra repositories
-	2)
-		echo 'Enabling repositories...'
-		echo ''
-		echo 'Current repositories list:
-		Canonical Partners (trusty)
-		Getdeb Apps (trusty)
-		Getdeb Games (trusty)
-		Google Chrome (stable)
-		Google Earth (stable)
-		Google Music Manager (stable)
-		Google Talk Plug-in (stable)
-		Dropbox (trusty)
-		Spotify (stable)
-		Steam (precise)'
-		echo ''
-		read -p 'Proceed? (Y)es, (N)o : ' REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			echo 'deb http://archive.canonical.com/ubuntu trusty partner #Canonical Partners' >> 'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb apps #Getdeb Apps'>>'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb games #Getdeb Games'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
-			echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
-			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
-			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
-			chmod 644 'extras.list'
-			sudo chown root:root 'extras.list'
-			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59 F24AEA9FB05498B7
-			clear && newcomers
-			;;
-		# Negative action
-		[Nn]* )
-			clear && newcomers
-			;;
-		# Error
-		* )
-			clear && echo 'Sorry, try again.'
-			newcomers
-			;;
-		esac
-		;;
-	# Install apps for newcomers
-	3)
-		echo 'Installing guest apps...'
-		echo ''
-		echo 'Current package list: faba-icon-theme fonts-droid fonts-lato fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
-		echo ''
-		read -p 'Proceed? (Y)es, (N)o : ' REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo apt-get update && sudo apt-get install aptitude && sudo aptitude upgrade && sudo aptitude install faba-icon-theme fonts-droid fonts-lato fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
-			clear && newcomers
-			;;
-		# Negative action
-		[Nn]* )
-			clear && newcomers
-			;;
-		# Error
-		* )
-			clear && echo 'Sorry, try again.'
-			newcomers
-			;;
-		esac
-		;;
-	# Delete repositories
-	4)
-		echo 'Deleting repositories...'
-		cd /etc/apt/sources.list.d/
-		sudo rm -rf *.save
-		sudo rm -rf *.list~
-		sudo rm -rf *dropbox*.list *google*.list steam.list
-		echo 'Deleting applications...'
-		sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
-		clear && newcomers
-		;;
-	# Return
-	[Rr]*)
-		clear && main;;
-	# Invalid choice
-	* )
-		clear && echo 'Not an option, try again.' && newcomers;;
-	esac
-	}
-
 # --------------------------------------------------
 #----- MAIN FUNCTION -----#
 	function main {
@@ -1150,7 +1015,6 @@ echo '#-------------------------------------------#'
 	echo '5) Perform advanced configurations?'
 	echo '6) View hardware information?'
 	echo '7) Cleanup the system?'
-	echo '8) Install and config newcomers system?'
 	echo 'q) Quit?'
 	echo ''
 	read -p 'What would you like to do? (Enter your choice): ' REPLY
@@ -1162,7 +1026,6 @@ echo '#-------------------------------------------#'
 		5) clear && advanced;; # Advanced config
 		6) clear && hardware;; # Hardware info
 		7) clear && cleanup;; # System cleanup
-		8) clear && newcomers;; # Newcomers
 		[Qq]* ) exit 99;; # Quit
 		* ) clear && echo 'Not an option, try again.' && main;;
 	esac
