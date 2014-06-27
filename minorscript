@@ -1,0 +1,152 @@
+#!/bin/bash
+# Authors:
+#   Sam Hewitt <hewittsamuel@gmail.com> (original script)
+#   Alfredo Hernández <aldomann.designs@gmail.com>
+#
+# Description:
+#   A post-installation bash script for Ubuntu GNOME (13.10)
+#
+# Legal Stuff:
+#   This script is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; version 3.
+#
+#   This script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses/gpl-3.0.txt>
+
+echo ''
+echo '#-------------------------------------------------#'
+echo '#     Ubuntu GNOME Post-Install Script (Lite)     #'
+echo '#-------------------------------------------------#'
+function main {
+echo ''
+echo "1) Enable PPAs?                  [4]"
+echo "2) Enable extra repositories?    [10]"
+echo '3) Install applications?         [34]'
+echo '4) Remove unused apps and repos? [*]'
+echo 'q) Quit?'
+echo ''
+read -p 'What would you like to do? (Enter your choice): ' REPLY
+case $REPLY in
+# Basic PPAs
+1)
+	echo 'Enabling repositories...'
+	echo ''
+	echo 'Current repositories list:
+	cybolic/vineyard-testing
+	moka/stable
+	ubuntu-wine
+	webupd8team/java'
+	echo ''
+	read -p 'Proceed? (Y)es, (N)o : ' REPLY
+	case $REPLY in
+	# Positive action
+	[Yy]* )
+		sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+		clear && main
+		;;
+	# Negative action
+	[Nn]* )
+		clear && main
+		;;
+	# Error
+	* )
+		clear && echo 'Sorry, try again.'
+		main
+		;;
+	esac
+	;;
+# Extra repositories
+2)
+	echo 'Enabling repositories...'
+	echo ''
+	echo 'Current repositories list:
+	Canonical Partners (trusty)
+	Getdeb Apps (trusty)
+	Getdeb Games (trusty)
+	Google Chrome (stable)
+	Google Earth (stable)
+	Google Music Manager (stable)
+	Google Talk Plug-in (stable)
+	Dropbox (trusty)
+	Spotify (stable)
+	Steam (precise)'
+	echo ''
+	read -p 'Proceed? (Y)es, (N)o : ' REPLY
+	case $REPLY in
+	# Positive action
+	[Yy]* )
+		echo 'deb http://archive.canonical.com/ubuntu trusty partner #Canonical Partners' >> 'extras.list'
+		echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb apps #Getdeb Apps'>>'extras.list'
+		echo 'deb http://archive.getdeb.net/ubuntu trusty-getdeb games #Getdeb Games'>>'extras.list'
+		echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
+		echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
+		echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
+		echo 'deb http://dl.google.com/linux/talkplugin/deb/ stable main #Google Talk Plug-in'>>'extras.list'
+		echo 'deb http://linux.dropbox.com/ubuntu trusty main #Dropbox'>>'extras.list'
+		echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
+		echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
+		chmod 644 'extras.list'
+		sudo chown root:root 'extras.list'
+		sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
+		sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59 F24AEA9FB05498B7
+		clear && main
+		;;
+	# Negative action
+	[Nn]* )
+		clear && main
+		;;
+	# Error
+	* )
+		clear && echo 'Sorry, try again.'
+		main
+		;;
+	esac
+	;;
+# Install apps for main
+3)
+	echo 'Installing guest apps...'
+	echo ''
+	echo 'Current package list: faba-icon-theme fonts-droid fonts-lato fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+	echo ''
+	read -p 'Proceed? (Y)es, (N)o : ' REPLY
+	case $REPLY in
+	# Positive action
+	[Yy]* )
+		sudo apt-get update && sudo apt-get install aptitude && sudo aptitude upgrade && sudo aptitude install faba-icon-theme fonts-droid fonts-lato fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+		clear && main
+		;;
+	# Negative action
+	[Nn]* )
+		clear && main
+		;;
+	# Error
+	* )
+		clear && echo 'Sorry, try again.'
+		main
+		;;
+	esac
+	;;
+# Delete repositories
+4)
+	echo 'Deleting repositories...'
+	cd /etc/apt/sources.list.d/
+	sudo rm -rf *.save
+	sudo rm -rf *.list~
+	sudo rm -rf *dropbox*.list *google*.list steam.list
+	echo 'Deleting applications...'
+	sudo aptitude purge firefox firefox-locale-en firefox-locale-es xul-ext-ubufox
+	clear && main
+	;;
+# Return
+[Qq]* ) 
+	exit 99;; # Quit
+# Invalid choice
+* )
+	clear && echo 'Not an option, try again.' && main;;
+esac
+}
+
+#----- RUN MAIN FUNCTION -----#
+main
+
+#END OF SCRIPT
