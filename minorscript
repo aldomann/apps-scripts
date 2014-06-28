@@ -107,6 +107,7 @@ case $REPLY in
 	echo 'Installing guest apps...'
 	echo ''
 	echo 'Current package list: faba-icon-theme fonts-droid fonts-lato fonts-roboto gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk rar skype synaptic vlc aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+	# Not installed [8]: bleachbit, fonts-lmodern, gbrainy, inkscape, quadrapassel, sound-juicer, vineyard, wine
 	echo ''
 	read -p 'Proceed? (Y)es, (N)o : ' REPLY
 	case $REPLY in
