@@ -225,6 +225,7 @@ echo '#------------------------------------------#'
 		echo 'Installing basic apps...'
 		echo ''
 		echo 'Current package list: bleachbit faba-icon-theme fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable google-talkplugin gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		# Not installed in minorscript [8]: bleachbit, fonts-lmodern, gbrainy, inkscape, quadrapassel, sound-juicer, vineyard, wine
 		echo ''
 		read -p 'Proceed? (Y)es, (N)o : ' REPLY
 		case $REPLY in
@@ -743,7 +744,7 @@ echo '#------------------------------------------#'
 		[Yy]* )
 			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Utilities']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Games"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['gnome-sudoku.desktop', 'gnomine.desktop', 'gvbam.desktop', 'mahjongg.desktop', 'minecraft.desktop', 'sol.desktop', 'steam.desktop', 'zsnes.desktop', 'battlenet.desktop.desktop', 'war3roc.desktop', 'war3tft.desktop', 'Worms Reloaded.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'glchess.desktop', 'glines.desktop', 'gnect.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'gnomine.desktop', 'gnotski.desktop', 'gtali.desktop', 'iagno.desktop', 'lightsoff.desktop', 'mahjongg.desktop', 'quadrapassel.desktop', 'sol.desktop', 'swell-foop.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit.desktop', 'dconf-editor.desktop', 'gdebi.desktop', 'gnome-disks.desktop', 'gnome-tweak-tool.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop']"
 			clear && fixapps
