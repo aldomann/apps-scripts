@@ -215,7 +215,7 @@ function applications {
 	echo "1) Install basic apps?         [43]"
 	echo "2) Install exclusive apps?     [13]"
 	echo "3) Install games?              [3]"
-	echo "4) Uninstall unnecessary apps? [14]"
+	echo "4) Uninstall unused apps? [14]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -298,9 +298,9 @@ function applications {
 		;;
 	# Uninstall apps
 	4)
-		show_info 'Uninstalling unnecessary apps...'
+		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: firefox firefox-locale-en firefox-locale-es xul-ext-ubufox'
+		echo 'Current package list: abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox' 
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
