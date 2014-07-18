@@ -28,31 +28,15 @@ echo '#------------------------------------------#'
 function sysupgrade {
 	# Perform system upgrade
 	echo
-	show_info 'Proceed with system upgrade? (Y)es, (N)o :' && read REPLY
-	case $REPLY in
-	# Positive action
-	[Yy]* )
-		# Update repository information
-		show_info 'Updating repository information...'
-		sudo aptitude update
-		# notify-send "Repository information has been updated" -i system-software-update
-		# Dist-Upgrade
-		show_info 'Performing system upgrade...'
-		sudo aptitude full-upgrade
-		show_success 'Done.'
-		notify-send "System upgrade was successful" -i system-software-update
-		exit
-		;;
-	# Negative action
-	[Nn]* )
-		clear && main
-		;;
-	# Error
-	* )
-		clear && show_error 'Sorry, try again.'
-		sysupgrade
-		;;
-	esac
+	show_info 'Updating repository information...'
+	sudo aptitude update
+	# notify-send "Repository information has been updated" -i system-software-update
+	# Full-Upgrade
+	show_info 'Performing system upgrade...'
+	sudo aptitude full-upgrade
+	show_success 'Done.'
+	notify-send "System upgrade was successful" -i system-software-update
+	exit
 }
 # --------------------------------------------------
 function repositories {
