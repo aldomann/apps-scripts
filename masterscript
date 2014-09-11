@@ -1,10 +1,10 @@
 #!/bin/bash
 # Authors:
-#   Sam Hewitt <hewittsamuel@gmail.com> (original script)
-#   Alfredo Hernández <aldomann.designs@gmail.com>
+#	Sam Hewitt <hewittsamuel@gmail.com> (original script)
+#	Alfredo Hernández <aldomann.designs@gmail.com>
 #
 # Description:
-#   A post-installation bash script for Ubuntu GNOME (14.04)
+#	A post-installation bash script for Ubuntu GNOME (14.04)
 #
 # Legal Stuff:
 #	This script is free software: you can redistribute it and/or modify
@@ -291,13 +291,13 @@ function applications {
 	4)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox' 
+		echo 'Current package list: abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude purge abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox 
+			sudo aptitude purge abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
@@ -897,7 +897,7 @@ function advanced {
 }
 # --------------------------------------------------
 function hardware {
-	show_info 'What would you like to do?'	
+	show_info 'What would you like to do?'
 	echo
 	echo "1) Show disk usage?"
 	echo "2) Show kernel version?"

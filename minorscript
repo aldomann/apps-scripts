@@ -1,10 +1,10 @@
 #!/bin/bash
 # Authors:
-#   Sam Hewitt <hewittsamuel@gmail.com> (original script)
-#   Alfredo Hernández <aldomann.designs@gmail.com>
+#	Sam Hewitt <hewittsamuel@gmail.com> (original script)
+#	Alfredo Hernández <aldomann.designs@gmail.com>
 #
 # Description:
-#   A post-installation bash script for Ubuntu GNOME (14.04)
+#	A post-installation bash script for Ubuntu GNOME (14.04)
 #
 # Legal Stuff:
 #	This script is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@ echo '#     Ubuntu GNOME Post-Install Script (Lite)     #'
 echo '#-------------------------------------------------#'
 function main {
 	show_info 'What would you like to do?'
-	echo 
+	echo
 	echo "1) Enable PPAs?                  [4]"
 	echo "2) Enable extra repositories?    [10]"
 	echo "3) Install applications?         [34]"
@@ -145,11 +145,11 @@ function main {
 		sudo rm -rf *dropbox*.list *google*.list steam.list
 		cd
 		show_info 'Uninstalling unused apps...'
-		sudo aptitude purge abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox 
+		sudo aptitude purge abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox
 		clear && main
 		;;
 	# Return
-	[Qq]* ) 
+	[Qq]* )
 		exit 99;; # Quit
 	# Invalid choice
 	* )
