@@ -204,7 +204,7 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install basic apps?         [42]"
-	echo "2) Install exclusive apps?     [13]"
+	echo "2) Install exclusive apps?     [11]"
 	echo "3) Install games?              [3]"
 	echo "4) Uninstall unused apps? [14]"
 	echo "r) Return?"
@@ -241,13 +241,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: atom comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo 'Current package list: comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install atom comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			sudo aptitude install comix dropbox gcolor2 git google-musicmanager-beta gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -312,8 +312,8 @@ function applications {
 			;;
 		esac
 		;;
-	# Not in use [27]
-		# alacarte arista bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gnac gnome-clocks google-earth-stable gtk-vector-screenshot hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
+	# Not in use [28]
+		# alacarte arista atom bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gnac gnome-clocks google-earth-stable gtk-vector-screenshot hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
 	# Quarantine [2]
 		# gparted pdfjam
 	# LaTeX [4]
