@@ -1032,6 +1032,7 @@ function main {
 		5) clear && advanced;; # Advanced config
 		6) clear && hardware;; # Hardware info
 		7) clear && cleanup;; # System cleanup
+		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
 		[Qq]* ) exit 99;; # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
 	esac
