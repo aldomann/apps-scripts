@@ -310,8 +310,8 @@ function applications {
 			;;
 		esac
 		;;
-	# Not in use [28]
-		# alacarte arista atom bzr cantor cutemupen easytag faience-icon-theme faience-theme gameconqueror gnac gnome-clocks google-earth-stable gtk-vector-screenshot hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
+	# Not in use [26]
+		# alacarte arista atom bzr cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable gtk-vector-screenshot hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
 	# Quarantine [2]
 		# gparted pdfjam
 	# LaTeX [4]
