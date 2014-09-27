@@ -20,8 +20,9 @@
 #	along with this script.  If not, see <http://www.gnu.org/licenses/>.
 
 #TODO:
+	# @advanced is 3) necessary anymore?
 	# @advanced nautilus scripts in En and Es.
-	# @fixapps, 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
+	# @fixapps 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
 
 tabs 2
 clear
@@ -74,7 +75,14 @@ function repositories {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:gnome3-team/gnome3 && sudo add-apt-repository ppa:gnome3-team/gnome3-next && sudo add-apt-repository ppa:gnome3-team/gnome3-staging && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:numix && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			sudo add-apt-repository ppa:cybolic/vineyard-testing
+			sudo add-apt-repository ppa:gnome3-team/gnome3
+			sudo add-apt-repository ppa:gnome3-team/gnome3-next
+			sudo add-apt-repository ppa:gnome3-team/gnome3-staging
+			sudo add-apt-repository ppa:moka/stable
+			sudo add-apt-repository ppa:numix
+			sudo add-apt-repository ppa:ubuntu-wine
+			sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
 			;;
 		# Negative action
@@ -147,7 +155,9 @@ function repositories {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			 sudo add-apt-repository ppa:moka/daily && sudo add-apt-repository ppa:webupd8team/popcorntime && sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			sudo add-apt-repository ppa:moka/daily
+			sudo add-apt-repository ppa:webupd8team/popcorntime
+			sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
 			;;
 		# Negative action
@@ -335,7 +345,7 @@ function fixapps {
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
 	echo
-	echo "7)  Set Moka/Roboto UI?"
+	echo "7)  Set Moka/Numix/Roboto UI?"
 	echo "8)  Set GNOME UI?"
 	echo "9)  Set button layout [All:]?"
 	echo "10) Set up Nautilus layout?"
@@ -620,7 +630,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Moka UI
+	# Moka/Numix UI
 	7)
 		show_info 'Changing dconf files...'
 		echo
@@ -628,7 +638,13 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "'close:'" && dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'" && dconf write /org/gnome/desktop/interface/monospace-font-name "'Monaco 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Numix Daily'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Numix Daily'" && dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
+			dconf write /org/gnome/shell/overrides/button-layout "'close:'"
+			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
+			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Numix'"
+			dconf write /org/gnome/desktop/wm/preferences/theme "'Numix'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
 			clear && fixapps
 			;;
 		# Negative action
@@ -650,7 +666,12 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "':close'" && dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'" && dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'" && dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'" && dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'" && dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
 			clear && fixapps
 			;;
 		# Negative action
@@ -694,8 +715,20 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
-			sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']" && sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128" && sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'" && sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true" && sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'" && sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+			# Regular nautilus
+				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']"
+				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128"
+				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
+				dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
+				dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'"
+				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+			# Root nautilus
+				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']"
+				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128"
+				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
+				sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
+				sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'"
+				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 			clear && fixapps
 			;;
 		# Negative action
@@ -802,7 +835,6 @@ function advanced {
 			wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
 			tar -xzf nautilus-scripts.tar.gz
 			rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
-			# rm -rf nautilus-scripts nautilus-scripts.tar.gz
 			nautilus -q
 			clear && advanced
 			;;
@@ -833,15 +865,12 @@ function advanced {
 				cp -r gnome-applications.menu $HOME/.config/menus
 				cp -r *.desktop $HOME/.local/share/applications
 				gtk-update-icon-cache
-				# cd $HOME
-				# rm -rf apps-desktops apps-desktops.tar.gz
 			# Directories
 				# cd /tmp
 				# wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
 				# tar -xzf desktop-directories.tar.gz
 				# rm -rf $HOME/.local/share/desktop-directories
 				# mv desktop-directories $HOME/.local/share/desktop-directories
-				# rm -rf desktop-directories desktop-directories.tar.gz
 			clear && advanced
 			;;
 		# Negative action
@@ -870,8 +899,6 @@ function advanced {
 			cd hidden-apps
 			cp -r *.desktop $HOME/.local/share/applications
 			gtk-update-icon-cache
-			# cd $HOME
-			# rm -rf apps-desktops apps-desktops.tar.gz
 			clear && advanced
 			;;
 		# Negative action
@@ -912,8 +939,7 @@ function hardware {
 		;;
 	# Show kernel version
 	2)
-		uname -r
-		# uname -a shows kernel and arch info
+		uname -r # uname -a shows kernel and arch info
 		hardware
 		;;
 	# Show system information
