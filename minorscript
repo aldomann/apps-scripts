@@ -50,7 +50,10 @@ function main {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:cybolic/vineyard-testing && sudo add-apt-repository ppa:moka/stable && sudo add-apt-repository ppa:ubuntu-wine && sudo add-apt-repository ppa:webupd8team/java
+			sudo add-apt-repository ppa:cybolic/vineyard-testing
+			sudo add-apt-repository ppa:moka/stable
+			sudo add-apt-repository ppa:ubuntu-wine
+			sudo add-apt-repository ppa:webupd8team/java
 			clear && main
 			;;
 		# Negative action
