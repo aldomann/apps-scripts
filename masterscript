@@ -212,7 +212,7 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install basic apps?         [41]"
-	echo "2) Install exclusive apps?     [12]"
+	echo "2) Install exclusive apps?     [11]"
 	echo "3) Install games?              [3]"
 	echo "4) Uninstall unused apps? [14]"
 	echo "r) Return?"
@@ -249,13 +249,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: dropbox gcolor2 git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo 'Current package list: dropbox git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install dropbox gcolor2 git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			sudo aptitude install dropbox git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
 			notify-send "Installation was successful"
 			clear && applications
 			;;
