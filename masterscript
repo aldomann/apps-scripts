@@ -49,7 +49,7 @@ function sysupgrade {
 function repositories {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Enable basic PPAs         [8]"
+	echo "1) Enable basic PPAs         [6]"
 	echo "2) Enable extra repositories [9]"
 	echo "3) Enable exclusive PPAs     [4]"
 	echo "4) Delete duplicated repos   [*]"
@@ -64,10 +64,8 @@ function repositories {
 		echo 'Current repositories list:
 		cybolic/vineyard-testing
 		gnome3-team/gnome3
-		gnome3-team/gnome3-next
 		gnome3-team/gnome3-staging
 		moka/stable
-		numix
 		ubuntu-wine
 		webupd8team/java'
 		echo
@@ -77,10 +75,8 @@ function repositories {
 		[Yy]* )
 			sudo add-apt-repository ppa:cybolic/vineyard-testing
 			sudo add-apt-repository ppa:gnome3-team/gnome3
-			sudo add-apt-repository ppa:gnome3-team/gnome3-next
 			sudo add-apt-repository ppa:gnome3-team/gnome3-staging
 			sudo add-apt-repository ppa:moka/stable
-			sudo add-apt-repository ppa:numix
 			sudo add-apt-repository ppa:ubuntu-wine
 			sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
@@ -148,6 +144,7 @@ function repositories {
 		echo
 		echo 'Current repositories list:
 		moka/daily
+		numix
 		webupd8team/popcorntime
 		webupd8team/sublime-text-3'
 		echo
@@ -156,6 +153,7 @@ function repositories {
 		# Positive action
 		[Yy]* )
 			sudo add-apt-repository ppa:moka/daily
+			sudo add-apt-repository ppa:numix
 			sudo add-apt-repository ppa:webupd8team/popcorntime
 			sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
@@ -197,7 +195,7 @@ function repositories {
 		esac
 		;;
 	# Not in use [2]
-		# tiheum/equinox
+		# gnome3-team/gnome3-next
 		# webupd8team/atom
 	# Return
 	[Rr]*)
@@ -320,8 +318,8 @@ function applications {
 			;;
 		esac
 		;;
-	# Not in use [26]
-		# alacarte arista atom bzr cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable gtk-vector-screenshot hardinfo hedgewars libreoffice-l10n-es menulibre minitube miro mupen64plus musique nuvolaplayer pitivi screenkey screenruler unetbootin wesnoth
+	# Not in use [21]
+		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
 	# Quarantine [2]
 		# gparted pdfjam
 	# LaTeX [4]
