@@ -210,7 +210,7 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install basic apps?         [41]"
-	echo "2) Install exclusive apps?     [11]"
+	echo "2) Install exclusive apps?     [10]"
 	echo "3) Install games?              [3]"
 	echo "4) Uninstall unused apps? [14]"
 	echo "r) Return?"
@@ -247,13 +247,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: dropbox git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
+		echo 'Current package list: dropbox git gnome-boxes gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install dropbox git gnome-boxes google-musicmanager-beta gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
+			sudo aptitude install dropbox git gnome-boxes gtk-3-examples nautilus-open-terminal popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -318,8 +318,8 @@ function applications {
 			;;
 		esac
 		;;
-	# Not in use [21]
-		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
+	# Not in use [22]
+		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable google-musicmanager-beta hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
 	# Quarantine [2]
 		# gparted pdfjam
 	# LaTeX [4]
