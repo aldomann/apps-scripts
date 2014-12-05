@@ -50,10 +50,10 @@ function sysupgrade {
 function repositories {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Enable basic PPAs         [6]"
-	echo "2) Enable extra repositories [9]"
-	echo "3) Enable exclusive PPAs     [4]"
-	echo "4) Delete duplicated repos   [*]"
+	echo "1) Enable basic PPAs            [6]"
+	echo "2) Enable extra repositories    [9]"
+	echo "3) Enable exclusive PPAs        [3]"
+	echo "4) Delete duplicated repos      [*]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -66,7 +66,7 @@ function repositories {
 		cybolic/vineyard-testing
 		gnome3-team/gnome3
 		gnome3-team/gnome3-staging
-		moka/stable
+		moka/daily
 		ubuntu-wine
 		webupd8team/java'
 		echo
@@ -77,7 +77,7 @@ function repositories {
 			sudo add-apt-repository ppa:cybolic/vineyard-testing
 			sudo add-apt-repository ppa:gnome3-team/gnome3
 			sudo add-apt-repository ppa:gnome3-team/gnome3-staging
-			sudo add-apt-repository ppa:moka/stable
+			sudo add-apt-repository ppa:moka/daily
 			sudo add-apt-repository ppa:ubuntu-wine
 			sudo add-apt-repository ppa:webupd8team/java
 			clear && repositories
@@ -98,15 +98,15 @@ function repositories {
 		show_info 'Enabling repositories...'
 		echo
 		echo 'Current repositories list:
-		Canonical Partners (trusty)
-		Dropbox (trusty)
-		Getdeb Apps (trusty)
-		Getdeb Games (trusty)
-		Google Chrome (stable)
-		Google Earth (stable)
+		Canonical Partners   (trusty)
+		Dropbox              (trusty)
+		Getdeb Apps          (trusty)
+		Getdeb Games         (trusty)
+		Google Chrome        (stable)
+		Google Earth         (stable)
 		Google Music Manager (stable)
-		Spotify (stable)
-		Steam (precise)'
+		Spotify              (stable)
+		Steam                (precise)'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -144,7 +144,6 @@ function repositories {
 		show_info 'Enabling repositories...'
 		echo
 		echo 'Current repositories list:
-		moka/daily
 		numix
 		webupd8team/popcorntime
 		webupd8team/sublime-text-3'
@@ -153,7 +152,6 @@ function repositories {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo add-apt-repository ppa:moka/daily
 			sudo add-apt-repository ppa:numix
 			sudo add-apt-repository ppa:webupd8team/popcorntime
 			sudo add-apt-repository ppa:webupd8team/sublime-text-3
@@ -210,10 +208,10 @@ function repositories {
 function applications {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Install basic apps?         [41]"
-	echo "2) Install exclusive apps?     [13]"
-	echo "3) Install games?              [3]"
-	echo "4) Uninstall unused apps? [14]"
+	echo "1) Install basic apps?        [42]"
+	echo "2) Install exclusive apps?    [15]"
+	echo "3) Install games?             [3]"
+	echo "4) Uninstall unused apps?     [14]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -222,14 +220,14 @@ function applications {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo 'Current package list: bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
+		echo 'Current package list: bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
 		# Not installed in minorscript [8]: bleachbit, fonts-lmodern, gbrainy, inkscape, quadrapassel, sound-juicer, vineyard, wine
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo aptitude install bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable  gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -248,13 +246,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl'
+		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl
+			sudo aptitude install comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -273,7 +271,7 @@ function applications {
 	3)
 		show_info 'Installing games...'
 		echo
-		echo 'Current package list: vbam-gtk zsnes'
+		echo 'Current package list: steam-launcher vbam-gtk zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -345,9 +343,9 @@ function fixapps {
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
 	echo
-	echo "7)  Set Moka/Numix/Roboto UI?"
-	echo "8)  Set GNOME UI?"
-	echo "9)  Set button layout [All:]?"
+	echo "7) Set Moka/Numix/Roboto UI?"
+	echo "8) Set GNOME UI?"
+	echo "9) Set button layout [All:]?"
 	echo "10) Set up Nautilus layout?"
 	echo "11) Set up GNOME Shell app folders?"
 	echo "r) Return?"
