@@ -52,7 +52,7 @@ function repositories {
 	echo
 	echo "1) Enable basic PPAs            [6]"
 	echo "2) Enable extra repositories    [9]"
-	echo "3) Enable exclusive PPAs        [3]"
+	echo "3) Enable exclusive PPAs        [4]"
 	echo "4) Delete duplicated repos      [*]"
 	echo "r) Return?"
 	echo
@@ -145,6 +145,7 @@ function repositories {
 		echo
 		echo 'Current repositories list:
 		numix
+		system76-dev/stable
 		webupd8team/popcorntime
 		webupd8team/sublime-text-3'
 		echo
@@ -153,6 +154,7 @@ function repositories {
 		# Positive action
 		[Yy]* )
 			sudo add-apt-repository ppa:numix
+			sudo add-apt-repository ppa:system76-dev/stable
 			sudo add-apt-repository ppa:webupd8team/popcorntime
 			sudo add-apt-repository ppa:webupd8team/sublime-text-3
 			clear && repositories
@@ -209,9 +211,9 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install basic apps?        [42]"
-	echo "2) Install exclusive apps?    [15]"
+	echo "2) Install exclusive apps?    [16]"
 	echo "3) Install games?             [3]"
-	echo "4) Uninstall unused apps?     [14]"
+	echo "4) Uninstall unused apps?     [17]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -246,13 +248,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl'
+		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer thunar vlc-plugin-fluidsynth youtube-dl
+			sudo aptitude install comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -296,7 +298,7 @@ function applications {
 	4)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox'
+		echo 'Current package list: abiword abiword-common firefox firefox-locale-en firefox-locale-es gnumeric libabiword-3.0 libgtkmathview0c2a pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox'
 		# EXCLUSIVE: brasero rhythmbox soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -320,8 +322,8 @@ function applications {
 		;;
 	# Not in use [22]
 		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable google-musicmanager-beta hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
-	# Quarantine [2]
-		# gparted pdfjam
+	# Quarantine [1]
+		# gparted
 	# LaTeX [4]
 		# asymptote gummi texlive texlive-latex-extra
 	# Return
