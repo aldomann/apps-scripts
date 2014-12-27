@@ -52,7 +52,7 @@ function repositories {
 	echo
 	echo "1) Enable basic PPAs            [6]"
 	echo "2) Enable extra repositories    [9]"
-	echo "3) Enable exclusive PPAs        [4]"
+	echo "3) Enable exclusive PPAs        [5]"
 	echo "4) Delete duplicated repos      [*]"
 	echo "r) Return?"
 	echo
@@ -144,6 +144,7 @@ function repositories {
 		show_info 'Enabling repositories...'
 		echo
 		echo 'Current repositories list:
+		nexulockr-dev/nexulockr-beta
 		numix
 		system76-dev/stable
 		webupd8team/popcorntime
@@ -153,6 +154,7 @@ function repositories {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
+			sudo add-apt-repository ppa:nexulockr-dev/nexulockr-beta
 			sudo add-apt-repository ppa:numix
 			sudo add-apt-repository ppa:system76-dev/stable
 			sudo add-apt-repository ppa:webupd8team/popcorntime
@@ -248,7 +250,7 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
+		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -767,7 +769,7 @@ function fixapps {
 				;;
 			esac #TODO: Note that there's no "* )" show_error option
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'swell-foop.desktop', 'tali.desktop', 'glines.desktop', 'gnect.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gnotski.desktop', 'gtali.desktop']" #TODO from glines to the end, the names are for dummy-transitional packages
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-tweak-tool.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-tweak-tool.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop']"
 			clear && fixapps
 			;;
 		# Negative action
