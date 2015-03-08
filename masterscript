@@ -347,7 +347,7 @@ function fixapps {
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
 	echo
-	echo "7) Set Moka/Numix/Roboto UI?"
+	echo "7) Set Moka/Adwaita/Roboto UI?"
 	echo "8) Set GNOME UI?"
 	echo "9) Set button layout [All:]?"
 	echo "10) Set up Nautilus layout?"
@@ -632,7 +632,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Moka/Numix UI
+	# Moka/Adwaita UI
 	7)
 		show_info 'Changing dconf files...'
 		echo
@@ -640,13 +640,13 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "'close:'"
-			dconf write /org/gnome/desktop/wm/preferences/button-layout "'close:'"
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
 			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
 			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
 			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Numix'"
-			dconf write /org/gnome/desktop/wm/preferences/theme "'Numix'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
 			clear && fixapps
 			;;
