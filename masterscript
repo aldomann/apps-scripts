@@ -20,9 +20,7 @@
 #	along with this script.  If not, see <http://www.gnu.org/licenses/>.
 
 #TODO:
-	# @advanced is 3) necessary anymore?
 	# @advanced nautilus scripts in En and Es.
-	# @fixapps 7) gtk-decoration-layout = ",close:"﻿ << settings.ini.
 	# @applications add unrar
 
 tabs 2
@@ -346,12 +344,7 @@ function fixapps {
 	echo "4) Use symbolic icons in Inkscape?"
 	echo "5) Enable smooth fonts in Wine?"
 	echo "6) Crack Sublime Text 3 License?"
-	echo
-	echo "7) Set Moka/Adwaita/Roboto UI?"
-	echo "8) Set GNOME UI?"
-	echo "9) Set button layout [All:]?"
-	echo "10) Set up Nautilus layout?"
-	echo "11) Set up GNOME Shell app folders?"
+	echo "7) Set up Nautilus layout?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -381,7 +374,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	#Google Earth fix
+	# Google Earth fix
 	2)
 		show_info 'Applying fix for Google Earth...'
 		echo
@@ -420,7 +413,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	#VLC fixes
+	# VLC fixes
 	3)
 		show_info 'Applying fixes for VLC...'
 		echo
@@ -491,7 +484,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	#Inkscape icons
+	# Inkscape icons
 	4)
 		show_info 'Applying fix for Inkscape...'
 		echo
@@ -520,7 +513,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	#Wine fonts
+	# Wine fonts
 	5)
 		show_info 'Applying fix for Wine...'
 		echo
@@ -605,6 +598,7 @@ function fixapps {
 			;;
 		esac
 		;;
+	# Sublime Text Crack
 	6)
 		show_info 'Cracking Sublime Text license...'
 		echo
@@ -632,87 +626,8 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Moka/Adwaita UI
+	# Nautilus layout
 	7)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "':close'"
-			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
-			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
-			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
-			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-			dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
-			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	# GNOME UI
-	8)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "':close'"
-			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
-			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
-			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-			dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
-			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	#[All:] button layout
-	9)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "'close,minimize,maximize:'"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	#Nautilus layout
-	10)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -746,46 +661,6 @@ function fixapps {
 			;;
 		esac
 		;;
-	# GNOME Shell app folders
-	11)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Office', 'Utilities']"
-			show_info 'In which language is your system? (E)nglish or (S)panish: ' && read REPLY
-			case $REPLY in
-			#English
-			[Ee]* )
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Games"
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
-				;;
-			#Spanish
-			[Ss]* )
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Juegos"
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilidades"
-				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Ofimática"
-				;;
-			esac #TODO: Note that there's no "* )" show_error option
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" #TODO from gnibbles to the end, the names are for dummy-transitional packages
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop']"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution.desktop', 'evolution-calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop']"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
 	# Return
 	[Rr]*)
 		clear && main;;
@@ -800,8 +675,10 @@ function advanced {
 	echo
 	echo "1) Add 'Binaries' to PATH?"
 	echo "2) Add Nautilus scripts?"
-	echo "3) Add .desktop, .directory and .menu files?"
-	echo "4) Add hidden .desktop files?"
+	echo "3) Add extra and hidden .desktop files?"
+	echo "4) Set Moka/Adwaita/Roboto UI?"
+	echo "5) Set Stock GNOME UI?"
+	echo "6) Set up GNOME Shell app folders?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -830,7 +707,7 @@ function advanced {
 			;;
 		esac
 		;;
-	#Nautilus scripts
+	# Nautilus scripts
 	2)
 		show_info 'Adding scripts...'
 		echo
@@ -856,28 +733,27 @@ function advanced {
 			;;
 		esac
 		;;
-	#Desktop files (directories are commented)
+	# Desktop files
 	3)
-		show_info 'Adding desktop and directory files...'
+		show_info 'Adding hidden desktop files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Apps Desktops
+			# Extra Desktops
 				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/apps-desktops.tar.gz
-				tar -xzf apps-desktops.tar.gz
-				cd apps-desktops
-				cp -r gnome-applications.menu $HOME/.config/menus
+				wget http://dl.dropbox.com/u/1564319/changed-apps.tar.gz
+				tar -xzf changed-apps.tar.gz
+				cd changed-apps
 				cp -r *.desktop $HOME/.local/share/applications
-				gtk-update-icon-cache
-			# Directories
-				# cd /tmp
-				# wget http://dl.dropbox.com/u/1564319/desktop-directories.tar.gz
-				# tar -xzf desktop-directories.tar.gz
-				# rm -rf $HOME/.local/share/desktop-directories
-				# mv desktop-directories $HOME/.local/share/desktop-directories
+			# Hidden Desktops
+				cd /tmp
+				wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.gz
+				tar -xzf hidden-apps.tar.gz
+				cd hidden-apps
+				cp -r *.desktop $HOME/.local/share/applications
+			gtk-update-icon-cache
 			clear && advanced
 			;;
 		# Negative action
@@ -891,31 +767,100 @@ function advanced {
 			;;
 		esac
 		;;
-	#Hidden Desktop files
+	# Moka/Adwaita UI
 	4)
-		show_info 'Adding hidden desktop files...'
+		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Apps Desktops
-			cd /tmp
-			wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.gz
-			tar -xzf hidden-apps.tar.gz
-			cd hidden-apps
-			cp -r *.desktop $HOME/.local/share/applications
-			gtk-update-icon-cache
-			clear && advanced
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
+			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
+			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && advanced
+			clear && fixapps
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			advanced
+			fixapps
+			;;
+		esac
+		;;
+	# Stock GNOME UI
+	5)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
+			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	# GNOME Shell app folders
+	6)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Office', 'Utilities']"
+			show_info 'In which language is your system? (E)nglish or (S)panish: ' && read REPLY
+			case $REPLY in
+			#English
+			[Ee]* )
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Games"
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
+				;;
+			#Spanish
+			[Ss]* )
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Juegos"
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilidades"
+				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Ofimática"
+				;;
+			esac #TODO: Note that there's no "* )" show_error option
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" #TODO from gnibbles to the end, the names are for dummy-transitional packages
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'winetricks.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution.desktop', 'evolution-calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop']"
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			fixapps
 			;;
 		esac
 		;;
