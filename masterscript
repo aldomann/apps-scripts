@@ -19,7 +19,7 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this script.  If not, see <http://www.gnu.org/licenses/>.
 
-#TODO:
+# TODO:
 	# @advanced nautilus scripts in En and Es.
 	# @applications add unrar
 
@@ -421,13 +421,13 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			#VLC Media Keys
+			# VLC Media Keys
 				vlcrc="$HOME/.config/vlc/vlcrc"
 				sed -i 's/#global-key-play-pause=/global-key-play-pause=Media Play Pause/' $vlcrc
 				sed -i 's/#global-key-next=/global-key-next=Media Next Track/' $vlcrc
 				sed -i 's/#global-key-prev=/global-key-prev=Media Prev Track/' $vlcrc
 				sed -i 's/#global-key-stop=/global-key-stop=Media Stop/' $vlcrc
-			#VLC GNOME Interface
+			# VLC GNOME Interface
 				cd $HOME/.config/vlc/
 				rm -rf vlc-qt-interface.conf
 				echo '[General]'>>'vlc-qt-interface.conf'
@@ -835,20 +835,20 @@ function advanced {
 			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Office', 'Utilities']"
 			show_info 'In which language is your system? (E)nglish or (S)panish: ' && read REPLY
 			case $REPLY in
-			#English
+			# English
 			[Ee]* )
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Games"
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
 				;;
-			#Spanish
+			# Spanish
 			[Ss]* )
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "Juegos"
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilidades"
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Ofimática"
 				;;
-			esac #TODO: Note that there's no "* )" show_error option
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" #TODO from gnibbles to the end, the names are for dummy-transitional packages
+			esac # TODO: Note that there's no "* )" show_error option
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" # TODO from gnibbles to the end, the names are for dummy-transitional packages
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'winetricks.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution.desktop', 'evolution-calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop']"
 			clear && fixapps
@@ -1017,4 +1017,4 @@ function main {
 #----- RUN MAIN FUNCTION -----#
 main
 
-#END OF SCRIPT
+# END OF SCRIPT
