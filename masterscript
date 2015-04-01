@@ -96,8 +96,8 @@ function repositories {
 		show_info 'Enabling repositories...'
 		echo
 		echo 'Current repositories list:
-		Canonical Partners   (utopic)
-		Dropbox              (utopic)
+		Canonical Partners   (vivid)
+		Dropbox              (vivid)
 		Getdeb Apps          (utopic)
 		Getdeb Games         (utopic)
 		Google Chrome        (stable)
@@ -110,12 +110,11 @@ function repositories {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			echo 'deb http://archive.canonical.com/ubuntu utopic partner #Canonical Partners' >> 'extras.list'
-			echo 'deb http://linux.dropbox.com/ubuntu utopic main #Dropbox'>>'extras.list'
+			echo 'deb http://archive.canonical.com/ubuntu vivid partner #Canonical Partners' >> 'extras.list'
+			echo 'deb http://linux.dropbox.com/ubuntu vivid main #Dropbox'>>'extras.list'
 			echo 'deb http://archive.getdeb.net/ubuntu utopic-getdeb apps #Getdeb Apps'>>'extras.list'
 			echo 'deb http://archive.getdeb.net/ubuntu utopic-getdeb games #Getdeb Games'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/earth/deb/ stable main #Google Earth'>>'extras.list'
 			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
 			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
 			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
