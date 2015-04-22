@@ -210,8 +210,8 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install basic apps?        [42]"
-	echo "2) Install exclusive apps?    [18]"
-	echo "3) Install games?             [3]"
+	echo "2) Install exclusive apps?    [19]"
+	echo "3) Install games?             [4]"
 	echo "4) Uninstall unused apps?     [17]"
 	echo "r) Return?"
 	echo
@@ -247,13 +247,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
+		echo 'Current package list: comix dropbox epiphany-browser gaupol git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install comix dropbox epiphany-browser git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl
+			sudo aptitude install comix dropbox epiphany-browser gaupol git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -272,13 +272,13 @@ function applications {
 	3)
 		show_info 'Installing games...'
 		echo
-		echo 'Current package list: steam-launcher vbam-gtk zsnes'
+		echo 'Current package list: steam-launcher vbam-gtk wiican zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install steam-launcher vbam-gtk zsnes
+			sudo aptitude install steam-launcher vbam-gtk wiican zsnes
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -298,13 +298,13 @@ function applications {
 		show_info 'Uninstalling unused apps...'
 		echo
 		echo 'Current package list: abiword abiword-common firefox firefox-locale-en firefox-locale-es gnumeric libabiword-3.0 libgtkmathview0c2a pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox'
-		# EXCLUSIVE: brasero rhythmbox soud-juicer
+		# EXCLUSIVE: libreoffice-draw libreoffice-impress libreoffice-ogltrans rhythmbox soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude purge abiword firefox firefox-locale-en firefox-locale-es gnumeric pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox
+			sudo aptitude purge abiword abiword-common firefox firefox-locale-en firefox-locale-es gnumeric libabiword-3.0 libgtkmathview0c2a pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
@@ -847,7 +847,7 @@ function advanced {
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Ofimática"
 				;;
 			esac # TODO: Note that there's no "* )" show_error option
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" # TODO from gnibbles to the end, the names are for dummy-transitional packages
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'wiican.desktop','gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" # TODO from gnibbles to the end, the names are for dummy-transitional packages
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'winetricks.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution.desktop', 'evolution-calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop']"
 			clear && fixapps
@@ -916,9 +916,9 @@ function cleanup {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Remove unused pre-installed packages?"
-	echo "2) Remove old kernel(s)?"
-	echo "3) Remove orphaned packages?"
-	echo "4) Remove leftover configuration files?"
+	echo "2) Remove orphaned packages?"
+	echo "3) Remove leftover configuration files?"
+	echo "4) Remove old kernel(s)?"
 	echo "5) Clean package cache?"
 	echo "r) Return?"
 	echo
@@ -932,16 +932,8 @@ function cleanup {
 		echo
 		cleanup
 		;;
-	# Remove old kernel(s)
-	2)
-		show_info 'Removing old Kernel(s)...'
-		sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
-		show_success 'Done.'
-		echo
-		cleanup
-		;;
 	# Remove orphaned packages
-	3)
+	2)
 		show_info 'Removing orphaned packages...'
 		sudo apt-get autoremove -y
 		show_success 'Done.'
@@ -949,9 +941,17 @@ function cleanup {
 		cleanup
 		;;
 	# Remove residual config files?
-	4)
+	3)
 		show_info 'Removing leftover configuration files...'
 		sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)
+		show_success 'Done.'
+		echo
+		cleanup
+		;;
+	# Remove old kernel(s)
+	4)
+		show_info 'Removing old Kernel(s)...'
+		sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
 		show_success 'Done.'
 		echo
 		cleanup
