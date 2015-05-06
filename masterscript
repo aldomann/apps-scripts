@@ -4,7 +4,7 @@
 #	Alfredo Hernández <aldomann.designs@gmail.com>
 #
 # Description:
-#	A post-installation bash script for Ubuntu GNOME (14.10)
+#	A post-installation bash script for Antergos
 #
 # Legal Stuff:
 #	This script is free software: you can redistribute it and/or modify
@@ -20,6 +20,12 @@
 #	along with this script.  If not, see <http://www.gnu.org/licenses/>.
 
 # TODO:
+	# @advanced change app-folder categories to universal ones w/ localisation
+	# @applications add AUR packages
+	# @applications add infintality
+	# @applications change pacman.conf, mirrors as well, maybe
+	# @cleanup update 2) leftover config files to Arch Linux syntax
+
 	# @advanced nautilus scripts in En and Es.
 	# @applications add unrar
 
@@ -27,208 +33,73 @@ tabs 2
 clear
 
 echo '#------------------------------------------#'
-echo '#     Ubuntu GNOME Post-Install Script     #'
+echo '#     Antergos Post-Install Script     #'
 echo '#------------------------------------------#'
 
 #----- FUNCTIONS -----#
 function sysupgrade {
 	# Perform system upgrade
 	echo
-	show_info 'Updating repository information...'
-	sudo aptitude update
-	# notify-send "Repository information has been updated" -i system-software-update
-	# Full-Upgrade
 	show_info 'Performing system upgrade...'
-	sudo aptitude full-upgrade
+	sudo pacman -Syu
 	show_success 'Done.'
 	notify-send "System upgrade was successful" -i system-software-update
 	exit
 }
 # --------------------------------------------------
-function repositories {
-	show_info 'What would you like to do?'
-	echo
-	echo "1) Enable basic PPAs            [6]"
-	echo "2) Enable extra repositories    [9]"
-	echo "3) Enable exclusive PPAs        [5]"
-	echo "4) Delete duplicated repos      [*]"
-	echo "r) Return?"
-	echo
-	show_info 'Enter your choice:' && read REPLY
-	case $REPLY in
-	# Basic PPAs
-	1)
-		show_info 'Enabling repositories...'
-		echo
-		echo 'Current repositories list:
-		cybolic/vineyard-testing
-		gnome3-team/gnome3
-		gnome3-team/gnome3-staging
-		moka/daily
-		ubuntu-wine
-		webupd8team/java'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo add-apt-repository ppa:cybolic/vineyard-testing
-			sudo add-apt-repository ppa:gnome3-team/gnome3
-			sudo add-apt-repository ppa:gnome3-team/gnome3-staging
-			sudo add-apt-repository ppa:moka/daily
-			sudo add-apt-repository ppa:ubuntu-wine
-			sudo add-apt-repository ppa:webupd8team/java
-			clear && repositories
-			;;
-		# Negative action
-		[Nn]* )
-			clear && repositories
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			repositories
-			;;
-		esac
-		;;
-	# Extra repositories
-	2)
-		show_info 'Enabling repositories...'
-		echo
-		echo 'Current repositories list:
-		Canonical Partners   (vivid)
-		Dropbox              (vivid)
-		Getdeb Apps          (utopic)
-		Getdeb Games         (utopic)
-		Google Chrome        (stable)
-		Google Earth         (stable)
-		Google Music Manager (stable)
-		Spotify              (stable)
-		Steam                (precise)'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			echo 'deb http://archive.canonical.com/ubuntu vivid partner #Canonical Partners' >> 'extras.list'
-			echo 'deb http://linux.dropbox.com/ubuntu vivid main #Dropbox'>>'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu utopic-getdeb apps #Getdeb Apps'>>'extras.list'
-			echo 'deb http://archive.getdeb.net/ubuntu utopic-getdeb games #Getdeb Games'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/chrome/deb/ stable main #Google Chrome'>>'extras.list'
-			echo 'deb http://dl.google.com/linux/musicmanager/deb/ stable main #Google Music Manager'>>'extras.list'
-			echo 'deb http://repository.spotify.com/ stable non-free #Spotify'>>'extras.list'
-			echo 'deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam #Steam'>>'extras.list'
-			chmod 644 'extras.list'
-			sudo chown root:root 'extras.list'
-			sudo mv 'extras.list' '/etc/apt/sources.list.d/extras.list'
-			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5044912E 46D7E7CF 7FAC5991 94558F59 F24AEA9FB05498B7
-
-			clear && repositories
-			;;
-		# Negative action
-		[Nn]* )
-			clear && repositories
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			repositories
-			;;
-		esac
-		;;
-	# Exclusive PPAs
-	3)
-		show_info 'Enabling repositories...'
-		echo
-		echo 'Current repositories list:
-		nexulockr-dev/nexulockr-beta
-		numix
-		system76-dev/stable
-		webupd8team/popcorntime
-		webupd8team/sublime-text-3'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo add-apt-repository ppa:nexulockr-dev/nexulockr-beta
-			sudo add-apt-repository ppa:numix
-			sudo add-apt-repository ppa:system76-dev/stable
-			sudo add-apt-repository ppa:webupd8team/popcorntime
-			sudo add-apt-repository ppa:webupd8team/sublime-text-3
-			clear && repositories
-			;;
-		# Negative action
-		[Nn]* )
-			clear && repositories
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			repositories
-			;;
-		esac
-		;;
-	# Delete repositories
-	4)
-		show_info 'Deleting repositories...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			cd /etc/apt/sources.list.d/
-			sudo rm -rf *.save
-			sudo rm -rf *.list~
-			sudo rm -rf *dropbox*.list *google*.list steam.list
-			clear && repositories
-			;;
-		# Negative action
-		[Nn]* )
-			clear && repositories
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			repositories
-			;;
-		esac
-		;;
-	# Not in use [2]
-		# gnome3-team/gnome3-next
-		# webupd8team/atom
-	# Return
-	[Rr]*)
-		clear && main;;
-	# Invalid choice
-	* )
-		clear && show_error 'Not an option, try again.' && repositories;;
-	esac
-}
-# --------------------------------------------------
 function applications {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Install basic apps?        [42]"
-	echo "2) Install exclusive apps?    [19]"
+	echo "0) Enable extra repositories?"
+	echo
+	echo "1) Install basic apps?        [29 + ]"
+	echo "2) Install exclusive apps?    [16 + ]"
 	echo "3) Install games?             [4]"
-	echo "4) Uninstall unused apps?     [17]"
+	echo "4) Uninstall unused apps?     [8]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
+	# Enable extra repositories
+	0)
+		show_info 'Enabling extra repositories...'
+		echo
+		echo 'Repositories to be enabled: '
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# sudo cp
+			# sudo dirmngr
+			# sudo pacman-key -r 962DDE58
+			# sudo pacman-key -f 962DDE58
+			# sudo pacman-key --lsign-key 962DDE58
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
 	# Install basic apps
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo 'Current package list: bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish'
-		# Not installed in minorscript [8]: bleachbit, fonts-lmodern, gbrainy, inkscape, quadrapassel, sound-juicer, vineyard, wine
+		echo 'Current package list: adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es'
+		# [Not in Arch repos]: hyphen-ca myspell-ca mythes-ca
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install bleachbit fonts-droid fonts-lato fonts-lmodern fonts-roboto gbrainy gdebi gimp gnome-cards-data google-chrome-stable  gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386 inkscape libreoffice-style-sifr moka-icon-theme nautilus-image-converter oracle-java8-installer p7zip pdftk quadrapassel rar skype sound-juicer synaptic vineyard vlc wine aspell-ca aspell-en aspell-es hyphen-ca hyphen-en-us myspell-ca myspell-en-gb mythes-ca mythes-en-us wbritish wcatalan wspanish
+			sudo pacman -S adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -247,13 +118,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: comix dropbox epiphany-browser gaupol git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl'
+		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid thunar youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install comix dropbox epiphany-browser gaupol git gnome-boxes gnome-music gnome-photos gtk-3-examples nexulockr pngquant popcorn-time ppa-purge qtiplot sublime-text-installer system76-driver thunar vlc-plugin-fluidsynth youtube-dl
+			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid thunar youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -272,13 +143,13 @@ function applications {
 	3)
 		show_info 'Installing games...'
 		echo
-		echo 'Current package list: steam-launcher vbam-gtk wiican zsnes'
+		echo 'Current package list: steam vbam-gtk zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude install steam-launcher vbam-gtk wiican zsnes
+			sudo pacman -S steam vbam-gtk zsnes
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -297,14 +168,14 @@ function applications {
 	4)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: abiword abiword-common firefox firefox-locale-en firefox-locale-es gnumeric libabiword-3.0 libgtkmathview0c2a pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox'
-		# EXCLUSIVE: libreoffice-draw libreoffice-impress libreoffice-ogltrans rhythmbox soud-juicer
+		echo 'Current package list: brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-shell-extension-lockscreen-lightdm gnome-sound-recorder lightdm pidgin'
+		# EXCLUSIVE: grbainy soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo aptitude purge abiword abiword-common firefox firefox-locale-en firefox-locale-es gnumeric libabiword-3.0 libgtkmathview0c2a pidgin thunderbird thunderbird-locale-en thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-es ttf-mscorefonts-installer xchat xul-ext-ubufox
+			sudo pacman -Rscn brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-shell-extension-lockscreen-lightdm gnome-sound-recorder lightdm pidgin
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
@@ -338,12 +209,11 @@ function fixapps {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Install Broadcom Wireless firmware (DELL)?"
-	echo "2) Fix Google Earth appearance?"
-	echo "3) Enable media keys and GNOME interface for VLC"
-	echo "4) Use symbolic icons in Inkscape?"
-	echo "5) Enable smooth fonts in Wine?"
-	echo "6) Crack Sublime Text 3 License?"
-	echo "7) Set up Nautilus layout?"
+	echo "2) Enable media keys and GNOME interface for VLC"
+	echo "3) Use symbolic icons in Inkscape?"
+	echo "4) Enable smooth fonts in Wine?"
+	echo "5) Crack Sublime Text 3 License?"
+	echo "6) Set up Nautilus layout?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -373,47 +243,8 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Google Earth fix
-	2)
-		show_info 'Applying fix for Google Earth...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# Delete files
-				cd /opt/google/earth/free
-				sudo rm -rf libcurl.so.4 libGLU.so.1 libnss_mdns4_minimal.so.2 libQtCore.so.4 libQtGui.so.4 libQtNetwork.so.4 libQtWebKit.so.4
-				cd $HOME
-			# Replace libfreeimage
-				wget https://dl.dropboxusercontent.com/u/1564319/libfreeimage.so.3
-				sudo mv libfreeimage.so.3 '/opt/google/earth/free/libfreeimage.so.3'
-				sudo chown $USERNAME:$USERNAME '/opt/google/earth/free/googleearth'
-				sudo chmod 777 '/opt/google/earth/free/googleearth'
-				sudo sed -i '43 d' '/opt/google/earth/free/googleearth'
-				sudo sed -i '42 d' '/opt/google/earth/free/googleearth'
-				echo 'export LD_PRELOAD=libfreeimage.so.3'>>'/opt/google/earth/free/googleearth'
-				echo 'LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./googleearth-bin "$@"'>>'/opt/google/earth/free/googleearth'
-				sudo chown root '/opt/google/earth/free/googleearth'
-				sudo chmod 755 '/opt/google/earth/free/googleearth'
-			# Install libraries
-				# sudo aptitude install libqtwebkit4 libcurl4-openssl-dev
-			notify-send "Google Earth" "The native appearance has been fixed successfully" -i google-earth
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
 	# VLC fixes
-	3)
+	2)
 		show_info 'Applying fixes for VLC...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -484,7 +315,7 @@ function fixapps {
 		esac
 		;;
 	# Inkscape icons
-	4)
+	3)
 		show_info 'Applying fix for Inkscape...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -513,7 +344,7 @@ function fixapps {
 		esac
 		;;
 	# Wine fonts
-	5)
+	4)
 		show_info 'Applying fix for Wine...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -598,7 +429,7 @@ function fixapps {
 		esac
 		;;
 	# Sublime Text Crack
-	6)
+	5)
 		show_info 'Cracking Sublime Text license...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -626,7 +457,7 @@ function fixapps {
 		esac
 		;;
 	# Nautilus layout
-	7)
+	6)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -634,18 +465,19 @@ function fixapps {
 		# Positive action
 		[Yy]* )
 			# Regular nautilus
-				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']"
-				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128"
+				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
-				dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'"
+				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+				nautilus -q
 			# Root nautilus
-				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'date_modified', 'none']"
-				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "128"
+				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
-				sudo dconf write /org/gnome/nautilus/window-state/geometry "'1010x575+135+135'"
+				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 			clear && fixapps
 			;;
@@ -847,9 +679,9 @@ function advanced {
 				gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Ofimática"
 				;;
 			esac # TODO: Note that there's no "* )" show_error option
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'swell-foop.desktop', 'tali.desktop', 'wiican.desktop','gnibbles.desktop', 'gnobots2.desktop', 'gtali.desktop']" # TODO from gnibbles to the end, the names are for dummy-transitional packages
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'winetricks.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop']"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution.desktop', 'evolution-calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'dolphin-emu.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'hitori.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'swell-foop.desktop', 'tali.desktop', 'wiican.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'imagewriter.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Logs.desktop', 'org.gnome.MultiWriter.desktop', 'pamac-manager.desktop', 'pamac-updater.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop', 'winetricks.desktop']"
+			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['bijiben.desktop', 'chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'chrome-hmjkmjkepdijhoojdojkdfohbdgmmhki-Default.desktop', 'chrome-ojcflmmmcfpacggndoaaflkmcoblhnbh-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution-calendar.desktop', 'evolution.desktop', 'libreoffice-base.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop']"
 			clear && fixapps
 			;;
 		# Negative action
@@ -915,51 +747,55 @@ function hardware {
 function cleanup {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Remove unused pre-installed packages?"
-	echo "2) Remove orphaned packages?"
-	echo "3) Remove leftover configuration files?"
-	echo "4) Remove old kernel(s)?"
-	echo "5) Clean package cache?"
+	echo "1) Remove orphaned packages?"
+	echo "2) Remove leftover configuration files?"
+	echo "3) Clean package cache?"
+	echo "4) Optimise pacman database?"
+	echo "5) List locally installed packages?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Remove unused pre-installed packages
-	1)
-		show_info 'Removing selected pre-installed applications...'
-		sudo apt-get purge
-		show_success 'Done.'
-		echo
-		cleanup
-		;;
 	# Remove orphaned packages
-	2)
-		show_info 'Removing orphaned packages...'
-		sudo apt-get autoremove -y
-		show_success 'Done.'
+	1)
+		if [[ ! -n $(pacman -Qdtt) ]]; then
+			show_success 'No orphans to remove.'
+		else
+			show_info 'Removing orphaned packages...'
+			sudo pacman -Rns $(pacman -Qdtq)
+			show_success 'Done.'
+		fi
 		echo
 		cleanup
 		;;
-	# Remove residual config files?
-	3)
+	# Remove residual config files
+	2)
 		show_info 'Removing leftover configuration files...'
 		sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)
 		show_success 'Done.'
 		echo
 		cleanup
 		;;
-	# Remove old kernel(s)
-	4)
-		show_info 'Removing old Kernel(s)...'
-		sudo dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -v linux-libc-dev | xargs sudo apt-get -y purge
+	# Clean package cache
+	3)
+		show_info 'Cleaning package cache...'
+		sudo pacman -Sc --noconfirm
 		show_success 'Done.'
 		echo
 		cleanup
 		;;
-	# Clean package cache
+	# Optimise pacman database
+	4)
+		show_info 'Optimising pacman database...'
+		sudo pacman-optimize
+		show_success 'Done.'
+		echo
+		cleanup
+		;;
+	# List locally installed packages
 	5)
-		show_info 'Cleaning package cache...'
-		sudo aptitude clean
+		show_info 'Listing packages...'
+		sudo pacman -Qm
 		show_success 'Done.'
 		echo
 		cleanup
@@ -989,24 +825,22 @@ show_error() {
 function main {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Perform system update & upgrade?"
-	echo "2) Enable extra repositories?"
-	echo "3) Install favourite applications?"
-	echo "4) Fix apps behaviour and appearance?"
-	echo "5) Perform advanced configurations?"
-	echo "6) View hardware information?"
-	echo "7) Cleanup the system?"
+	echo "1) Perform system update and upgrade?"
+	echo "2) Install favourite applications?"
+	echo "3) Fix apps behaviour and appearance?"
+	echo "4) Perform advanced configurations?"
+	echo "5) View hardware information?"
+	echo "6) Cleanup the system?"
 	echo "q) Quit?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		1) sysupgrade;; # System Upgrade
-		2) clear && repositories;; # Enable repos
-		3) clear && applications;; # Install apps
-		4) clear && fixapps;; # Fix apps
-		5) clear && advanced;; # Advanced config
-		6) clear && hardware;; # Hardware info
-		7) clear && cleanup;; # System cleanup
+		1) sysupgrade;;            # System Upgrade
+		2) clear && applications;; # Install apps
+		3) clear && fixapps;;      # Fix apps
+		4) clear && advanced;;     # Advanced config
+		5) clear && hardware;;     # Hardware info
+		6) clear && cleanup;;      # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
 		[Qq]* ) exit 99;; # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
