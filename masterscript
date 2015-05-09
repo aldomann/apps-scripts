@@ -26,7 +26,8 @@
 	# @applications change pacman.conf, mirrors as well, maybe
 	# @cleanup update 2) leftover config files to Arch Linux syntax
 
-	# @advanced nautilus scripts in En and Es.
+	# @advanced nautilus scripts in en and es
+	# @advanced nautilus the gtk python library is outdated in Arch
 	# @applications add unrar
 
 tabs 2
@@ -53,7 +54,7 @@ function applications {
 	echo "0) Enable extra repositories?"
 	echo
 	echo "1) Install basic apps?        [29 + ]"
-	echo "2) Install exclusive apps?    [16 + ]"
+	echo "2) Install exclusive apps?    [17 + ]"
 	echo "3) Install games?             [4]"
 	echo "4) Uninstall unused apps?     [8]"
 	echo "r) Return?"
@@ -92,14 +93,14 @@ function applications {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo 'Current package list: adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es'
+		echo 'Current package list: adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web infinality-bundle inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es'
 		# [Not in Arch repos]: hyphen-ca myspell-ca mythes-ca
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es
+			sudo pacman -S adobe-source-han-sans-otc-fonts aisleriot bleachbit gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines icedtea-web infinality-bundle inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -118,13 +119,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid thunar youtube-dl'
+		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid texlive-most thunar youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid thunar youtube-dl
+			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid texlive-most thunar youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
