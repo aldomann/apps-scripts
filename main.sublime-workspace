@@ -599,6 +599,8 @@
 	],
 	"file_history":
 	[
+		"/home/aldomann/Dropbox/.directory",
+		"/home/aldomann/.local/share/gvfs-metadata/home",
 		"/home/aldomann/Downloads/install-copy-lang",
 		"/home/aldomann/Downloads/asd",
 		"/home/aldomann/SparkleShare/apps-scripts/gitpull",
@@ -724,9 +726,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/06.06 - Lethal Inspection.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/01.12 - When Aliens Attack.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/03.16 - A Leela Of Her Own.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/04.05 - A Taste Of Freedom.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/02.03 - A Head In The Polls.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.13 - Bendin' In The Wind.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/04.05 - A Taste Of Freedom.srt"
 	],
 	"find":
 	{
@@ -1039,7 +1039,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
@@ -1071,7 +1070,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "plain text",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
@@ -1096,8 +1094,8 @@
 						"selection":
 						[
 							[
-								1176,
-								1176
+								1556,
+								1556
 							]
 						],
 						"settings":
