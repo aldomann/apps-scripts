@@ -120,26 +120,10 @@
 			}
 		},
 		{
-			"file": "antergos",
-			"settings":
-			{
-				"buffer_size": 2358,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "minorscript",
 			"settings":
 			{
 				"buffer_size": 6107,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "gitpull",
-			"settings":
-			{
-				"buffer_size": 1429,
 				"line_ending": "Unix"
 			}
 		}
@@ -595,10 +579,12 @@
 	},
 	"expanded_folders":
 	[
-		"/home/aldomann/Dropbox/Binaries"
+		"/home/aldomann/SparkleShare/apps-scripts"
 	],
 	"file_history":
 	[
+		"/home/aldomann/SparkleShare/apps-scripts/gitpull",
+		"/home/aldomann/SparkleShare/apps-scripts/antergos",
 		"/home/aldomann/Downloads/Software/inkscape-pages-1.2.1/README",
 		"/home/aldomann/Downloads/Software/inkscape-pages-1.2.1/install",
 		"/home/aldomann/Downloads/Software/inkscape-pages-1.2.1/modules/files",
@@ -724,9 +710,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/02.03 - A Head In The Polls.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/03.13 - Bendin' In The Wind.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/04.14 - Obsoletely Fabulous.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/01.05 - Fear Of A Bot Planet.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/01.10 - A Flight To Remember.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.03 - A Tale Of Two Santas.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/01.05 - Fear Of A Bot Planet.srt"
 	],
 	"find":
 	{
@@ -1033,8 +1017,8 @@
 						"selection":
 						[
 							[
-								18505,
-								18505
+								19095,
+								19095
 							]
 						],
 						"settings":
@@ -1046,7 +1030,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 11227.0,
+						"translation.y": 11245.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1054,36 +1038,6 @@
 				},
 				{
 					"buffer": 1,
-					"file": "antergos",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2358,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2204,
-								2204
-							]
-						],
-						"settings":
-						{
-							"WordCountSyntax": "plain text",
-							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 353.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "minorscript",
 					"semi_transient": false,
 					"settings":
@@ -1251,180 +1205,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "gitpull",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1429,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								301,
-								301
-							]
-						],
-						"settings":
-						{
-							"WordCountSyntax": "shell-unix-generic",
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_database_dir": "~/.codeintel",
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Node.js",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_exclude_scopes_from_complete_triggers":
-							[
-								"comment"
-							],
-							"codeintel_language_settings":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_exclude_dir":
-									[
-										"/build/",
-										"/min/"
-									],
-									"codeintel_scan_extra_dir":
-									[
-									],
-									"codeintel_scan_files_in_project": false,
-									"codeintel_selected_catalogs":
-									[
-										"jQuery"
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 15,
-									"codeintel_scan_exclude_dir":
-									[
-										"/Applications/MAMP/bin/php/php5.5.3/"
-									],
-									"codeintel_scan_extra_dir":
-									[
-									],
-									"codeintel_scan_files_in_project": true,
-									"php": "/Applications/MAMP/bin/php/php5.5.3/bin/php"
-								},
-								"Python3":
-								{
-									"codeintel_scan_extra_dir":
-									[
-										"/Applications/Sublime Text.app/Contents/MacOS",
-										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
-										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
-									],
-									"codeintel_scan_files_in_project": true,
-									"codeintel_selected_catalogs":
-									[
-									],
-									"python3": "/usr/local/bin/python3.3"
-								}
-							},
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							[
-							],
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"codeintel_word_completions": "buffer",
-							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
-							"spell_check": false,
-							"sublime_auto_complete": true,
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
