@@ -55,7 +55,7 @@ function applications {
 	echo "0) Enable extra repositories?"
 	echo
 	echo "1) Install basic apps?        [29 + ]"
-	echo "2) Install exclusive apps?    [17 + ]"
+	echo "2) Install exclusive apps?    [18 + ]"
 	echo "3) Install games?             [4]"
 	echo "4) Uninstall unused apps?     [8]"
 	echo "r) Return?"
@@ -120,13 +120,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid texlive-most thunar youtube-dl'
+		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid texlive-most thunar youtube-dl
+			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
