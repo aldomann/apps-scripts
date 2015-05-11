@@ -670,15 +670,15 @@ function advanced {
 			case $REPLY in
 			# English
 			[Ee]* )
-				games_appfolder = "Games"
-				utilities_appfolder = "Utilities"
-				office_appfolder = "Office"
+				games_appfolder="Games"
+				utilities_appfolder="Utilities"
+				office_appfolder="Office"
 				;;
 			# Spanish
 			[Ss]* )
-				games_appfolder = "Juegos"
-				utilities_appfolder = "Utilidades"
-				office_appfolder = "Ofimática"
+				games_appfolder="Juegos"
+				utilities_appfolder="Utilidades"
+				office_appfolder="Ofimática"
 				;;
 			esac # TODO: Note that there's no "* )" show_error option
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "$games_appfolder"
