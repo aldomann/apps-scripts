@@ -115,7 +115,7 @@
 			"file": "masterscript",
 			"settings":
 			{
-				"buffer_size": 28208,
+				"buffer_size": 28221,
 				"line_ending": "Unix"
 			}
 		},
@@ -123,7 +123,7 @@
 			"file": "/home/aldomann/Dropbox/Binaries/antergos",
 			"settings":
 			{
-				"buffer_size": 2371,
+				"buffer_size": 2431,
 				"line_ending": "Unix"
 			}
 		},
@@ -744,6 +744,11 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			":	",
+			" ",
+			"chromium empathy",
+			" ",
+			"0)",
 			"fixapps",
 			"bleach",
 			"delete",
@@ -866,12 +871,7 @@
 			"<i> </i>",
 			"<i></i>",
 			"7\n00:04:45,435 --> 00:04:47,819\n<i></i>",
-			"<i></i>",
-			"Exec=",
-			"♪",
-			": ",
-			"sync",
-			"bev,"
+			"<i></i>"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1017,7 +1017,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1026,29 +1026,30 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28208,
+						"buffer_size": 28221,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1864,
-								1864
+								2989,
+								2989
 							]
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 966.0,
+						"translation.y": 1469.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1057,25 +1058,26 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2371,
+						"buffer_size": 2431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1869,
-								1869
+								853,
+								853
 							]
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "plain text",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 618.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1100,7 +1102,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"codeintel": true,
 							"codeintel_config":
@@ -1251,7 +1252,7 @@
 						"translation.y": 378.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
