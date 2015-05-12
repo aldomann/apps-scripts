@@ -23,12 +23,11 @@
 	# @applications add AUR packages
 	# @applications add infintality-bundle repository
 	# @applications change pacman.conf, mirrors as well, maybe
-
+	# @advanced change app-folder categories to universal ones w/ localisation
 	# @cleanup update 2) leftover config files to Arch Linux syntax
 
 	# @advanced nautilus scripts in en and es
 	# @advanced nautilus the gtk python library is outdated in Arch
-	# @applications add unrar
 
 tabs 2
 clear
