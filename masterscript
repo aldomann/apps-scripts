@@ -56,7 +56,7 @@ function applications {
 	echo "1) Install basic apps?        [29 + ]"
 	echo "2) Install exclusive apps?    [18 + ]"
 	echo "3) Install games?             [4]"
-	echo "4) Uninstall unused apps?     [8]"
+	echo "4) Uninstall unused apps?     [9]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -169,7 +169,7 @@ function applications {
 	4)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin '
+		echo 'Current package list: brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin'
 		# EXCLUSIVE: grbainy soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
