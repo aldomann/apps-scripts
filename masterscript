@@ -20,10 +20,10 @@
 #	along with this script.  If not, see <http://www.gnu.org/licenses/>.
 
 # TODO:
-	# @advanced change app-folder categories to universal ones w/ localisation
 	# @applications add AUR packages
-	# @applications add infintality
+	# @applications add infintality-bundle repository
 	# @applications change pacman.conf, mirrors as well, maybe
+
 	# @cleanup update 2) leftover config files to Arch Linux syntax
 
 	# @advanced nautilus scripts in en and es
@@ -170,14 +170,14 @@ function applications {
 	4)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-shell-extension-lockscreen-lightdm gnome-sound-recorder lightdm pidgin'
+		echo 'Current package list: brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin '
 		# EXCLUSIVE: grbainy soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -Rscn brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-shell-extension-lockscreen-lightdm gnome-sound-recorder lightdm pidgin
+			sudo pacman -Rscn brasero chromium empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
