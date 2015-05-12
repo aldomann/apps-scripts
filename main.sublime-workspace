@@ -599,6 +599,7 @@
 	],
 	"file_history":
 	[
+		"/var/log/pacman.log",
 		"/home/aldomann/Documents/gtk2apps.txt",
 		"/home/aldomann/Dropbox/.directory",
 		"/home/aldomann/.local/share/gvfs-metadata/home",
@@ -725,8 +726,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/03.22 - The 30% Iron Chef.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/04.08 - Crimes Of The Hot.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/06.06 - Lethal Inspection.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/01.12 - When Aliens Attack.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.16 - A Leela Of Her Own.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/01.12 - When Aliens Attack.srt"
 	],
 	"find":
 	{
@@ -744,6 +744,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"3.16.2",
+			"3.16",
 			":	",
 			" ",
 			"chromium empathy",
@@ -869,8 +871,6 @@
 			",",
 			"	",
 			"<i> </i>",
-			"<i></i>",
-			"7\n00:04:45,435 --> 00:04:47,819\n<i></i>",
 			"<i></i>"
 		],
 		"highlight": true,
