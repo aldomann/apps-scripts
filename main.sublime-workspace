@@ -115,7 +115,7 @@
 			"file": "masterscript",
 			"settings":
 			{
-				"buffer_size": 28221,
+				"buffer_size": 28225,
 				"line_ending": "Unix"
 			}
 		},
@@ -1017,7 +1017,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1026,15 +1026,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28221,
+						"buffer_size": 28225,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								635,
-								635
+								1137,
+								1137
 							]
 						],
 						"settings":
@@ -1046,10 +1046,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1080,7 +1080,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1102,7 +1102,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"codeintel": true,
 							"codeintel_config":
@@ -1253,7 +1252,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
