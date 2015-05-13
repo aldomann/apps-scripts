@@ -599,6 +599,8 @@
 	],
 	"file_history":
 	[
+		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/azeroth-encyclopedia.sublime-project",
+		"/home/aldomann/SparkleShare/apps-scripts/main.sublime-project",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/main1.tex",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/main2.tex",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/TODO2.tex",
@@ -724,9 +726,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/02.12 - The Deep South.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/03.02 - Parasites Lost.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/04.04 - Less Than Hero.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/04.10 - The Why Of Fry.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/01.11 - Mars University.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.15 - I Dated A Robot.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/04.10 - The Why Of Fry.srt"
 	],
 	"find":
 	{
@@ -1033,8 +1033,8 @@
 						"selection":
 						[
 							[
-								2989,
-								2989
+								2648,
+								2648
 							]
 						],
 						"settings":
