@@ -599,6 +599,8 @@
 	],
 	"file_history":
 	[
+		"/home/aldomann/Downloads/P3_CabayolEscanesHernandez/trapezi.c",
+		"/home/aldomann/Downloads/P3_EstanyHernandez/trapezi.c",
 		"/etc/pacman.conf",
 		"/etc/pacman.d/antergos-mirrorlist",
 		"/home/aldomann/SparkleShare/apps-scripts/main.sublime-project",
@@ -724,9 +726,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/04.17 - Spanish Fry.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/03.21 - Future Stock.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/02.08 - Raging Bender.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.06 - Bendless Love.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/04.07 - Jurassic Bark.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/02.12 - The Deep South.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/03.06 - Bendless Love.srt"
 	],
 	"find":
 	{
@@ -1046,7 +1046,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1071,7 +1071,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "plain text",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
