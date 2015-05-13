@@ -1039,6 +1039,7 @@
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
