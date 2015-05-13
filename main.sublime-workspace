@@ -1039,7 +1039,6 @@
 						],
 						"settings":
 						{
-							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
@@ -1363,7 +1362,7 @@
 		[
 			[
 				"",
-				"~/Physics/Introducció a l'astrofísica/astrofisica.sublime-project"
+				"~/Physics/Introducció a l'astrofísica/astrofisica.sublime-workspace"
 			],
 			[
 				"o",
