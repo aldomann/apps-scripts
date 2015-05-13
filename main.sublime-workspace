@@ -599,9 +599,11 @@
 	],
 	"file_history":
 	[
+		"/etc/pacman.conf",
+		"/etc/pacman.d/antergos-mirrorlist",
+		"/home/aldomann/SparkleShare/apps-scripts/main.sublime-project",
 		"/home/aldomann/Python/integration.py",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/azeroth-encyclopedia.sublime-project",
-		"/home/aldomann/SparkleShare/apps-scripts/main.sublime-project",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/main1.tex",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/main2.tex",
 		"/home/aldomann/Dropbox/LaTeX/Azeroth Encyclopedia/TODO2.tex",
@@ -724,9 +726,7 @@
 		"/home/aldomann/Downloads/Futurama.Complete/02.08 - Raging Bender.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/03.06 - Bendless Love.srt",
 		"/home/aldomann/Downloads/Futurama.Complete/04.07 - Jurassic Bark.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/02.12 - The Deep South.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/03.02 - Parasites Lost.srt",
-		"/home/aldomann/Downloads/Futurama.Complete/04.04 - Less Than Hero.srt"
+		"/home/aldomann/Downloads/Futurama.Complete/02.12 - The Deep South.srt"
 	],
 	"find":
 	{
@@ -1017,7 +1017,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1033,12 +1033,13 @@
 						"selection":
 						[
 							[
-								264,
-								264
+								635,
+								635
 							]
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
@@ -1048,7 +1049,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1064,12 +1065,13 @@
 						"selection":
 						[
 							[
-								853,
-								853
+								607,
+								607
 							]
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "plain text",
 							"color_scheme": "Packages/User/Color Highlighter/themes/Solarized (dark).tmTheme",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
@@ -1078,7 +1080,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1100,6 +1102,7 @@
 						],
 						"settings":
 						{
+							"WordCountShouldRun": true,
 							"WordCountSyntax": "shell-unix-generic",
 							"codeintel": true,
 							"codeintel_config":
@@ -1247,10 +1250,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 378.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
