@@ -599,6 +599,8 @@
 	],
 	"file_history":
 	[
+		"/home/aldomann/Dropbox/LaTeX/Physics/FQ Entregues/4.tex",
+		"/home/aldomann/Dropbox/LaTeX/Physics/FQ Entregues/main.tex",
 		"/home/aldomann/Dropbox/LaTeX/Informe labortatori/main.tex",
 		"/home/aldomann/Dropbox/LaTeX/Informe labortatori/plantilla.tex",
 		"/home/aldomann/Dropbox/LaTeX/Plantilla apunts/main.tex",
@@ -724,9 +726,7 @@
 		"/home/aldomann/Downloads/s06e0221.srt",
 		"/home/aldomann/Downloads/3.srt",
 		"/home/aldomann/Downloads/s06e02.srt",
-		"/home/aldomann/Downloads/Futurama.S06E02.720p.HDTV.X264-CTU.srt",
-		"/media/aldomann/DRIVE Ω/Series/Futurama/2x19 - The Cryonic Woman.srt",
-		"/home/aldomann/Downloads/Fututrama TODO/sub/2x19 - The Cryonic Woman.srt"
+		"/home/aldomann/Downloads/Futurama.S06E02.720p.HDTV.X264-CTU.srt"
 	],
 	"find":
 	{
@@ -1033,8 +1033,8 @@
 						"selection":
 						[
 							[
-								129,
-								129
+								458,
+								458
 							]
 						],
 						"settings":
