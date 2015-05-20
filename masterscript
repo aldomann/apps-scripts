@@ -42,7 +42,7 @@ function sysupgrade {
 	echo
 	show_info 'Performing system upgrade...'
 	# sudo pacman -Syu
-	yaourt -Syua
+	yaourt -Syua --noconfirm
 	show_success 'Done.'
 	notify-send "System upgrade was successful" -i system-software-update
 	exit
