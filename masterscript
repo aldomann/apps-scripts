@@ -361,13 +361,11 @@ function fixapps {
 			WINE=${WINE:-wine}
 			WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
 			DIALOG=whiptail
-			if [ ! -x "`which "$WINE"`" ]
-			then
+			if [ ! -x "`which "$WINE"`" ]; then
 				echo "Wine was not found. Is it really installed? ($WINE)"
 				exit 1
 			fi
-			if [ ! -x "`which "$DIALOG"`" ]
-			then
+			if [ ! -x "`which "$DIALOG"`" ]; then
 				DIALOG=dialog
 			fi
 			TMPFILE=`mktemp` || exit 1
@@ -380,8 +378,7 @@ function fixapps {
 					4 "Subpixel smoothing (ClearType) BGR" 2> $TMPFILE
 			STATUS=$?
 			ANSWER=`cat $TMPFILE`
-			if [ $STATUS != 0 ]
-			then
+			if [ $STATUS != 0 ]; then
 				rm -f $TMPFILE
 				exit 1
 			fi
