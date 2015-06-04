@@ -41,7 +41,7 @@ function sysupgrade {
 	# Perform system upgrade
 	echo
 	show_info 'Performing system upgrade...'
-	if [-a /var/lib/pacman/db.lck ]; then
+	if [ -a /var/lib/pacman/db.lck ]; then
 		show_success 'True'
 	else
 		show_success 'False'
