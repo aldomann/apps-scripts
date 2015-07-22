@@ -56,7 +56,9 @@ function applications {
 	echo "1) Install basic apps?        [31]"
 	echo "2) Install exclusive apps?    [18]"
 	echo "3) Install games?             [4]"
-	echo "4) Uninstall unused apps?     [8]"
+	echo "4) Install GDM?"
+	echo
+	echo "5) Uninstall unused apps?     [8]"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -169,8 +171,34 @@ function applications {
 			;;
 		esac
 		;;
-	# Uninstall apps
 	4)
+		show_info 'Installing games...'
+		echo
+		echo 'Current package list: steam vbam-gtk zsnes'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S gdm
+			sudo systemctl disable lightdm.service
+			sudo systemctl enable gdm.service
+			sudo pacman -Rscn lightdm
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			applications
+			;;
+		esac
+		;;
+	# Uninstall apps
+	5)
 		show_info 'Uninstalling unused apps...'
 		echo
 		echo 'Current package list: brasero empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin'
