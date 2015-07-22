@@ -57,7 +57,6 @@ function applications {
 	echo "2) Install exclusive apps?    [18]"
 	echo "3) Install games?             [4]"
 	echo "4) Install GDM?"
-	echo
 	echo "5) Uninstall unused apps?     [8]"
 	echo "r) Return?"
 	echo
