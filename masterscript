@@ -58,6 +58,7 @@ function applications {
 	echo "3) Install games?             [4]"
 	echo "4) Install GDM?"
 	echo "5) Uninstall unused apps?     [8]"
+	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -245,6 +246,7 @@ function fixapps {
 	echo "5) Set up Nautilus layout?"
 	echo "6) Add extra and hidden .desktop files?"
 	echo "7) Set up GNOME Shell app folders?"
+	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -639,6 +641,7 @@ function advanced {
 	echo "1) Add 'Binaries' to PATH?"
 	echo "2) Set Moka/Adwaita/Roboto UI?"
 	echo "3) Set Stock GNOME UI?"
+	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -740,6 +743,7 @@ function hardware {
 	echo "2) Show kernel version?"
 	echo "3) Show system controllers?"
 	echo "4) Show CPU, RAM and architecture information?"
+	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -780,6 +784,7 @@ function cleanup {
 	echo "2) Clean package cache?"
 	echo "3) Optimise pacman database?"
 	echo "4) List locally installed packages?"
+	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -851,6 +856,7 @@ function main {
 	echo "4) Perform advanced configurations?"
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
+	echo
 	echo "q) Quit?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
