@@ -532,9 +532,9 @@ function advanced {
 	echo "1) Add 'Binaries' to PATH?"
 	echo "2) Add Nautilus scripts?"
 	echo "3) Add extra and hidden .desktop files?"
-	echo "4) Set Moka/Adwaita/Roboto UI?"
-	echo "5) Set Stock GNOME UI?"
-	echo "6) Set up GNOME Shell app folders?"
+	echo "4) Set up GNOME Shell app folders?"
+	echo "5) Set Moka/Adwaita/Roboto UI?"
+	echo "6) Set Stock GNOME UI?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -623,65 +623,8 @@ function advanced {
 			;;
 		esac
 		;;
-	# Moka/Adwaita UI
-	4)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "':close'"
-			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
-			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
-			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
-			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
-			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-			clear && advanced
-			;;
-		# Negative action
-		[Nn]* )
-			clear && advanced
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			advanced
-			;;
-		esac
-		;;
-	# Stock GNOME UI
-	5)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/shell/overrides/button-layout "':close'"
-			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
-			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
-			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
-			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-			clear && advanced
-			;;
-		# Negative action
-		[Nn]* )
-			clear && advanced
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			advanced
-			;;
-		esac
-		;;
 	# GNOME Shell app folders
-	6)
+	4)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -710,6 +653,63 @@ function advanced {
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop.desktop', 'cutemupen.desktop', 'dolphin-emu.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'hitori.desktop', 'iagno.desktop', 'lightsoff.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'swell-foop.desktop', 'tali.desktop', 'wiican.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'imagewriter.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Logs.desktop', 'org.gnome.MultiWriter.desktop', 'pamac-manager.desktop', 'pamac-updater.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop', 'winetricks.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['bijiben.desktop', 'chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'chrome-hmjkmjkepdijhoojdojkdfohbdgmmhki-Default.desktop', 'chrome-ojcflmmmcfpacggndoaaflkmcoblhnbh-Default.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution-calendar.desktop', 'evolution.desktop', 'libreoffice-base.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'pdfchain.desktop', 'sparkleshare.desktop']"
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	# Moka/Adwaita UI
+	5)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
+			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
+			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
+	# Stock GNOME UI
+	6)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/shell/overrides/button-layout "':close'"
+			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
+			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
+			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
 			clear && advanced
 			;;
 		# Negative action
