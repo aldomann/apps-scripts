@@ -240,7 +240,11 @@ function fixapps {
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
 	echo "3) Crack Sublime Text 3 License?"
-	echo "4) Set up Nautilus layout?"
+	echo
+	echo "4) Add Nautilus scripts?"
+	echo "5) Set up Nautilus layout?"
+	echo "6) Add extra and hidden .desktop files?"
+	echo "7) Set up GNOME Shell app folders?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
@@ -517,54 +521,8 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Return
-	[Rr]*)
-		clear && main;;
-	# Invalid choice
-	* )
-		clear && show_error 'Not an option, try again.' && fixapps;;
-	esac
-}
-# --------------------------------------------------
-function advanced {
-	show_info 'What would you like to do?'
-	echo
-	echo "1) Add 'Binaries' to PATH?"
-	echo "2) Add Nautilus scripts?"
-	echo "3) Add extra and hidden .desktop files?"
-	echo "4) Set up GNOME Shell app folders?"
-	echo "5) Set Moka/Adwaita/Roboto UI?"
-	echo "6) Set Stock GNOME UI?"
-	echo "r) Return?"
-	echo
-	show_info 'Enter your choice:' && read REPLY
-	case $REPLY in
-	# Binaries to PATH
-	1)
-		show_info 'Adding Binaries to PATH...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
-			wget https://dl.dropboxusercontent.com/u/1564319/bashrc
-			mv bashrc $HOME/.bashrc
-			clear && advanced
-			;;
-		# Negative action
-		[Nn]* )
-			clear && advanced
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			advanced
-			;;
-		esac
-		;;
 	# Nautilus scripts
-	2)
+	5)
 		show_info 'Adding scripts...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -590,7 +548,7 @@ function advanced {
 		esac
 		;;
 	# Desktop files
-	3)
+	6)
 		show_info 'Adding hidden desktop files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -624,7 +582,7 @@ function advanced {
 		esac
 		;;
 	# GNOME Shell app folders
-	4)
+	7)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -666,8 +624,51 @@ function advanced {
 			;;
 		esac
 		;;
+	# Return
+	[Rr]*)
+		clear && main;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && fixapps;;
+	esac
+}
+# --------------------------------------------------
+function advanced {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Add 'Binaries' to PATH?"
+	echo "2) Set Moka/Adwaita/Roboto UI?"
+	echo "3) Set Stock GNOME UI?"
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Binaries to PATH
+	1)
+		show_info 'Adding Binaries to PATH...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
+			wget https://dl.dropboxusercontent.com/u/1564319/bashrc
+			mv bashrc $HOME/.bashrc
+			clear && advanced
+			;;
+		# Negative action
+		[Nn]* )
+			clear && advanced
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			advanced
+			;;
+		esac
+		;;
 	# Moka/Adwaita UI
-	5)
+	2)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -696,7 +697,7 @@ function advanced {
 		esac
 		;;
 	# Stock GNOME UI
-	6)
+	3)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
