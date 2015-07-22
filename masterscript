@@ -21,7 +21,7 @@
 
 # TODO:
 	# @applications add AUR packages
-	# @applications add infintality-bundle repository
+	# @applications add infinality-bundle repository
 	# @applications change pacman.conf, mirrors as well, maybe
 	# @advanced change app-folder categories to universal ones w/ localisation
 	# @cleanup update 2) leftover config files to Arch Linux syntax
@@ -53,7 +53,7 @@ function sysupgrade {
 function applications {
 	show_info 'What would you like to do?'
 	echo
-	echo "0) Enable extra repositories?"
+	echo "0) Set up Pacman configuration?"
 	echo
 	echo "1) Install basic apps?        [31 + ]"
 	echo "2) Install exclusive apps?    [18 + ]"
@@ -67,17 +67,21 @@ function applications {
 	0)
 		show_info 'Enabling extra repositories...'
 		echo
-		echo 'Repositories to be enabled: '
+		echo 'Repositories to be enabled: infinality-bundle'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# sudo cp
-			# sudo dirmngr
-			# sudo pacman-key -r 962DDE58
-			# sudo pacman-key -f 962DDE58
-			# sudo pacman-key --lsign-key 962DDE58
+			# Set up pacman.conf
+				wget https://dl.dropboxusercontent.com/u/1564319/pacman.conf
+				sudo mv pacman.conf /etc/pacman.conf
+			# Add infinality-bundle key
+				# sudo cp
+				# sudo dirmngr
+				# sudo pacman-key -r 962DDE58
+				# sudo pacman-key -f 962DDE58
+				# sudo pacman-key --lsign-key 962DDE58
 			clear && applications
 			;;
 		# Negative action
@@ -195,10 +199,6 @@ function applications {
 		;;
 	# Not in use [22]
 		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable google-musicmanager-beta hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
-	# Quarantine [1]
-		# gparted
-	# LaTeX [4]
-		# asymptote gummi texlive texlive-latex-extra
 	# Return
 	[Rr]*)
 		clear && main;;
