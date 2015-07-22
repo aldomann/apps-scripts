@@ -30,9 +30,9 @@
 tabs 2
 clear
 
-echo '#------------------------------------------#'
-echo '#       Antergos Post-Install Script       #'
-echo '#------------------------------------------#'
+echo '#--------------------------------------------#'
+echo '#        Antergos Post-Install Script        #'
+echo '#--------------------------------------------#'
 
 #----- FUNCTIONS -----#
 function sysupgrade {
