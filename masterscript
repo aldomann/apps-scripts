@@ -53,8 +53,8 @@ function applications {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [31 + ]"
-	echo "2) Install exclusive apps?    [18 + ]"
+	echo "1) Install basic apps?        [31]"
+	echo "2) Install exclusive apps?    [18]"
 	echo "3) Install games?             [4]"
 	echo "4) Uninstall unused apps?     [8]"
 	echo "r) Return?"
