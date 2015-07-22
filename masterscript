@@ -211,7 +211,7 @@ function applications {
 function fixapps {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Install Broadcom Wireless firmware (DELL)?"
+	# echo "1) Install Broadcom Wireless firmware (DELL)?"
 	echo "2) Enable media keys and GNOME interface for VLC"
 	echo "3) Use symbolic icons in Inkscape?"
 	echo "4) Enable smooth fonts in Wine?"
@@ -437,6 +437,7 @@ function fixapps {
 		# Positive action
 		[Yy]* )
 			# Source: https://gist.github.com/vertexclique/9839383
+			# Source 2 (3083): http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/
 			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x32_build_3059
 			# sudo mv sublime_text_linux_x32_build_3059 '/opt/sublime_text/sublime_text'
 			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x64_build_3065
