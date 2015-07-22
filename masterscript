@@ -21,8 +21,6 @@
 
 # TODO:
 	# @applications add AUR packages
-	# @applications add infinality-bundle repository
-	# @applications change pacman.conf, mirrors as well, maybe
 	# @advanced change app-folder categories to universal ones w/ localisation
 	# @cleanup update 2) leftover config files to Arch Linux syntax
 
