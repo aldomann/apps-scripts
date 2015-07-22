@@ -236,18 +236,18 @@ function applications {
 function fixapps {
 	show_info 'What would you like to do?'
 	echo
-	# echo "1) Install Broadcom Wireless firmware (DELL)?"
-	echo "2) Enable media keys and GNOME interface for VLC"
-	echo "3) Use symbolic icons in Inkscape?"
-	echo "4) Enable smooth fonts in Wine?"
-	echo "5) Crack Sublime Text 3 License?"
-	echo "6) Set up Nautilus layout?"
+	# echo "0) Install Broadcom Wireless firmware (DELL)?"
+	# echo "0) Enable media keys and GNOME interface for VLC"
+	echo "1) Use symbolic icons in Inkscape?"
+	echo "2) Enable smooth fonts in Wine?"
+	echo "3) Crack Sublime Text 3 License?"
+	echo "4) Set up Nautilus layout?"
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
 	# Install Broadcom Wireless
-	1)
+	0)
 		show_info 'Installing Broadcom Wireless firmware...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -272,7 +272,7 @@ function fixapps {
 		esac
 		;;
 	# VLC fixes
-	2)
+	0)
 		show_info 'Applying fixes for VLC...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -343,7 +343,7 @@ function fixapps {
 		esac
 		;;
 	# Inkscape icons
-	3)
+	1)
 		show_info 'Applying fix for Inkscape...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -372,7 +372,7 @@ function fixapps {
 		esac
 		;;
 	# Wine fonts
-	4)
+	2)
 		show_info 'Applying fix for Wine...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -454,7 +454,7 @@ function fixapps {
 		esac
 		;;
 	# Sublime Text Crack
-	5)
+	3)
 		show_info 'Cracking Sublime Text license...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -483,7 +483,7 @@ function fixapps {
 		esac
 		;;
 	# Nautilus layout
-	6)
+	4)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
