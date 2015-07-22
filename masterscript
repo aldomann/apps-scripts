@@ -171,10 +171,9 @@ function applications {
 			;;
 		esac
 		;;
+	# Install GDM
 	4)
 		show_info 'Installing games...'
-		echo
-		echo 'Current package list: steam vbam-gtk zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
