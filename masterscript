@@ -37,10 +37,10 @@ function sysupgrade {
 	# Perform system upgrade
 	echo
 	show_info 'Performing system upgrade...'
+	yaourt -Syua --noconfirm
 	if [ -a /var/lib/pacman/db.lck ]; then
 		sudo rm /var/lib/pacman/db.lck
 	fi
-	yaourt -Syua --noconfirm
 	show_success 'Done.'
 	notify-send "System upgrade was successful" -i system-software-update
 	exit
