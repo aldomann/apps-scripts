@@ -534,11 +534,11 @@ function fixapps {
 			tar -xzf nautilus-scripts.tar.gz
 			rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
 			nautilus -q
-			clear && advanced
+			clear && fixapps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && advanced
+			clear && fixapps
 			;;
 		# Error
 		* )
