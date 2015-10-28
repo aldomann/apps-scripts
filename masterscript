@@ -148,13 +148,13 @@ function applications {
 	3)
 		show_info 'Installing games...'
 		echo
-		echo 'Current package list: steam vbam-gtk zsnes'
+		echo 'Current package list: cwiid steam vbam-gtk zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S steam vbam-gtk zsnes
+			sudo pacman -S cwiid steam vbam-gtk zsnes
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -171,12 +171,13 @@ function applications {
 		;;
 	# Install GDM
 	4)
-		show_info 'Installing games...'
+		show_info 'Installing GDM...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
+			# SRC: http://drunkensloth.weebly.com/home/how-to-switch-from-lightdm-to-gdm-or-any-other-display-manager-on-antergos-or-arch-linux
 			sudo pacman -S gdm
 			sudo systemctl disable lightdm.service
 			sudo systemctl enable gdm.service
@@ -382,7 +383,7 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Source: http://files.polosatus.ru/winefontssmoothing_en.sh
+			# SRC: http://files.polosatus.ru/winefontssmoothing_en.sh
 			WINE=${WINE:-wine}
 			WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
 			DIALOG=whiptail
@@ -464,8 +465,8 @@ function fixapps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Source: https://gist.github.com/vertexclique/9839383
-			# Source 2 (3083): http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/
+			# SRC: https://gist.github.com/vertexclique/9839383
+			# SRC2 (3083): http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/
 			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x32_build_3059
 			# sudo mv sublime_text_linux_x32_build_3059 '/opt/sublime_text/sublime_text'
 			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x64_build_3065
