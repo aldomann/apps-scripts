@@ -52,7 +52,7 @@ function applications {
 	echo "0) Set up Pacman configuration?"
 	echo
 	echo "1) Install basic apps?        [31]"
-	echo "2) Install exclusive apps?    [19]"
+	echo "2) Install exclusive apps?    [20]"
 	echo "3) Install games?             [4]"
 	echo "4) Install GDM?"
 	echo "5) Uninstall unused apps?     [8]"
@@ -123,13 +123,13 @@ function applications {
 	2)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo 'Current package list: android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl'
+		echo 'Current package list: agetpkg android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl
+			sudo pacman -S agetpkg android-tools dconf-editor dropbox epiphany fluidsynth gaupol git gnome-boxes gnome-characters mcomix mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl
 			notify-send "Installation was successful"
 			clear && applications
 			;;
