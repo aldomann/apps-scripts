@@ -241,10 +241,11 @@ function fixapps {
 	echo "2) Enable smooth fonts in Wine?"
 	echo "3) Crack Sublime Text 3 License?"
 	echo
-	echo "4) Add Nautilus scripts?"
-	echo "5) Set up Nautilus layout?"
-	echo "6) Add extra and hidden .desktop files?"
-	echo "7) Set up GNOME Shell app folders?"
+	echo "4) Change background and lock wallpapers?"
+	echo "5) Add Nautilus scripts?"
+	echo "6) Set up Nautilus layout?"
+	echo "7) Add extra and hidden .desktop files?"
+	echo "8) Set up GNOME Shell app folders?"
 	echo
 	echo "r) Return?"
 	echo
@@ -486,8 +487,31 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Nautilus layout
+	# Backgrounds
 	4)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/desktop/background/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/back.jpg'"
+			dconf write /org/gnome/desktop/screensaver/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/lock.jpg'"
+			clear && fixapps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fixapps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			fixapps
+			;;
+		esac
+		;;
+	# Nautilus layout
+	5)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -523,7 +547,7 @@ function fixapps {
 		esac
 		;;
 	# Nautilus scripts
-	5)
+	6)
 		show_info 'Adding scripts...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -549,7 +573,7 @@ function fixapps {
 		esac
 		;;
 	# Desktop files
-	6)
+	7)
 		show_info 'Adding hidden desktop files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -583,7 +607,7 @@ function fixapps {
 		esac
 		;;
 	# GNOME Shell app folders
-	7)
+	8)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
