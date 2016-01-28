@@ -774,7 +774,7 @@ function hardware {
 	# Show disk usage
 	1)
 		lsblk
-		echo ''
+		echo
 		df -h
 		hardware
 		;;
