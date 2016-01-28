@@ -773,6 +773,7 @@ function hardware {
 	case $REPLY in
 	# Show disk usage
 	1)
+		lsblk
 		df -h
 		hardware
 		;;
