@@ -99,6 +99,7 @@ function applications {
 		echo
 		echo 'Current package list: adobe-source-han-sans-otc-fonts aisleriot bleachbit ffmpegthumbnailer gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines gvfs-goa gvfs-google icedtea-web infinality-bundle inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es'
 		# [Not in Arch repos]: hyphen-ca myspell-ca mythes-ca
+		# [Not installed]: gbrainy skype sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
