@@ -237,15 +237,12 @@ function applications {
 function fixapps {
 	show_info 'What would you like to do?'
 	echo
-	# echo "0) Install Broadcom Wireless firmware (DELL)?"
-	# echo "0) Enable media keys and GNOME interface for VLC"
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
-	echo "3) Crack Sublime Text 3 License?"
 	echo
 	echo "4) Change background and lock wallpapers?"
-	echo "5) Add Nautilus scripts?"
 	echo "6) Set up Nautilus layout?"
+	echo
 	echo "7) Add extra and hidden .desktop files?"
 	echo "8) Set up GNOME Shell app folders?"
 	echo
@@ -253,102 +250,6 @@ function fixapps {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Install Broadcom Wireless
-	0)
-		show_info 'Installing Broadcom Wireless firmware...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo aptitude install b43-fwcutter firmware-b43-installer
-			sudo rfkill unblock all
-			# type into terminal: 'cat /etc/modprobe.d/* | grep bcm' and see if the term 'blacklist bcm43xx' is there; if it is, type 'sudo gedit /etc/modprobe.d/blacklist.conf' and put a # in front of the line: 'blacklist bcm43xx'
-			notify-send "Broadcom Wireless firmware installed successfully" -i network-wireless
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	# VLC fixes
-	0)
-		show_info 'Applying fixes for VLC...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# VLC Media Keys
-				vlcrc="$HOME/.config/vlc/vlcrc"
-				sed -i 's/#global-key-play-pause=/global-key-play-pause=Media Play Pause/' $vlcrc
-				sed -i 's/#global-key-next=/global-key-next=Media Next Track/' $vlcrc
-				sed -i 's/#global-key-prev=/global-key-prev=Media Prev Track/' $vlcrc
-				sed -i 's/#global-key-stop=/global-key-stop=Media Stop/' $vlcrc
-			# VLC GNOME Interface
-				cd $HOME/.config/vlc/
-				rm -rf vlc-qt-interface.conf
-				echo '[General]'>>'vlc-qt-interface.conf'
-				echo 'IsFirstRun=0'>>'vlc-qt-interface.conf'
-				echo 'geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x1\0\0\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\x1\x8a\0\0\x1:\0\0\x3r\0\0\x1t\0\0\0\0\0\0)'>>'vlc-qt-interface.conf'
-				echo>>'vlc-qt-interface.conf'
-				echo '[MainWindow]'>>'vlc-qt-interface.conf'
-				echo 'pl-dock-status=true'>>'vlc-qt-interface.conf'
-				echo 'status-bar-visible=false'>>'vlc-qt-interface.conf'
-				echo 'playlist-visible=false'>>'vlc-qt-interface.conf'
-				echo 'adv-controls=0'>>'vlc-qt-interface.conf'
-				echo 'bgSize=@Size(489 0)'>>'vlc-qt-interface.conf'
-				echo 'playlistSize=@Size(-1 -1)'>>'vlc-qt-interface.conf'
-				echo 'MainToolbar1="64;39-5;64;38-5;65;"'>>'vlc-qt-interface.conf'
-				echo 'MainToolbar2="3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;"'>>'vlc-qt-interface.conf'
-				echo 'AdvToolbar="12-5;11-5;13-5;14-5;"'>>'vlc-qt-interface.conf'
-				echo 'FSCtoolbar="64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
-				echo 'InputToolbar='>>'vlc-qt-interface.conf'
-				echo 'ToolbarPos=0'>>'vlc-qt-interface.conf'
-				echo>>'vlc-qt-interface.conf'
-				echo '[ToolbarProfiles]'>>'vlc-qt-interface.conf'
-				echo '1\ProfileName=VLC 2.x.x Style'>>'vlc-qt-interface.conf'
-				echo '1\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;9;64;10;20;19;64-4;37;65;35-4;|12;11;13;14;|43;33-4;44;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-				echo '2\ProfileName=VLC 1.1.x Style'>>'vlc-qt-interface.conf'
-				echo '2\Value="0|64;39;64;38;65;|0-2;64;3;1;4;64;7;10;9;64-4;20;19;64-4;37;65;35-4;|12;11;13;14;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-				echo '3\ProfileName=VLC 0.8.x Style'>>'vlc-qt-interface.conf'
-				echo '3\Value="1|64;39-1;64;38;|2-1;32-4;0-5;1-5;32-5;3-5;5-5;6-5;4-5;32-5;10-1;64-1;35-1;65;|12-1;11-1;13-1;14-1;|33;37-4;|0-5;1-5;32-1;1-5;5-1;6-1;4-5;32-1;12-5;11-1;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
-				echo '4\ProfileName=Minimalist Style'>>'vlc-qt-interface.conf'
-				echo '4\Value="0|64;65;|0-7;64;3-1;1-5;4-1;64;12-5;64-5;37-5;38-5;64-4;10-1;65;36-4;|11-5;13-5;14-5;|5-1;33;6-1;|0-5;64;3-5;1-5;4-5;64;12-5;65;34-4;35-1;"'>>'vlc-qt-interface.conf'
-				echo '5\ProfileName=One-Liner Style'>>'vlc-qt-interface.conf'
-				echo '5\Value="0|64;38;65;|0-4;64;3;1;4;64;7;10;9;64-4;39;64-4;37;65;36-4;|12;11;14;13;|5-1;33;6-1;|0-2;64;3;1;4;64;37;64;38;64;8;65;25;35-4;34;"'>>'vlc-qt-interface.conf'
-				echo '6\ProfileName=Simplest Style'>>'vlc-qt-interface.conf'
-				echo '6\Value="0||36-4;65-4;0-7;4-5;1-5;65-4;7-5;|12-4;11;13;||36-4;65-4;0-5;4-5;1-5;65;8-5;"'>>'vlc-qt-interface.conf'
-				echo '7\ProfileName=GNOME'>>'vlc-qt-interface.conf'
-				echo '7\Value="0|64;39-5;64;38-5;65;|3-5;0-7;4-5;37-5;64-4;10-5;7-5;33;34-4;64-4;19-5;20-5;64-4;36-4;|12-5;11-5;13-5;14-5;||64-4;3-5;0-7;4-5;37-5;64;25-5;8-1;33-1;34;64-1;36-4;64-4;"'>>'vlc-qt-interface.conf'
-				echo 'size=7'>>'vlc-qt-interface.conf'
-				echo>>'vlc-qt-interface.conf'
-				echo '[FullScreen]'>>'vlc-qt-interface.conf'
-				echo 'pos=@Point(0 0)'>>'vlc-qt-interface.conf'
-				echo 'screen=@Rect(0 0 0 0)'>>'vlc-qt-interface.conf'
-				echo 'wide=false'>>'vlc-qt-interface.conf'
-			cd $HOME
-			notify-send "VLC media player" "Desktop integration applied successfully" -i vlc
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
 	# Inkscape icons
 	1)
 		show_info 'Applying fix for Inkscape...'
@@ -460,35 +361,6 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Sublime Text Crack
-	3)
-		show_info 'Cracking Sublime Text license...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# SRC: https://gist.github.com/vertexclique/9839383
-			# SRC2 (3083): http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/
-			# wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x32_build_3059
-			# sudo mv sublime_text_linux_x32_build_3059 '/opt/sublime_text/sublime_text'
-			wget http://dl.dropbox.com/u/1564319/sublime_text_linux_x64_build_3065
-			sudo mv sublime_text_linux_x64_build_3065 '/opt/sublime_text/sublime_text'
-			sudo chmod 755 '/opt/sublime_text/sublime_text'
-			notify-send "Sublime Text" "The license has been installed successfully" -i sublime-text
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
 	# Backgrounds
 	4)
 		show_info 'Changing dconf files...'
@@ -545,32 +417,6 @@ function fixapps {
 		* )
 			clear && show_error 'Sorry, try again.'
 			fixapps
-			;;
-		esac
-		;;
-	# Nautilus scripts
-	6)
-		show_info 'Adding scripts...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			cd /tmp
-			wget http://dl.dropbox.com/u/1564319/nautilus-scripts.tar.gz
-			tar -xzf nautilus-scripts.tar.gz
-			rsync -a nautilus-scripts/ $HOME/.local/share/nautilus/scripts/
-			nautilus -q
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			advanced
 			;;
 		esac
 		;;
@@ -881,7 +727,7 @@ function main {
 	echo "2) Install favourite applications?"
 	echo "3) Fix apps behaviour and appearance?"
 	echo "4) Perform advanced configurations?"
-	echo ""
+	echo
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
 	echo
