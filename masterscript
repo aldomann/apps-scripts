@@ -365,8 +365,8 @@ function fix-apps {
 		# Positive action
 		[Yy]* )
 			sudo pacman -S noto-fonts-emoji
-			touch ~/.config/fontconfig/conf.d/02-emoji.conf
-			echo "<?xml version="1.0"?>" > ~/.config/fontconfig/conf.d/02-emoji.conf
+			touch ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "<?xml version="1.0"?>" > ~/.config/fontconfig/conf.d/01-emoji.conf
 			echo "<!DOCTYPE fontconfig SYSTEM "fonts.dtd">" > ~/.config/fontconfig/conf.d/01-emoji.conf
 			echo "<fontconfig>" > ~/.config/fontconfig/conf.d/01-emoji.conf
 			echo "  <!-- Use Google Emojis -->" > ~/.config/fontconfig/conf.d/01-emoji.conf
