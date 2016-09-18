@@ -1,6 +1,6 @@
-# App Scripts
+# Post-installation Scripts
 
-Scripts for app/repos management (GNU/Linux).
+Post-installation scripts for managing app/repos, configuration settings, and hardware information.
 - `masterscript` is configured to work on Arch Linux based distributions.
 - `masterscript-ubuntu` is configured to work on Ubuntu based distributions (unmaintained).
 
