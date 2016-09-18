@@ -881,6 +881,7 @@ function main {
 	echo "2) Install favourite applications?"
 	echo "3) Fix apps behaviour and appearance?"
 	echo "4) Perform advanced configurations?"
+	echo ""
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
 	echo
