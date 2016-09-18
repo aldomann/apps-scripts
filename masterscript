@@ -356,6 +356,39 @@ function fix-apps {
 			;;
 		esac
 		;;
+	# Coloured emojis
+	3)
+		show_info 'Installing and setting up noto-fonts-emoji...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S noto-fonts-emoji
+			touch ~/.config/fontconfig/conf.d/02-emoji.conf
+			echo "<?xml version="1.0"?>" > ~/.config/fontconfig/conf.d/02-emoji.conf
+			echo "<!DOCTYPE fontconfig SYSTEM "fonts.dtd">" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "<fontconfig>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "  <!-- Use Google Emojis -->" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "  <match target="pattern">" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "    <test qual="any" name="family"><string>Segoe UI Emoji</string></test>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "    <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "  </match>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo "</fontconfig>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+
+			clear && fix-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fix-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			fix-apps
+			;;
+		esac
+		;;
 	# Desktop files
 	4)
 		show_info 'Adding hidden desktop files...'
