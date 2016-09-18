@@ -237,9 +237,8 @@ function fix-apps {
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
 	echo
-	echo
-	echo "5) Add extra and hidden .desktop files?"
-	echo "6) Set up GNOME Shell app folders?"
+	echo "3) Add extra and hidden .desktop files?"
+	echo "4) Set up GNOME Shell app folders?"
 	echo
 	echo "r) Return?"
 	echo
