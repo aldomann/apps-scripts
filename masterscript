@@ -238,11 +238,11 @@ function fixapps {
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
 	echo
-	echo "4) Change background and lock wallpapers?"
-	echo "6) Set up Nautilus layout?"
+	echo "3) Change background and lock wallpapers?"
+	echo "4) Set up Nautilus layout?"
 	echo
-	echo "7) Add extra and hidden .desktop files?"
-	echo "8) Set up GNOME Shell app folders?"
+	echo "5) Add extra and hidden .desktop files?"
+	echo "6) Set up GNOME Shell app folders?"
 	echo
 	echo "r) Return?"
 	echo
@@ -360,7 +360,7 @@ function fixapps {
 		esac
 		;;
 	# Backgrounds
-	4)
+	3)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -383,7 +383,7 @@ function fixapps {
 		esac
 		;;
 	# Nautilus layout and preferences
-	5)
+	4)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -419,7 +419,7 @@ function fixapps {
 		esac
 		;;
 	# Desktop files
-	7)
+	5)
 		show_info 'Adding hidden desktop files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -453,7 +453,7 @@ function fixapps {
 		esac
 		;;
 	# GNOME Shell app folders
-	8)
+	6)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
