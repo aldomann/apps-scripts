@@ -523,7 +523,7 @@ function dconf-settings {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/desktop/interface/show-battery-percentage "'Roboto 11'"
+			dconf write /org/gnome/desktop/interface/show-battery-percentage "true"
 			clear && dconf-settings
 			;;
 		# Negative action
