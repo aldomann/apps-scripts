@@ -366,14 +366,14 @@ function fix-apps {
 		[Yy]* )
 			# Extra Desktops
 				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/changed-apps.tar.gz
-				tar -xzf changed-apps.tar.gz
+				wget http://dl.dropbox.com/u/1564319/changed-apps.tar.xz
+				tar xf changed-apps.tar.xz
 				cd changed-apps
 				cp -r *.desktop $HOME/.local/share/applications
 			# Hidden Desktops
 				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.gz
-				tar -xzf hidden-apps.tar.gz
+				wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.xz
+				tar xf hidden-apps.tar.xz
 				cd hidden-apps
 				cp -r *.desktop $HOME/.local/share/applications
 			gtk-update-icon-cache
