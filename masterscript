@@ -22,8 +22,6 @@
 # TODO:
 	# @applications add AUR packages
 	# @advanced change app-folder categories to universal ones w/ localisation
-	# @advanced nautilus scripts in en and es
-	# @advanced nautilus the gtk python library is outdated in Arch
 
 tabs 2
 clear
