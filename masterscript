@@ -515,6 +515,28 @@ function dconf-settings {
 			;;
 		esac
 		;;
+	# Show battery percentage
+	3)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/desktop/interface/show-battery-percentage "'Roboto 11'"
+			clear && dconf-settings
+			;;
+		# Negative action
+		[Nn]* )
+			clear && dconf-settings
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			dconf-settings
+			;;
+		esac
+		;;
 	# Moka/Arc UI
 	4)
 		show_info 'Changing dconf files...'
@@ -697,9 +719,9 @@ function main {
 	show_info 'What would you like to do?'
 	echo
 	# echo "1) Perform system update and upgrade?"
-	echo "2) Install favourite applications?"
-	echo "3) Change apps behaviour and appearance?"
-	# echo "4) Perform dconf configurations?"
+	echo "1) Install favourite applications?"
+	echo "2) Change apps behaviour and appearance?"
+	echo "3) Perform dconf configurations?"
 	echo
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
@@ -709,9 +731,9 @@ function main {
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
 		# 1) sysupgrade;;            # System Upgrade
-		2) clear && applications;; # Install apps
-		3) clear && fix-apps;;      # Fix apps
-		# 4) clear && dconf-settings;;     # Dconf config
+		1) clear && applications;; # Install apps
+		2) clear && fix-apps;;      # Fix apps
+		3) clear && dconf-settings;;     # Dconf config
 		5) clear && hardware;;     # Hardware info
 		6) clear && cleanup;;      # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
