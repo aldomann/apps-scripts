@@ -526,10 +526,10 @@ function dconf-settings {
 			dconf write /org/gnome/shell/overrides/button-layout "':close'"
 			dconf write /org/gnome/desktop/wm/preferences/button-layout "':close'"
 			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
+			dconf write /org/gnome/desktop/interface/document-font-name "'Literata 11'"
 			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
 			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
 			dconf write /org/gnome/desktop/interface/gtk-theme "'Arc-Darker'"
-			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
 			clear && dconf-settings
 			;;
@@ -557,7 +557,6 @@ function dconf-settings {
 			dconf write /org/gnome/desktop/interface/font-name "'Cantarell 11'"
 			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 11'"
 			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
 			clear && dconf-settings
 			;;
