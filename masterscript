@@ -21,7 +21,6 @@
 
 # TODO:
 	# @applications add AUR packages
-	# @advanced change app-folder categories to universal ones w/ localisation
 
 tabs 2
 clear
@@ -232,14 +231,12 @@ function applications {
 	esac
 }
 # ----------------------------------------------------------------------
-function fixapps {
+function fix-apps {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
 	echo
-	echo "3) Change background and lock wallpapers?"
-	echo "4) Set up Nautilus layout?"
 	echo
 	echo "5) Add extra and hidden .desktop files?"
 	echo "6) Set up GNOME Shell app folders?"
@@ -264,16 +261,16 @@ function fixapps {
 				wget https://raw.github.com/gnome-design-team/gnome-icons/master/inkscape-symbolic/inkscape-icons.svg
 				sudo mv inkscape-icons.svg '/usr/share/inkscape/icons/icons.svg'
 			notify-send "Inkscape" "Symbolic icons have been installed successfully" -i inkscape
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			fixapps
+			fix-apps
 			;;
 		esac
 		;;
@@ -346,75 +343,16 @@ function fixapps {
 			rm -f $TMPFILE
 
 			notify-send "Wine" "Font rendering has been fixed successfully" -i wine
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	# Backgrounds
-	3)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			dconf write /org/gnome/desktop/background/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/back.jpg'"
-			dconf write /org/gnome/desktop/screensaver/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/lock.jpg'"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
-			;;
-		esac
-		;;
-	# Nautilus layout and preferences
-	4)
-		show_info 'Changing dconf files...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# Regular nautilus
-				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
-				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
-				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
-				dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
-				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
-				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
-				nautilus -q
-			# Root nautilus
-				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
-				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
-				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
-				sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
-				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
-				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
-			clear && fixapps
-			;;
-		# Negative action
-		[Nn]* )
-			clear && fixapps
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			fixapps
+			fix-apps
 			;;
 		esac
 		;;
@@ -439,16 +377,16 @@ function fixapps {
 				cd hidden-apps
 				cp -r *.desktop $HOME/.local/share/applications
 			gtk-update-icon-cache
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			advanced
+			fix-apps
 			;;
 		esac
 		;;
@@ -482,16 +420,16 @@ function fixapps {
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop', 'cutemupen.desktop', 'dolphin-emu.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'hitori.desktop', 'iagno.desktop', 'lightsoff.desktop', 'org.gnome.gnome-2048.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'swell-foop.desktop', 'tali.desktop', 'teeworlds.desktop', 'Teeworlds.desktop', 'wiican.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['chrome-aohghmighlieiainnegkcijnfilokake-Default.desktop', 'chrome-ejjicmeblgpmajnghnpcppodonldlgfn-Default.desktop', 'chrome-felcaaldnbdncclmgdcncolpebgiejap-Default.desktop', 'chrome-hmjkmjkepdijhoojdojkdfohbdgmmhki-Default.desktop', 'chrome-ojcflmmmcfpacggndoaaflkmcoblhnbh-Default.desktop', 'bijiben.desktop', 'dropbox.desktop', 'evince.desktop', 'evolution-calendar.desktop', 'evolution.desktop', 'libreoffice-base.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'masterpdfeditor.desktop', 'megasync.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'pdfchain.desktop', 'simple-scan.desktop', 'sparkleshare.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'dosbox.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-appfolders-manager.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-power-statistics.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'imagewriter.desktop', 'indicator-kdeconnect.desktop', 'nact.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Logs.desktop', 'org.gnome.MultiWriter.desktop', 'org.gnome.Terminal.desktop', 'org.kde.kdeconnect.kcm.desktop', 'pamac-manager.desktop', 'pamac-updater.desktop', 'qt5ct.desktop', 'qtconfig-qt4.desktop', 'redshift-gtk.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'urserver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop', 'winetricks.desktop']"
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Negative action
 		[Nn]* )
-			clear && fixapps
+			clear && fix-apps
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			advanced
+			fix-apps
 			;;
 		esac
 		;;
@@ -500,23 +438,85 @@ function fixapps {
 		clear && main;;
 	# Invalid choice
 	* )
-		clear && show_error 'Not an option, try again.' && fixapps;;
+		clear && show_error 'Not an option, try again.' && fix-apps;;
 	esac
 }
 # ----------------------------------------------------------------------
-function advanced {
+function dconf-settings {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Add 'Binaries' to PATH?"
-	echo "2) Set Moka/Adwaita/Roboto UI?"
-	echo "3) Set Stock GNOME UI?"
+	echo "1) Change background and lock wallpapers?"
+	echo "2) Set up Nautilus layout?"
+	echo "3) Show battery percentage in GNOME Shell?"
+	echo
+	echo "4) Set Moka/Arc/Roboto UI?"
+	echo "5) Set Stock GNOME UI?"
 	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Moka/Adwaita UI
+	# Backgrounds
+	1)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			dconf write /org/gnome/desktop/background/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/back.jpg'"
+			dconf write /org/gnome/desktop/screensaver/picture-uri "'file:///home/aldomann/Pictures/Wallpapers/lock.jpg'"
+			clear && dconf-settings
+			;;
+		# Negative action
+		[Nn]* )
+			clear && dconf-settings
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			dconf-settings
+			;;
+		esac
+		;;
+	# Nautilus layout and preferences
 	2)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Regular nautilus
+				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
+				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
+				dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
+				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
+				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+				nautilus -q
+			# Root nautilus
+				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
+				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
+				sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
+				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
+				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+			clear && dconf-settings
+			;;
+		# Negative action
+		[Nn]* )
+			clear && dconf-settings
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			dconf-settings
+			;;
+		esac
+		;;
+	# Moka/Adwaita UI
+	4)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -531,21 +531,21 @@ function advanced {
 			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
 			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
-			clear && advanced
+			clear && dconf-settings
 			;;
 		# Negative action
 		[Nn]* )
-			clear && advanced
+			clear && dconf-settings
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			advanced
+			dconf-settings
 			;;
 		esac
 		;;
 	# Stock GNOME UI
-	3)
+	5)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -559,16 +559,16 @@ function advanced {
 			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
 			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'gnome'"
-			clear && advanced
+			clear && dconf-settings
 			;;
 		# Negative action
 		[Nn]* )
-			clear && advanced
+			clear && dconf-settings
 			;;
 		# Error
 		* )
 			clear && show_error 'Sorry, try again.'
-			advanced
+			dconf-settings
 			;;
 		esac
 		;;
@@ -699,8 +699,8 @@ function main {
 	echo
 	# echo "1) Perform system update and upgrade?"
 	echo "2) Install favourite applications?"
-	echo "3) Fix apps behaviour and appearance?"
-	# echo "4) Perform advanced configurations?"
+	echo "3) Change apps behaviour and appearance?"
+	# echo "4) Perform dconf configurations?"
 	echo
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
@@ -711,8 +711,8 @@ function main {
 	case $REPLY in
 		# 1) sysupgrade;;            # System Upgrade
 		2) clear && applications;; # Install apps
-		3) clear && fixapps;;      # Fix apps
-		# 4) clear && advanced;;     # Advanced config
+		3) clear && fix-apps;;      # Fix apps
+		# 4) clear && dconf-settings;;     # Dconf config
 		5) clear && hardware;;     # Hardware info
 		6) clear && cleanup;;      # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
