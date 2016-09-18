@@ -236,9 +236,10 @@ function fix-apps {
 	echo
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
+	echo "3) Enable coloured Emojis?"
 	echo
-	echo "3) Add extra and hidden .desktop files?"
-	echo "4) Set up GNOME Shell app folders?"
+	echo "4) Add extra and hidden .desktop files?"
+	echo "5) Set up GNOME Shell app folders?"
 	echo
 	echo "r) Return?"
 	echo
@@ -356,7 +357,7 @@ function fix-apps {
 		esac
 		;;
 	# Desktop files
-	5)
+	4)
 		show_info 'Adding hidden desktop files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -390,7 +391,7 @@ function fix-apps {
 		esac
 		;;
 	# GNOME Shell app folders
-	6)
+	5)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
