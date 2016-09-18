@@ -721,7 +721,7 @@ show_error() {
 function main {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Perform system update and upgrade?"
+	# echo "1) Perform system update and upgrade?"
 	echo "2) Install favourite applications?"
 	echo "3) Fix apps behaviour and appearance?"
 	echo "4) Perform advanced configurations?"
