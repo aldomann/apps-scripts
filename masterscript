@@ -398,7 +398,6 @@ function fix-apps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			gsettings set org.gnome.desktop.app-folders folder-children "['Games', 'Office', 'Utilities']"
 			show_info 'In which language is your system? (E)nglish or (S)panish: ' && read REPLY
 			case $REPLY in
 			# English
@@ -407,6 +406,7 @@ function fix-apps {
 				media_appfolder="Media"
 				office_appfolder="Office"
 				utilities_appfolder="Utilities"
+				gsettings set org.gnome.desktop.app-folders folder-children "['$games_appfolder', '$office_appfolder', '$utilities_appfolder']"
 				;;
 			# Spanish
 			[Ss]* )
@@ -416,10 +416,10 @@ function fix-apps {
 				utilities_appfolder="Utilidades"
 				;;
 			esac
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "$games_appfolder"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "$media_appfolder"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "$utilities_appfolder"
-			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "$office_appfolder"
+			# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "$games_appfolder"
+			# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ name "$media_appfolder"
+			# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "$utilities_appfolder"
+			# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "$office_appfolder"
 
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Games/ apps "['battlenet.desktop', 'cutemupen.desktop', 'dolphin-emu.desktop', 'GameConqueror.desktop', 'gbrainy.desktop', 'gvbam.desktop', 'hedgewars.desktop', 'minecraft.desktop', 'Portal 2 (Beta).desktop', 'steam.desktop', 'war3roc.desktop', 'war3tft.desktop', 'five-or-more.desktop', 'four-in-a-row.desktop', 'gnome-chess.desktop', 'gnome-klotski.desktop', 'gnome-mahjongg.desktop', 'gnome-mines.desktop', 'gnome-nibbles.desktop', 'gnome-robots.desktop', 'gnome-sudoku.desktop', 'gnome-tetravex.desktop', 'hitori.desktop', 'iagno.desktop', 'lightsoff.desktop', 'org.gnome.gnome-2048.desktop', 'quadrapassel.desktop', 'sol.desktop', 'starcraft.desktop', 'wesnoth-1.10.desktop', 'Worms Reloaded.desktop', 'zsnes.desktop', 'swell-foop.desktop', 'tali.desktop', 'teeworlds.desktop', 'Teeworlds.desktop', 'wiican.desktop']"
 			gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Media/ apps "['chrome-cnciopoikihiagdjbjpnocolokfelagl-Default.desktop', 'eog.desktop', 'gaupol.desktop', 'gcolor3.desktop', 'gimp.desktop', 'gnome-music.desktop', 'gradio.desktop', 'inkscape.desktop', 'lightzone.desktop', 'mpv.desktop', 'org.gnome.Cheese.desktop', 'org.gnome.Screenshot.desktop', 'com.uploadedlobster.peek.desktop', 'popcorntime.desktop', 'vocal.desktop']"
