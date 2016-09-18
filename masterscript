@@ -889,7 +889,7 @@ function main {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		1) sysupgrade;;            # System Upgrade
+		# 1) sysupgrade;;            # System Upgrade
 		2) clear && applications;; # Install apps
 		3) clear && fixapps;;      # Fix apps
 		4) clear && advanced;;     # Advanced config
