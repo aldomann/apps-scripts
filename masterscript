@@ -515,30 +515,6 @@ function advanced {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Binaries to PATH
-	1)
-		show_info 'Adding Binaries to PATH...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			echo 'export PATH="$HOME/Dropbox/Binaries:$PATH"'>>'.bash_profile'
-			wget https://dl.dropboxusercontent.com/u/1564319/bashrc
-			mv bashrc $HOME/.bashrc
-			clear && advanced
-			;;
-		# Negative action
-		[Nn]* )
-			clear && advanced
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.'
-			advanced
-			;;
-		esac
-		;;
 	# Moka/Adwaita UI
 	2)
 		show_info 'Changing dconf files...'
@@ -724,7 +700,7 @@ function main {
 	# echo "1) Perform system update and upgrade?"
 	echo "2) Install favourite applications?"
 	echo "3) Fix apps behaviour and appearance?"
-	echo "4) Perform advanced configurations?"
+	# echo "4) Perform advanced configurations?"
 	echo
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
@@ -736,7 +712,7 @@ function main {
 		# 1) sysupgrade;;            # System Upgrade
 		2) clear && applications;; # Install apps
 		3) clear && fixapps;;      # Fix apps
-		4) clear && advanced;;     # Advanced config
+		# 4) clear && advanced;;     # Advanced config
 		5) clear && hardware;;     # Hardware info
 		6) clear && cleanup;;      # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
