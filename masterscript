@@ -515,7 +515,7 @@ function dconf-settings {
 			;;
 		esac
 		;;
-	# Moka/Adwaita UI
+	# Moka/Arc UI
 	4)
 		show_info 'Changing dconf files...'
 		echo
@@ -528,7 +528,7 @@ function dconf-settings {
 			dconf write /org/gnome/desktop/interface/font-name "'Roboto 11'"
 			dconf write /org/gnome/desktop/interface/monospace-font-name "'Menlo 11'"
 			dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Roboto Bold 11'"
-			dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
+			dconf write /org/gnome/desktop/interface/gtk-theme "'Arc-Darker'"
 			# dconf write /org/gnome/desktop/wm/preferences/theme "'Adwaita'"
 			dconf write /org/gnome/desktop/interface/icon-theme "'Moka'"
 			clear && dconf-settings
