@@ -16,10 +16,10 @@ This project is coded and organized in a modular fashion so you can easily delet
 
 Simple, you just run the main script from the root of the source folder:
 ```bash
-	./masterscript
+./masterscript
 ```
 
 Or you can store this scriptset in some directory, and add that location to your custom shell paths to run on-demand. For example, adding it as the following line to your `.bashrc` or `.zshrc` (editing the path appropriately):
 ```bash
-	export PATH=${PATH}:$HOME/.scripts/
+export PATH=${PATH}:$HOME/.scripts/
 ```
