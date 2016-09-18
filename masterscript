@@ -45,7 +45,7 @@ function sysupgrade {
 	notify-send "System upgrade was successful" -i system-software-update
 	exit
 }
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 function applications {
 	show_info 'What would you like to do?'
 	echo
@@ -233,7 +233,7 @@ function applications {
 		clear && show_error 'Not an option, try again.' && applications;;
 	esac
 }
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 function fixapps {
 	show_info 'What would you like to do?'
 	echo
@@ -384,7 +384,7 @@ function fixapps {
 			;;
 		esac
 		;;
-	# Nautilus layout
+	# Nautilus layout and preferences
 	5)
 		show_info 'Changing dconf files...'
 		echo
@@ -505,7 +505,7 @@ function fixapps {
 		clear && show_error 'Not an option, try again.' && fixapps;;
 	esac
 }
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 function advanced {
 	show_info 'What would you like to do?'
 	echo
@@ -606,7 +606,7 @@ function advanced {
 		clear && show_error 'Not an option, try again.' && hardware;;
 	esac
 }
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 function hardware {
 	show_info 'What would you like to do?'
 	echo
@@ -649,7 +649,7 @@ function hardware {
 		clear && show_error 'Not an option, try again.' && hardware;;
 	esac
 	}
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 function cleanup {
 	show_info 'What would you like to do?'
 	echo
@@ -706,7 +706,7 @@ function cleanup {
 		clear && show_error 'Not an option, try again.' && cleanup;;
 	esac
 }
-# --------------------------------------------------
+# ----------------------------------------------------------------------
 
 #----- MESSAGE FUNCTIONS -----#
 show_info() {
