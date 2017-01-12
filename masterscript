@@ -48,7 +48,7 @@ function applications {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [32]"
+	echo "1) Install basic apps?        [33]"
 	echo "2) Install exclusive apps?    [26]"
 	echo "3) Install games?             [5]"
 	echo "4) Install GDM?"
@@ -97,7 +97,7 @@ function applications {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo 'Current package list: arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es'
+		echo 'Current package list: arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 pepper-flash xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es'
 		# [Not in Arch repos]: hunspell-ca hyphen-ca myspell-ca mythes-ca
 		# [Not installed]: gbrainy skype sound-juicer mythes-en mythes-es
 		echo
@@ -105,7 +105,7 @@ function applications {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
+			sudo pacman -S arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 pepper-flash xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
