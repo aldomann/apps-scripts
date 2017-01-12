@@ -539,7 +539,6 @@ function dconf-settings {
 				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
 				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
-				dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
 				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 				nautilus -q
@@ -547,7 +546,6 @@ function dconf-settings {
 				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
 				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
-				sudo dconf write /org/gnome/nautilus/preferences/sort-directories-first "true"
 				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
 			clear && dconf-settings
