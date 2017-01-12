@@ -694,6 +694,7 @@ function cleanup {
 	echo "2) Clean package cache?"
 	echo "3) Optimise pacman database?"
 	echo "4) List locally installed packages?"
+	echo "5) List manually installed packages?"
 	echo
 	echo "r) Return?"
 	echo
@@ -731,6 +732,14 @@ function cleanup {
 	4)
 		show_info 'Listing packages...'
 		sudo pacman -Qm
+		show_success 'Done.'
+		echo
+		cleanup
+		;;
+	# List manually installed packages
+	5)
+		show_info 'Listing packages...'
+		sudo pacman -Qet
 		show_success 'Done.'
 		echo
 		cleanup
