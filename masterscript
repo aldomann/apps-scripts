@@ -48,11 +48,11 @@ function applications {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [34]"
-	echo "2) Install exclusive apps?    [16]"
-	echo "3) Install games?             [4]"
+	echo "1) Install basic apps?        [32]"
+	echo "2) Install exclusive apps?    [26]"
+	echo "3) Install games?             [5]"
 	echo "4) Install GDM?"
-	echo "5) Uninstall unused apps?     [8]"
+	echo "5) Uninstall unused apps?     [12]"
 	echo
 	echo "r) Return?"
 	echo
@@ -77,6 +77,9 @@ function applications {
 				# sudo pacman-key -r 962DDE58
 				# sudo pacman-key -f 962DDE58
 				# sudo pacman-key --lsign-key 962DDE58
+				# gpg --recv-keys 4B4E7A9523ACD201
+				# gpg --recv-keys AE6866C7962DDE58
+
 			clear && applications
 			;;
 		# Negative action
@@ -94,15 +97,15 @@ function applications {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo 'Current package list: adobe-source-han-sans-otc-fonts aisleriot bleachbit ffmpegthumbnailer gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines gvfs-goa gvfs-google icedtea-web infinality-bundle inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es'
-		# [Not in Arch repos]: hyphen-ca myspell-ca mythes-ca
-		# [Not installed]: gbrainy skype sound-juicer
+		echo 'Current package list: arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es'
+		# [Not in Arch repos]: hunspell-ca hyphen-ca myspell-ca mythes-ca
+		# [Not installed]: gbrainy skype sound-juicer mythes-en mythes-es
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts aisleriot bleachbit ffmpegthumbnailer gbrainy gimp gnome-clocks gnome-mahjongg gnome-mines gvfs-goa gvfs-google icedtea-web infinality-bundle inkscape jre7-openjdk lib32-gtk2 p7zip quadrapassel simple-scan skype sound-juicer wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es mythes-en mythes-es
+			sudo pacman -S arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan gvfs-goa gvfs-google libappindicator-gtk3 xf86-input-libinput wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -122,13 +125,14 @@ function applications {
 		show_info 'Installing exclusive apps...'
 		echo
 		# echo 'Old package list: dropbox polari'
-		echo 'Current package list: android-tools dconf-editor fluidsynth gaupol git gnome-boxes gnome-characters mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl'
+		echo 'Current package list: android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kde-connnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid terminix texlive-most youtube-dl kde-gtk-config qt5ct qt5-styleplugins'
+		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools dconf-editor fluidsynth gaupol git gnome-boxes gnome-characters mkvtoolnix-cli polari qtiplot sigil soundfont-fluid sparkleshare texlive-most thunar youtube-dl
+			sudo pacman -S android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kde-connnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid terminix texlive-most youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -147,13 +151,13 @@ function applications {
 	3)
 		show_info 'Installing games...'
 		echo
-		echo 'Current package list: cwiid steam vbam-gtk zsnes'
+		echo 'Current package list: cwiid dolphin-emu steam-native-runtime vbam-gtk zsnes'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S cwiid steam vbam-gtk zsnes
+			sudo pacman -S cwiid dolphin-emu steam-native-runtime vbam-gtk zsnes --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -180,7 +184,7 @@ function applications {
 			sudo pacman -S gdm
 			sudo systemctl disable lightdm.service
 			sudo systemctl enable gdm.service
-			sudo pacman -Rscn lightdm
+			sudo pacman -Rncs lightdm
 			clear && applications
 			;;
 		# Negative action
@@ -198,14 +202,14 @@ function applications {
 	5)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo 'Current package list: brasero empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin'
-		# EXCLUSIVE: grbainy soud-juicer
+		echo 'Current package list: brasero gedit gnome-contacts gnome-maps gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin totem'
+		# EXCLUSIVE: gedit grbainy soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -Rscn brasero empathy gnome-shell-extension-dash-to-dock gnome-sound-recorder numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin
+			sudo pacman -Rncs brasero gedit gnome-contacts gnome-maps gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin totem
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
