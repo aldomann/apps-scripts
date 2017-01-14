@@ -779,7 +779,7 @@ function main {
 	echo "5) View hardware information?"
 	echo "6) Cleanup the system?"
 	echo
-	echo "q) Quit?"
+	echo "e) Exit?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
@@ -790,6 +790,7 @@ function main {
 		5) clear && hardware;;     # Hardware info
 		6) clear && cleanup;;      # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
+		[Ee]* ) exit 99;; # Quit
 		[Qq]* ) exit 99;; # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
 	esac
