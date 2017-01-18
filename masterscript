@@ -181,7 +181,7 @@ function applications {
 		# Positive action
 		[Yy]* )
 			# SRC: http://drunkensloth.weebly.com/home/how-to-switch-from-lightdm-to-gdm-or-any-other-display-manager-on-antergos-or-arch-linux
-			sudo pacman -S gdm
+			sudo pacman -S gdm --needed
 			sudo systemctl disable lightdm.service
 			sudo systemctl enable gdm.service
 			sudo pacman -Rncs lightdm
@@ -369,17 +369,17 @@ function fix-apps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S noto-fonts-emoji
+			sudo pacman -S noto-fonts-emoji --needed
 			touch ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "<?xml version="1.0"?>" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "<!DOCTYPE fontconfig SYSTEM "fonts.dtd">" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "<fontconfig>" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "  <!-- Use Google Emojis -->" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "  <match target="pattern">" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "    <test qual="any" name="family"><string>Segoe UI Emoji</string></test>" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "    <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "  </match>" > ~/.config/fontconfig/conf.d/01-emoji.conf
-			echo "</fontconfig>" > ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '<?xml version="1.0"?>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '<fontconfig>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '  <!-- Use Google Emojis -->' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '  <match target="pattern">' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '    <test qual="any" name="family"><string>Segoe UI Emoji</string></test>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '    <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '  </match>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
+			echo '</fontconfig>' >> ~/.config/fontconfig/conf.d/01-emoji.conf
 
 			clear && fix-apps
 			;;
