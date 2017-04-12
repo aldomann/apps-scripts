@@ -560,18 +560,18 @@ function dconf-settings {
 		# Positive action
 		[Yy]* )
 			# Regular nautilus
-				dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				dconf write /org/gnome/nautilus/icon-view/captions "['none', 'size', 'none']"
 				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
-				dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+				dconf write /org/gnome/nautilus/window-state/sidebar-width "'155'"
 				nautilus -q
 			# Root nautilus
-				sudo dconf write /org/gnome/nautilus/icon-view/captions "['size', 'none', 'date_modified']"
+				sudo dconf write /org/gnome/nautilus/icon-view/captions "['none', 'size', 'none']"
 				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
 				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
-				sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'160'"
+				# sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'155'"
 			clear && dconf-settings
 			;;
 		# Negative action
