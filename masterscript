@@ -62,24 +62,13 @@ function applications {
 	0)
 		show_info 'Enabling extra repositories...'
 		echo
-		echo 'Repositories to be enabled: infinality-bundle'
-		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
 			# Set up pacman.conf
-				wget https://dl.dropboxusercontent.com/u/1564319/pacman.conf
+				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAAk4l7K7sh7XG_c-BtnRhDPa/pacman.conf
 				sudo mv pacman.conf /etc/pacman.conf
-			# Add infinality-bundle key
-				# sudo cp
-				# sudo dirmngr
-				# sudo pacman-key -r 962DDE58
-				# sudo pacman-key -f 962DDE58
-				# sudo pacman-key --lsign-key 962DDE58
-				# gpg --recv-keys 4B4E7A9523ACD201
-				# gpg --recv-keys AE6866C7962DDE58
-
 			clear && applications
 			;;
 		# Negative action
@@ -405,13 +394,13 @@ function fix-apps {
 		[Yy]* )
 			# Extra Desktops
 				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/changed-apps.tar.xz
+				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AADTMfJJP5Mbb7gUgIgoHHTIa/changed-apps.tar.xz
 				tar xf changed-apps.tar.xz
 				cd changed-apps
 				cp -r *.desktop $HOME/.local/share/applications
 			# Hidden Desktops
 				cd /tmp
-				wget http://dl.dropbox.com/u/1564319/hidden-apps.tar.xz
+				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AADlaS19s7PWVnIDcq207k_6a/hidden-apps.tar.xz
 				tar xf hidden-apps.tar.xz
 				cd hidden-apps
 				cp -r *.desktop $HOME/.local/share/applications
