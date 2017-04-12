@@ -49,7 +49,7 @@ function applications {
 	echo "0) Set up Pacman configuration?"
 	echo
 	echo "1) Install basic apps?        [35]"
-	echo "2) Install exclusive apps?    [27]"
+	echo "2) Install exclusive apps?    [28]"
 	echo "3) Install games?             [3]"
 	echo "4) Install GDM?"
 	echo "5) Uninstall unused apps?     [12]"
@@ -125,14 +125,14 @@ function applications {
 		show_info 'Installing exclusive apps...'
 		echo
 		# echo 'Old package list: dropbox polari'
-		echo 'Current package list: android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins'
+		echo 'Current package list: android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift ruby scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins'
 		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift ruby scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
