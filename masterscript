@@ -49,7 +49,7 @@ function applications {
 	echo "0) Set up Pacman configuration?"
 	echo
 	echo "1) Install basic apps?        [35]"
-	echo "2) Install exclusive apps?    [26]"
+	echo "2) Install exclusive apps?    [27]"
 	echo "3) Install games?             [3]"
 	echo "4) Install GDM?"
 	echo "5) Uninstall unused apps?     [12]"
@@ -125,14 +125,14 @@ function applications {
 		show_info 'Installing exclusive apps...'
 		echo
 		# echo 'Old package list: dropbox polari'
-		echo 'Current package list: android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix youtube-dl kde-gtk-config qt5ct qt5-styleplugins'
+		echo 'Current package list: android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins'
 		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools bzr dconf-editor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -244,6 +244,7 @@ function fix-apps {
 	echo
 	echo "4) Add extra and hidden .desktop files?"
 	echo "5) Set up GNOME Shell app folders?"
+	echo "6) Replace Synaptics for libinput?"
 	echo
 	echo "r) Return?"
 	echo
@@ -469,6 +470,29 @@ function fix-apps {
 			dconf write /org/gnome/desktop/app-folders/folders/Science/apps "['anaconda-navigator.desktop', 'imagej.desktop', 'matlab.desktop', 'pycharm-community.desktop', 'qtiplot.desktop', 'r.desktop', 'rstudio.desktop', 'wolfram-mathematica11.desktop', 'www.octave.org-octave.desktop']"
 			dconf write /org/gnome/desktop/app-folders/folders/Utilities/apps "['bleachbit-root.desktop', 'bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dconf-editor.desktop', 'dosbox.desktop', 'file-roller.desktop', 'gdebi.desktop', 'gnome-appfolders-manager.desktop', 'gnome-boxes.desktop', 'gnome-disks.desktop', 'gnome-power-statistics.desktop', 'gnome-system-log.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'imagewriter.desktop', 'indicator-kdeconnect.desktop', 'fma-config-tool.desktop', 'nexulockr.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Logs.desktop', 'org.gnome.MultiWriter.desktop', 'org.gnome.Terminal.desktop', 'org.kde.kdeconnect.kcm.desktop', 'pamac-manager.desktop', 'pamac-updater.desktop', 'qt5ct.desktop', 'qtconfig-qt4.desktop', 'redshift-gtk.desktop', 'seahorse.desktop', 'software-properties-drivers.desktop', 'software-properties-gnome.desktop', 'synaptic.desktop', 'system76-driver.desktop', 'urserver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop', 'winetricks.desktop']"
 			clear && fix-apps
+			;;
+		# Replace Synaptics for libinput
+		6)
+			show_info 'Replacing Synaptics for libinput...'
+			echo
+			show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+			case $REPLY in
+			# Positive action
+			[Yy]* )
+				sudo pacman -S xf86-input-libinput --needed
+				sudo rm -rf /etc/X11/xorg.conf.d/*synaptics*.conf
+				clear && fix-apps
+				;;
+			# Negative action
+			[Nn]* )
+				clear && fix-apps
+				;;
+			# Error
+			* )
+				clear && show_error 'Sorry, try again.'
+				fix-apps
+				;;
+			esac
 			;;
 		# Negative action
 		[Nn]* )
