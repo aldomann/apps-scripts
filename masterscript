@@ -561,14 +561,14 @@ function dconf-settings {
 		[Yy]* )
 			# Regular nautilus
 				dconf write /org/gnome/nautilus/icon-view/captions "['none', 'size', 'none']"
-				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
+				dconf write /org/gnome/nautilus/icon-view/thumbnail-size "64"
 				dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				# dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				dconf write /org/gnome/nautilus/window-state/sidebar-width "'155'"
 				nautilus -q
 			# Root nautilus
 				sudo dconf write /org/gnome/nautilus/icon-view/captions "['none', 'size', 'none']"
-				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "96"
+				sudo dconf write /org/gnome/nautilus/icon-view/thumbnail-size "64"
 				sudo dconf write /org/gnome/nautilus/preferences/executable-text-activation "'ask'"
 				# sudo dconf write /org/gnome/nautilus/window-state/geometry "'1195x675+380+200'"
 				# sudo dconf write /org/gnome/nautilus/window-state/sidebar-width "'155'"
