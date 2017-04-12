@@ -58,17 +58,16 @@ function applications {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Enable extra repositories
+	# Set up Pacman configuration
 	0)
-		show_info 'Enabling extra repositories...'
+		show_info 'Seting up Pacman configuration...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Set up pacman.conf
-				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAAk4l7K7sh7XG_c-BtnRhDPa/pacman.conf
-				sudo mv pacman.conf /etc/pacman.conf
+			wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAAk4l7K7sh7XG_c-BtnRhDPa/pacman.conf
+			sudo mv pacman.conf /etc/pacman.conf
 			clear && applications
 			;;
 		# Negative action
@@ -234,6 +233,7 @@ function fix-apps {
 	echo "4) Add extra and hidden .desktop files?"
 	echo "5) Set up GNOME Shell app folders?"
 	echo "6) Replace Synaptics for libinput?"
+	echo "7) Set up Systemd Journald configuration?"
 	echo
 	echo "r) Return?"
 	echo
@@ -491,6 +491,29 @@ function fix-apps {
 		* )
 			clear && show_error 'Sorry, try again.'
 			fix-apps
+			;;
+		esac
+		;;
+	# Set up Systemd Journald configuration
+	7)
+		show_info 'Seting up Systemd Journald configuration...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAD2FIYmTGzG_KoC9nfFvOL6a/journald.conf
+			sudo mv journald.conf /etc/journald.conf
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			applications
 			;;
 		esac
 		;;
