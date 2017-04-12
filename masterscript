@@ -503,7 +503,7 @@ function fix-apps {
 		# Positive action
 		[Yy]* )
 			wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAD2FIYmTGzG_KoC9nfFvOL6a/journald.conf
-			sudo mv journald.conf /etc/journald.conf
+			sudo mv journald.conf /etc/systemd/journald.conf
 			clear && applications
 			;;
 		# Negative action
