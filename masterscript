@@ -536,9 +536,10 @@ function dconf-settings {
 	echo "1) Change background and lock wallpapers?"
 	echo "2) Set up Nautilus layout?"
 	echo "3) Show battery percentage in GNOME Shell?"
+	echo "4) Change Night Light temperature?"
 	echo
-	echo "4) Set Moka/Arc/Roboto UI?"
-	echo "5) Set Stock GNOME UI?"
+	echo "8) Set Moka/Arc/Roboto UI?"
+	echo "9) Set Stock GNOME UI?"
 	echo
 	echo "r) Return?"
 	echo
@@ -623,8 +624,31 @@ function dconf-settings {
 			;;
 		esac
 		;;
-	# Moka/Arc UI
+	# Change Night Light temperature
 	4)
+		show_info 'Changing dconf files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4500
+
+			clear && dconf-settings
+			;;
+		# Negative action
+		[Nn]* )
+			clear && dconf-settings
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.'
+			dconf-settings
+			;;
+		esac
+		;;
+	# Moka/Arc UI
+	8)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -652,7 +676,7 @@ function dconf-settings {
 		esac
 		;;
 	# Stock GNOME UI
-	5)
+	9)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
