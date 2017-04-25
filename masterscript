@@ -73,8 +73,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -100,8 +99,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -127,8 +125,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -152,8 +149,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -178,8 +174,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -204,8 +199,7 @@ function applications {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -260,8 +254,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			fix-apps
+			clear && show_error 'Sorry, try again.' && fix-apps
 			;;
 		esac
 		;;
@@ -342,8 +335,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			fix-apps
+			clear && show_error 'Sorry, try again.' && fix-apps
 			;;
 		esac
 		;;
@@ -376,8 +368,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			fix-apps
+			clear && show_error 'Sorry, try again.' && fix-apps
 			;;
 		esac
 		;;
@@ -410,8 +401,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			fix-apps
+			clear && show_error 'Sorry, try again.' && fix-apps
 			;;
 		esac
 		;;
@@ -479,8 +469,7 @@ function fix-apps {
 				;;
 			# Error
 			* )
-				clear && show_error 'Sorry, try again.'
-				fix-apps
+				clear && show_error 'Sorry, try again.' && fix-apps
 				;;
 			esac
 			;;
@@ -490,8 +479,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			fix-apps
+			clear && show_error 'Sorry, try again.' && fix-apps
 			;;
 		esac
 		;;
@@ -513,8 +501,7 @@ function fix-apps {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			applications
+			clear && show_error 'Sorry, try again.' && applications
 			;;
 		esac
 		;;
@@ -560,8 +547,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
@@ -594,8 +580,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
@@ -616,8 +601,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
@@ -639,8 +623,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
@@ -667,8 +650,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
@@ -693,8 +675,7 @@ function dconf-settings {
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.'
-			dconf-settings
+			clear && show_error 'Sorry, try again.' && dconf-settings
 			;;
 		esac
 		;;
