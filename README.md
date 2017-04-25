@@ -8,11 +8,11 @@ Original Author: [Sam Hewitt](https://github.com/snwh)
 
 Feel free to fork this project, modify to suit your preference, and distribute.
 
-##Structure
+## Structure
 
 This project is coded and organized in a modular fashion so you can easily delete or exclude parts that you don't want to use.
 
-##Usage
+## Usage
 
 Simple, you just run the main script from the root of the source folder:
 ```bash
@@ -23,3 +23,9 @@ Or you can store this scriptset in some directory, and add that location to your
 ```bash
 export PATH=${PATH}:$HOME/.scripts/
 ```
+# `configscript` Script
+
+The purpose of this script is to:
+ - Create local configuration files to overide system settings.
+ - Create symbolic links of configuration files/folders from a backup.
+ - Modify system settings.
