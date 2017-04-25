@@ -613,7 +613,7 @@ function dconf-settings {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 4500
+			dconf write /org/gnome/settings-daemon/plugins/color/night-light-temperature "uint32 4500"
 
 			clear && dconf-settings
 			;;
