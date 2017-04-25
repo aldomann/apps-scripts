@@ -29,17 +29,20 @@ echo '#--------------------------------------------#'
 function config-general {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Do something?"
-	echo "2) Do something?"
-	echo "3) Do something?"
+	echo "1) Change pacman.conf?   (system)"
+	echo "2) Change journald.conf? (system)"
+	echo "3) Create .makepkg.conf?  (local)"
+	echo
+	echo "4) Symlink zshrc and zsh_history?"
+	echo "5) Symlink bashrc and bash_profile?"
 	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Set up Systemd Journald configuration
+	# Change pacman.conf
 	1)
-		show_info 'Seting up Systemd Journald configuration...'
+		show_info 'Changing /etc/pacman.conf...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -58,12 +61,95 @@ function config-general {
 			;;
 		esac
 		;;
+	# Change journald.conf in /etc/systemd/
+	2)
+		show_info 'Changing /etc/systemd/journald.conf...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo "asd"
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
+	# Create makepkg.conf
+	3)
+		show_info 'Creating ~/.makepkg.conf...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			touch ~/.makepkg.conf
+			echo 'PKGEXT='\''.pkg.tar.xz'\''' > ~/.makepkg.conf
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
 	# Return
 	[Rr]*)
 		clear && main;;
 	# Invalid choice
 	* )
 		clear && show_error 'Not an option, try again.' && config-general;;
+	esac
+}
+# ----------------------------------------------------------------------
+function config-apps {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Create .Rprofile? (local)"
+	echo
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Create .Rprofile
+	1)
+		show_info 'Creating ~/.Rprofile...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			touch ~/.Rprofile
+			echo '.libPaths("~/.R/x86_64-pc-linux-gnu-library/3.4")' > ~/.Rprofile
+			clear && config-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-apps
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*)
+		clear && main;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && config-apps;;
 	esac
 }
 # ----------------------------------------------------------------------
@@ -125,27 +211,19 @@ show_error() {
 function main {
 	show_info 'What would you like to do?'
 	echo
-	# echo "1) Perform system update and upgrade?"
-	echo "1) Install favourite applications?"
-	echo "2) Change apps behaviour and appearance?"
-	echo "3) Perform dconf configurations?"
-	echo
-	echo "5) View hardware information?"
-	echo "6) Cleanup the system?"
+	echo "1) Change general config files?"
+	echo "2) Change apps config files?"
+	echo "3) Change games config files?"
 	echo
 	echo "e) Exit?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		# 1) sysupgrade;;            # System Upgrade
-		1) clear && applications;; # Install apps
-		2) clear && fix-apps;;      # Fix apps
-		3) clear && dconf-settings;;     # Dconf config
-		5) clear && hardware;;     # Hardware info
-		6) clear && cleanup;;      # System cleanup
-		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
-		[Ee]* ) exit 99;; # Quit
-		[Qq]* ) exit 99;; # Quit
+		1) clear && config-general;; # General
+		2) clear && config-apps;;    # Apps
+		3) clear && config-games;;   # Games
+		[Ee]* ) exit 99;;            # Quit
+		[Qq]* ) exit 99;;            # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
 	esac
 }
