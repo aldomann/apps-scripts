@@ -825,15 +825,15 @@ function main {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		# 0) sysupgrade;;            # System Upgrade
-		1) clear && applications;; # Install apps
-		2) clear && fix-apps;;      # Fix apps
-		3) clear && dconf-settings;;     # Dconf config
-		5) clear && hardware;;     # Hardware info
-		6) clear && cleanup;;      # System cleanup
+		# 0) sysupgrade;;              # System Upgrade
+		1) clear && applications;;   # Install apps
+		2) clear && fix-apps;;       # Fix apps
+		3) clear && dconf-settings;; # Dconf config
+		5) clear && hardware;;       # Hardware info
+		6) clear && cleanup;;        # System cleanup
 		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
-		[Ee]* ) exit 99;; # Quit
-		[Qq]* ) exit 99;; # Quit
+		[Ee]* ) exit 99;;            # Quit
+		[Qq]* ) exit 99;;            # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
 	esac
 }
