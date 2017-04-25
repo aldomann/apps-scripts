@@ -1,0 +1,156 @@
+#!/bin/bash
+# Authors:
+#	Alfredo Hernández <aldomann.designs@gmail.com>
+#
+# Description:
+#	A post-installation bash script for Antergos
+#
+# Legal Stuff:
+#	This script is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, version 3.
+
+#	This script is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#	GNU General Public License for more details.
+
+#	You should have received a copy of the GNU General Public License
+#	along with this script. If not, see <http://www.gnu.org/licenses/>.
+
+tabs 2
+clear
+
+echo '#--------------------------------------------#'
+echo '#            Config Files Script             #'
+echo '#--------------------------------------------#'
+
+#----- FUNCTIONS -----#
+function config-general {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Do something?"
+	echo "2) Do something?"
+	echo "3) Do something?"
+	echo
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Set up Systemd Journald configuration
+	1)
+		show_info 'Seting up Systemd Journald configuration...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo "asd"
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*)
+		clear && main;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && config-general;;
+	esac
+}
+# ----------------------------------------------------------------------
+function config-games {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Retroarch?"
+	echo "2) EmulationStation?"
+	echo "3) Warcraft III?"
+	echo "4) StarCraft?"
+	echo
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Set up Systemd Journald configuration
+	1)
+		show_info 'Doing something...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			echo "asd"
+			clear && config-games
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-games
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-games
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*)
+		clear && main;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && config-games;;
+	esac
+}
+# ----------------------------------------------------------------------
+
+#----- MESSAGE FUNCTIONS -----#
+show_info() {
+	echo -e "\033[1;34m$@\033[0m"
+}
+show_success() {
+	echo -e "\033[1;32m$@\033[0m"
+}
+show_error() {
+	echo -e "\033[1;31m$@\033[m" 1>&2
+}
+
+#----- MAIN FUNCTION -----#
+function main {
+	show_info 'What would you like to do?'
+	echo
+	# echo "1) Perform system update and upgrade?"
+	echo "1) Install favourite applications?"
+	echo "2) Change apps behaviour and appearance?"
+	echo "3) Perform dconf configurations?"
+	echo
+	echo "5) View hardware information?"
+	echo "6) Cleanup the system?"
+	echo
+	echo "e) Exit?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+		# 1) sysupgrade;;            # System Upgrade
+		1) clear && applications;; # Install apps
+		2) clear && fix-apps;;      # Fix apps
+		3) clear && dconf-settings;;     # Dconf config
+		5) clear && hardware;;     # Hardware info
+		6) clear && cleanup;;      # System cleanup
+		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
+		[Ee]* ) exit 99;; # Quit
+		[Qq]* ) exit 99;; # Quit
+		* ) clear && show_error 'Not an option, try again.' && main;;
+	esac
+}
+
+#----- RUN MAIN FUNCTION -----#
+main
+
+# END OF SCRIPT
