@@ -813,7 +813,7 @@ show_error() {
 function main {
 	show_info 'What would you like to do?'
 	echo
-	# echo "1) Perform system update and upgrade?"
+	# echo "0) Perform system update and upgrade?"
 	echo "1) Install favourite applications?"
 	echo "2) Change apps behaviour and appearance?"
 	echo "3) Perform dconf configurations?"
@@ -825,7 +825,7 @@ function main {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		# 1) sysupgrade;;            # System Upgrade
+		# 0) sysupgrade;;            # System Upgrade
 		1) clear && applications;; # Install apps
 		2) clear && fix-apps;;      # Fix apps
 		3) clear && dconf-settings;;     # Dconf config
