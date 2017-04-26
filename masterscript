@@ -168,7 +168,10 @@ function applications {
 			sudo pacman -S gdm --needed
 			sudo systemctl disable lightdm.service
 			sudo systemctl enable gdm.service
-			sudo pacman -Rncs lightdm
+			PKG="lightdm"
+			if [[ -n $(pacman -Qs $PKG) ]]; then
+				sudo pacman -S $PKG
+			fi
 			clear && applications
 			;;
 		# Negative action
