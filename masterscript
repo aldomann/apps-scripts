@@ -315,13 +315,13 @@ function fix-apps {
 					exit 1
 					;;
 			esac
-			echo "REGEDIT4
-			[HKEY_CURRENT_USER\Control Panel\Desktop]
-			\"FontSmoothing\"=\"$MODE\"
-			\"FontSmoothingOrientation\"=dword:0000000$ORIENTATION
-			\"FontSmoothingType\"=dword:0000000$TYPE
-			\"FontSmoothingGamma\"=dword:00000578" > $TMPFILE
-			echo -n "Updating configuration..."
+			echo "REGEDIT4" > $TMPFILE
+			echo "[HKEY_CURRENT_USER\Control Panel\Desktop]" >> $TMPFILE
+			echo "\"FontSmoothing\"=\"$MODE\"" >> $TMPFILE
+			echo "\"FontSmoothingOrientation\"=dword:0000000$ORIENTATION" >> $TMPFILE
+			echo "\"FontSmoothingType\"=dword:0000000$TYPE" >> $TMPFILE
+			echo "\"FontSmoothingGamma\"=dword:00000578" >> $TMPFILE
+			show_info "Updating configuration..."
 			$WINE regedit $TMPFILE 2> /dev/null
 			rm -f $TMPFILE
 
