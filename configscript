@@ -151,9 +151,9 @@ function config-general {
 function config-apps {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Create .Rprofile? (local)"
+	echo "1) Create .Rprofile?        (local)"
 	echo "2) Sublime Text?"
-	echo "3) MPV?"
+	echo "3) Change mpv config files? (local)"
 	echo "4) Tilix?"
 	echo
 	echo "r) Return?"
@@ -169,6 +169,45 @@ function config-apps {
 		# Positive action
 		[Yy]* )
 			echo '.libPaths("~/.R/x86_64-pc-linux-gnu-library/3.4")' > ~/.Rprofile
+			clear && config-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-apps
+			;;
+		esac
+		;;
+	# Change mpv config files
+	3)
+		show_info 'Changing mpv config files...'
+		show_info 'This will create/modify mpv.conf & lua-settings/osc.conf'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			if [ ! -d ~/.config/mpv ]; then
+				mkdir ~/.config/mpv
+			fi
+			echo 'osd-font="Roboto"' > ~/.config/mpv/mpv.conf
+			echo 'sub-font="Myriad Pro"' >> ~/.config/mpv/mpv.conf
+			echo '#sub-font="Helvetica Neue LT Std"' >> ~/.config/mpv/mpv.conf
+			echo 'sub-font-size=60' >> ~/.config/mpv/mpv.conf
+			echo 'sub-color="#FFFFFFFF"' >> ~/.config/mpv/mpv.conf
+			echo 'sub-border-color="#FF171717"' >> ~/.config/mpv/mpv.conf
+			if [ ! -d ~/.config/mpv/lua-settings ]; then
+				mkdir ~/.config/mpv/lua-settings
+			fi
+			echo '#layout=box' > ~/.config/mpv/lua-settings/osc.conf
+			echo '#seekbarstyle=slider' >> ~/.config/mpv/lua-settings/osc.conf
+			echo 'deadzonesize=0' >> ~/.config/mpv/lua-settings/osc.conf
+			echo 'minmousemove=10' >> ~/.config/mpv/lua-settings/osc.conf
+			echo '#scalewindowed=1.5' >> ~/.config/mpv/lua-settings/osc.conf
+			echo 'scalefullscreen=1.2' >> ~/.config/mpv/lua-settings/osc.conf
 			clear && config-apps
 			;;
 		# Negative action
