@@ -75,6 +75,7 @@ function config-general {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
+			sudo journalctl --vacuum-time=2d
 			sudo sed -i 's@.*SystemMaxFileSize.*@SystemMaxFileSize=8M@g' /etc/systemd/journald.conf
 			sudo sed -i 's@.*RuntimeMaxFileSize.*@RuntimeMaxFileSize=8M@g' /etc/systemd/journald.conf
 			sudo sed -i 's@.*SystemMaxUse.*@SystemMaxUse=64M@g' /etc/systemd/journald.conf
