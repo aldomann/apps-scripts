@@ -29,12 +29,13 @@ echo '#--------------------------------------------#'
 function config-general {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Change pacman.conf?   (system)"
-	echo "2) Change journald.conf? (system)"
-	echo "3) Create .makepkg.conf?  (local)"
+	echo "1) Change pacman.conf?     (system)"
+	echo "2) Change journald.conf?   (system)"
+	echo "3) Create .makepkg.conf?    (local)"
+	echo "4) Set up Qt5 integration?  (system)"
 	echo
-	echo "4) Symlink zshrc and zsh_history?"
-	echo "5) Symlink bashrc and bash_profile?"
+	echo "8) Symlink zshrc and zsh_history?"
+	echo "9) Symlink bashrc and bash_profile?"
 	echo
 	echo "r) Return?"
 	echo
@@ -48,7 +49,8 @@ function config-general {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			echo "asd"
+			# wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAAk4l7K7sh7XG_c-BtnRhDPa/pacman.conf
+			# sudo mv pacman.conf /etc/pacman.conf
 			clear && config-general
 			;;
 		# Negative action
@@ -69,7 +71,8 @@ function config-general {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			echo "asd"
+			# wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAD2FIYmTGzG_KoC9nfFvOL6a/journald.conf
+			# sudo mv journald.conf /etc/systemd/journald.conf
 			clear && config-general
 			;;
 		# Negative action
@@ -92,6 +95,32 @@ function config-general {
 		[Yy]* )
 			touch ~/.makepkg.conf
 			echo 'PKGEXT='\''.pkg.tar.xz'\''' > ~/.makepkg.conf
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
+	# Set up Qt5 integration
+	4)
+		show_info 'Seting up Qt5 integration...'
+		show_info 'This will install qt5ct qt5-styleplugins and edit /etc/environment'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S qt5ct qt5-styleplugins --needed
+			if ! grep -q 'QT_QPA_PLATFORMTHEME=qt5ct' "/etc/environment"; then
+				sudo bash -c "echo 'QT_QPA_PLATFORMTHEME=qt5ct' >> /etc/environment"
+			fi
+			# TODO: config fonts and settings
 			clear && config-general
 			;;
 		# Negative action
