@@ -127,7 +127,7 @@ function config-general {
 			if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "/etc/environment"; then
 				sudo bash -c "echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment"
 			fi
-			# TODO: config fonts and settings
+			# TODO: modify qt5ct.conf
 			clear && config-general
 			;;
 		# Negative action
@@ -153,6 +153,9 @@ function config-apps {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Create .Rprofile? (local)"
+	echo "2) Sublime Text?"
+	echo "3) MPV?"
+	echo "4) Tilix?"
 	echo
 	echo "r) Return?"
 	echo
