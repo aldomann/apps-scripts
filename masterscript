@@ -63,8 +63,12 @@ function applications {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAAk4l7K7sh7XG_c-BtnRhDPa/pacman.conf
-			sudo mv pacman.conf /etc/pacman.conf
+			sudo sed -i 's@#CacheDir.*@CacheDir    = /tmp@g' /etc/pacman.conf
+			if [ -d /var/cache/pacman ]; then
+				sudo rm -rf /var/cache/pacman
+			fi
+			sudo sed -i 's@#Color@Color@g' /etc/pacman.conf
+			sudo sed -i ':a;N;$!ba;s@#\[multilib\]\n#Include = /etc/pacman.d/mirrorlist@\[multilib\]\nInclude = /etc/pacman.d/mirrorlist@g' /etc/pacman.conf
 			clear && applications
 			;;
 		# Negative action
