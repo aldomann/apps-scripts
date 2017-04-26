@@ -100,7 +100,6 @@ function config-general {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			touch ~/.makepkg.conf
 			echo "PKGEXT='.pkg.tar.xz'" > ~/.makepkg.conf
 			clear && config-general
 			;;
@@ -169,7 +168,6 @@ function config-apps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			touch ~/.Rprofile
 			echo '.libPaths("~/.R/x86_64-pc-linux-gnu-library/3.4")' > ~/.Rprofile
 			clear && config-apps
 			;;
