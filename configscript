@@ -21,9 +21,9 @@
 tabs 2
 clear
 
-echo '#--------------------------------------------#'
-echo '#            Config Files Script             #'
-echo '#--------------------------------------------#'
+echo "#--------------------------------------------#"
+echo "#            Config Files Script             #"
+echo "#--------------------------------------------#"
 
 #----- FUNCTIONS -----#
 function config-general {
@@ -94,7 +94,7 @@ function config-general {
 		# Positive action
 		[Yy]* )
 			touch ~/.makepkg.conf
-			echo 'PKGEXT='\''.pkg.tar.xz'\''' > ~/.makepkg.conf
+			echo "PKGEXT='.pkg.tar.xz'" > ~/.makepkg.conf
 			clear && config-general
 			;;
 		# Negative action
@@ -117,8 +117,8 @@ function config-general {
 		# Positive action
 		[Yy]* )
 			sudo pacman -S qt5ct qt5-styleplugins --needed
-			if ! grep -q 'QT_QPA_PLATFORMTHEME=qt5ct' "/etc/environment"; then
-				sudo bash -c "echo 'QT_QPA_PLATFORMTHEME=qt5ct' >> /etc/environment"
+			if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "/etc/environment"; then
+				sudo bash -c "echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment"
 			fi
 			# TODO: config fonts and settings
 			clear && config-general
