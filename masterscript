@@ -616,7 +616,7 @@ function dconf-settings {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			dconf write /org/gnome/settings-daemon/plugins/color/night-light-temperature "uint32 4500"
+			dconf write /org/gnome/settings-daemon/plugins/color/night-light-temperature "uint32 5250"
 
 			clear && dconf-settings
 			;;
