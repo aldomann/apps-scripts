@@ -29,8 +29,8 @@ echo "#--------------------------------------------#"
 function config-general {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Change pacman.conf?     (system)"
-	echo "2) Change journald.conf?   (system)"
+	echo "1) Change pacman.conf?      (system)"
+	echo "2) Change journald.conf?    (system)"
 	echo "3) Create .makepkg.conf?    (local)"
 	echo "4) Set up Qt5 integration?  (system)"
 	echo
@@ -50,6 +50,9 @@ function config-general {
 		# Positive action
 		[Yy]* )
 			sudo sed -i 's@#CacheDir.*@CacheDir    = /tmp@g' /etc/pacman.conf
+			if [ -d /var/cache/pacman ]; then
+				sudo rm -rf /var/cache/pacman
+			fi
 			sudo sed -i 's@#Color@Color@g' /etc/pacman.conf
 			sudo sed -i ':a;N;$!ba;s@#\[multilib\]\n#Include = /etc/pacman.d/mirrorlist@\[multilib\]\nInclude = /etc/pacman.d/mirrorlist@g' /etc/pacman.conf
 			clear && config-general
