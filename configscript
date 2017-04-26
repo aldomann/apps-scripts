@@ -75,8 +75,10 @@ function config-general {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# wget https://www.dropbox.com/sh/6895lj4ys3nooew/AAD2FIYmTGzG_KoC9nfFvOL6a/journald.conf
-			# sudo mv journald.conf /etc/systemd/journald.conf
+			sudo sed -i 's@.*SystemMaxFileSize.*@SystemMaxFileSize=8M@g' /etc/systemd/journald.conf
+			sudo sed -i 's@.*RuntimeMaxFileSize.*@RuntimeMaxFileSize=8M@g' /etc/systemd/journald.conf
+			sudo sed -i 's@.*SystemMaxUse.*@SystemMaxUse=64M@g' /etc/systemd/journald.conf
+			sudo sed -i 's@.*RuntimeMaxUse.*@RuntimeMaxUse=64M@g' /etc/systemd/journald.conf
 			clear && config-general
 			;;
 		# Negative action
