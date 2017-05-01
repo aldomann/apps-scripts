@@ -33,6 +33,7 @@ function config-general {
 	echo "2) Change journald.conf?    (system)"
 	echo "3) Create .makepkg.conf?    (local)"
 	echo "4) Set up Qt5 integration?  (system)"
+	echo "5) Set up Qt5 integration?  (local)"
 	echo
 	echo "8) Symlink zshrc and zsh_history?"
 	echo "9) Symlink bashrc and bash_profile?"
@@ -41,7 +42,7 @@ function config-general {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-	# Change pacman.conf
+	# Change pacman.conf (system)
 	1)
 		show_info 'Changing /etc/pacman.conf...'
 		echo
@@ -67,7 +68,7 @@ function config-general {
 			;;
 		esac
 		;;
-	# Change journald.conf in /etc/systemd/
+	# Change journald.conf (system)
 	2)
 		show_info 'Changing /etc/systemd/journald.conf...'
 		echo
@@ -92,7 +93,7 @@ function config-general {
 			;;
 		esac
 		;;
-	# Create makepkg.conf
+	# Create makepkg.conf (local)
 	3)
 		show_info 'Creating ~/.makepkg.conf...'
 		echo
@@ -113,10 +114,10 @@ function config-general {
 			;;
 		esac
 		;;
-	# Set up Qt5 integration
+	# Set up Qt5 integration (system)
 	4)
 		show_info 'Seting up Qt5 integration...'
-		show_info 'This will install qt5ct qt5-styleplugins and edit /etc/environment'
+		show_info 'This will install qt5ct & qt5-styleplugins, and edit /etc/environment'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -125,6 +126,43 @@ function config-general {
 			sudo pacman -S qt5ct qt5-styleplugins --needed
 			if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "/etc/environment"; then
 				sudo bash -c "echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment"
+			fi
+			# TODO: modify qt5ct.conf
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
+	# Set up Qt5 integration (local)
+	5)
+		show_info 'Seting up Qt5 integration...'
+		show_info 'This will install qt5ct & qt5-styleplugins, and add export QT_QPA_PLATFORMTHEME variable'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S qt5ct qt5-styleplugins --needed
+			if [ $SHELL="/usr/bin/zsh" ]; then # ZSH (we assume .zshrc already exists)
+				show_info 'Integrating using zsh...'
+				if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "$HOME/.zshrc"; then
+					bash -c 'echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.zshrc'
+				fi
+			else # BASH (we don't assume .profile already exists)
+				show_info 'Integrating using bash...'
+				if [[ ! -a $HOME/.profile ]]; then
+					touch $HOME/.profile
+				fi
+				if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "$HOME/.profile"; then
+					bash -c 'echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.profile'
+				fi
 			fi
 			# TODO: modify qt5ct.conf
 			clear && config-general
