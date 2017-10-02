@@ -237,6 +237,7 @@ function config-apps {
 			echo 'sub-font-size=60' >> ~/.config/mpv/mpv.conf
 			echo 'sub-color="#FFFFFFFF"' >> ~/.config/mpv/mpv.conf
 			echo 'sub-border-color="#FF171717"' >> ~/.config/mpv/mpv.conf
+			echo 'screenshot-directory="~/Pictures"' >> ~/.config/mpv/mpv.conf
 			if [ ! -d ~/.config/mpv/lua-settings ]; then
 				mkdir ~/.config/mpv/lua-settings
 			fi
