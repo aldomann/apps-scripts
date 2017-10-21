@@ -49,7 +49,7 @@ function applications {
 	echo "2) Install exclusive apps?    [30]"
 	echo "3) Install games?             [3]"
 	echo "4) Install GDM?"
-	echo "5) Uninstall unused apps?     [12]"
+	echo "5) Uninstall unused apps?     [14]"
 	echo
 	echo "r) Return?"
 	echo
@@ -188,14 +188,14 @@ function applications {
 	5)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo "Current package list: brasero gedit gnome-contacts gnome-maps gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin totem"
+		echo "Current package list: brasero gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
 		# EXCLUSIVE: gedit grbainy soud-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -Rncs brasero gedit gnome-contacts gnome-maps gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square pidgin totem
+			sudo pacman -Rncs brasero gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
 			notify-send "Uninstallation was successful"
 			clear && applications
 			;;
