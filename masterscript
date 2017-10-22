@@ -487,13 +487,13 @@ function fix-apps {
 		[Yy]* )
 			# Extra Desktops
 				cd /tmp
-				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AADTMfJJP5Mbb7gUgIgoHHTIa/changed-apps.tar.xz
+				wget https://www.dropbox.com/s/h48ukig4kyb3kjs/changed-apps.tar.xz
 				tar xf changed-apps.tar.xz
 				cd changed-apps
 				cp -r *.desktop $HOME/.local/share/applications
 			# Hidden Desktops
 				cd /tmp
-				wget https://www.dropbox.com/sh/6895lj4ys3nooew/AADlaS19s7PWVnIDcq207k_6a/hidden-apps.tar.xz
+				wget https://www.dropbox.com/s/ic9uim3efnkuxpa/hidden-apps.tar.xz
 				tar xf hidden-apps.tar.xz
 				cd hidden-apps
 				cp -r *.desktop $HOME/.local/share/applications
