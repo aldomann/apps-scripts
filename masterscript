@@ -45,11 +45,17 @@ function applications {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [34]"
-	echo "2) Install exclusive apps?    [30]"
-	echo "3) Install games?             [3]"
-	echo "4) Install GDM?"
-	echo "5) Uninstall unused apps?     [14]"
+	echo "1) Install basic apps?        [26]"
+	echo "2) Install basic games?       [4]"
+	echo "3) Install exclusive apps?    [28]"
+	echo "4) Install exclusive games?   [5]"
+	echo
+	echo "5) Install GDM?"
+	echo "6) Install Wine?"
+	echo "7) Install Sublime Text?"
+	echo "8) Install TeXLive?"
+	echo
+	echo "u) Uninstall unused apps?     [14]"
 	echo
 	echo "r) Return?"
 	echo
@@ -85,15 +91,15 @@ function applications {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer filemanager-actions icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan subdl gvfs-goa gvfs-google libappindicator-gtk3 pepper-flash wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es"
-		# [Not in Arch repos]: hunspell-ca hyphen-ca myspell-ca mythes-ca
-		# [Not installed]: gbrainy skype sound-juicer mythes-en mythes-es
+		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli  aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es"
+		# [Not in Arch repos]: hunspell-ca hyphen-ca
+		# [Not installed]: gbrainy skype sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S arc-gtk-theme gimp inkscape aisleriot gnome-mahjongg gnome-mines quadrapassel gnome-clocks ffmpegthumbnailer filemanager-actions icedtea-web jre8-openjdk mpv bleachbit mlocate p7zip reflector simple-scan subdl gvfs-goa gvfs-google libappindicator-gtk3 pepper-flash wine wine-mono wine_gecko winetricks aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
+			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli  aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -107,18 +113,42 @@ function applications {
 			;;
 		esac
 		;;
-	# Install extra apps
+	# Install basic games
 	2)
+		show_info 'Installing basic games...'
+		echo
+		echo "Current package list: aisleriot gnome-mahjongg gnome-mines quadrapassel"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S aisleriot gnome-mahjongg gnome-mines quadrapassel --needed
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && applications
+			;;
+		esac
+		;;
+	# Install exclusive apps
+	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: android-tools bzr dconf-editor diffcolor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac hamster-time-tracker kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift ruby scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: android-tools bzr colordiff dconf-editor fdupes filemanager-actions fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli youtube-dl kdeconnect kde-gtk-config qt5ct qt5-styleplugins"
 		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr dconf-editor diffcolor fdupes fluidsynth gaupol git gnome-boxes gnome-characters gpac hamster-time-tracker kdeconnnect mkvtoolnix-cli peek polari python2-nautilus qtiplot redshift ruby scudcloud sigil soundfont-fluid texlive-most tilix transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools bzr colordiff dconf-editor fdupes filemanager-actions fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli youtube-dl kdeconnect kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -132,17 +162,17 @@ function applications {
 			;;
 		esac
 		;;
-	# Install games
-	3)
-		show_info 'Installing games...'
+	# Install exclusive games
+	4)
+		show_info 'Installing exclusive games...'
 		echo
-		echo "Current package list: dolphin-emu retroarch steam steam-native-runtime"
+		echo "Current package list: dolphin-emu gameconqueror retroarch steam steam-native-runtime"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S dolphin-emu retroarch steam steam-native-runtime --needed
+			sudo pacman -S dolphin-emu gameconqueror retroarch steam steam-native-runtime --needed
 			notify-send "Installation was successful"
 			clear && applications
 			;;
@@ -157,7 +187,7 @@ function applications {
 		esac
 		;;
 	# Install GDM
-	4)
+	5)
 		show_info 'Installing GDM...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -184,12 +214,84 @@ function applications {
 			;;
 		esac
 		;;
+	# Install Wine
+	6)
+		show_info 'Installing Wine...'
+		echo
+		echo "Current package list: wine wine-mono wine_gecko winetricks"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S wine wine-mono wine_gecko winetricks --needed
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && applications
+			;;
+		esac
+		;;
+	# Install Sublime Text
+	7)
+		show_info 'Installing Sublime Text...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Install the GPG key
+			curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+			# Enable Stable Channel
+			echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && applications
+			;;
+		esac
+		;;
+	# Install TeXLive
+	8)
+		show_info 'Installing TeXLive...'
+		echo
+		echo "Current package list: texlive-most"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S texlive-most
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && applications
+			;;
+		esac
+		;;
 	# Uninstall apps
-	5)
+	[Uu]*)
 		show_info 'Uninstalling unused apps...'
 		echo
 		echo "Current package list: brasero gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
-		# EXCLUSIVE: gedit grbainy soud-juicer
+		# EXCLUSIVE: gedit sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -209,8 +311,6 @@ function applications {
 			;;
 		esac
 		;;
-	# Not in use [22]
-		# alacarte arista atom cantor cutemupen easytag gameconqueror gnac gnome-clocks google-earth-stable google-musicmanager-beta hardinfo libreoffice-l10n-es menulibre minitube miro mupen64plus nuvolaplayer pitivi screenkey screenruler unetbootin
 	# Return
 	[Rr]*)
 		clear && main;;
@@ -347,6 +447,7 @@ function fix-apps {
 	# Coloured emojis
 	3)
 		# SRC: https://www.reddit.com/r/archlinux/comments/52k3t0/proper_color_emoji_support/d7l05nt
+		# TEST: https://eosrei.github.io/emojione-color-font/full-demo.html
 		show_info 'Installing and setting up noto-fonts-emoji...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
