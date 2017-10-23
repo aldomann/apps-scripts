@@ -552,31 +552,31 @@ function fix-apps {
 			dconf write /org/gnome/desktop/app-folders/folders/Utilities/apps "['bleachbit.desktop', 'ca.desrt.dconf-editor.desktop', 'dosbox.desktop', 'gnome-appfolders-manager.desktop', 'gnome-power-statistics.desktop', 'gnome-tweak-tool.desktop', 'gparted.desktop', 'imagewriter.desktop', 'indicator-kdeconnect.desktop', 'fma-config-tool.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Logs.desktop', 'org.gnome.MultiWriter.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Usage.desktop', 'org.kde.kdeconnect.kcm.desktop', 'pamac-manager.desktop', 'pamac-updater.desktop', 'qt5ct.desktop', 'qtconfig-qt4.desktop', 'redshift-gtk.desktop', 'seahorse.desktop', 'system76-driver.desktop', 'urserver.desktop', 'usb-creator-gtk.desktop', 'vineyard-preferences.desktop', 'wine-uninstaller.desktop', 'wine-winecfg.desktop', 'winetricks.desktop']"
 			clear && fix-apps
 			;;
-		# Replace Synaptics for libinput
-		6)
-			show_info 'Replacing Synaptics for libinput...'
-			echo
-			show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-			case $REPLY in
-			# Positive action
-			[Yy]* )
-				sudo pacman -S xf86-input-libinput --needed
-				PKG="xf86-input-synaptics"
-				if [[ -n $(pacman -Qs $PKG) ]]; then
-					sudo pacman -Rncs $PKG
-				fi
-				sudo rm -rf /etc/X11/xorg.conf.d/*synaptics*.conf
-				clear && fix-apps
-				;;
-			# Negative action
-			[Nn]* )
-				clear && fix-apps
-				;;
-			# Error
-			* )
-				clear && show_error 'Sorry, try again.' && fix-apps
-				;;
-			esac
+		# Negative action
+		[Nn]* )
+			clear && fix-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && fix-apps
+			;;
+		esac
+		;;
+	# Replace Synaptics for libinput
+	6)
+		show_info 'Replacing Synaptics for libinput...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S xf86-input-libinput --needed
+			PKG="xf86-input-synaptics"
+			if [[ -n $(pacman -Qs $PKG) ]]; then
+				sudo pacman -Rncs $PKG
+			fi
+			sudo rm -rf /etc/X11/xorg.conf.d/*synaptics*.conf
+			clear && fix-apps
 			;;
 		# Negative action
 		[Nn]* )
@@ -812,7 +812,7 @@ function hardware {
 	* )
 		clear && show_error 'Not an option, try again.' && hardware;;
 	esac
-	}
+}
 # ----------------------------------------------------------------------
 function cleanup {
 	show_info 'What would you like to do?'
