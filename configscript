@@ -190,9 +190,9 @@ function config-apps {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Create .Rprofile?        (local)"
-	echo "2) Sublime Text?"
+	echo "2) Sublime Text? (WIP)"
 	echo "3) Change mpv config files? (local)"
-	echo "4) Tilix?"
+	echo "4) True Solarized Tilix?    (local)"
 	echo
 	echo "r) Return?"
 	echo
@@ -237,7 +237,7 @@ function config-apps {
 			echo 'sub-font-size=60' >> ~/.config/mpv/mpv.conf
 			echo 'sub-color="#FFFFFFFF"' >> ~/.config/mpv/mpv.conf
 			echo 'sub-border-color="#FF171717"' >> ~/.config/mpv/mpv.conf
-			echo 'screenshot-directory="~/Pictures"' >> ~/.config/mpv/mpv.conf
+			echo 'screenshot-directory="~/Pictures/mpv"' >> ~/.config/mpv/mpv.conf
 			if [ ! -d ~/.config/mpv/lua-settings ]; then
 				mkdir ~/.config/mpv/lua-settings
 			fi
@@ -247,6 +247,68 @@ function config-apps {
 			echo 'minmousemove=10' >> ~/.config/mpv/lua-settings/osc.conf
 			echo '#scalewindowed=1.5' >> ~/.config/mpv/lua-settings/osc.conf
 			echo 'scalefullscreen=1.2' >> ~/.config/mpv/lua-settings/osc.conf
+			clear && config-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-apps
+			;;
+		esac
+		;;
+	# True Solarized Tilix
+	4)
+		show_info 'Changing Tilix scheme files...'
+		show_info 'This will create ../tilix/schemes'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			if [ ! -d ~/.config/tilix/schemes ]; then
+				mkdir ~/.config/tilix/schemes
+			fi
+			# True Solarized Dark
+			echo '{' > ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "background-color": "#002A35",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "badge-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "comment": "",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "cursor-background-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "cursor-foreground-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "dim-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "foreground-color": "#829395",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "highlight-background-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "highlight-foreground-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "name": "True Solarized Dark",' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "palette": [ "#073542", "#DC312F", "#859900", "#B48800", "#258AD1", "#D23581", "#29A097", "#EDE7D4", "#073542", "#DC312F", "#859900", "#B48800", "#268AD2", "#D33682", "#29A198", "#FCF5E2" ],' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "use-badge-color": false,' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "use-cursor-color": false,' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "use-dim-color": false,' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "use-highlight-color": false,' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '    "use-theme-colors": false' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			echo '}' >> ~/.config/tilix/schemes/tilix-solarized-dark.json
+			# True Solarized Light
+			echo '{' > ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "background-color": "#FCF5E2",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "badge-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "comment": "",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "cursor-background-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "cursor-foreground-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "dim-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "foreground-color": "#647981",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "highlight-background-color": "#000000",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "highlight-foreground-color": "#FFFFFF",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "name": "True Solarized Light",' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "palette": [ "#073542", "#DC312F", "#859900", "#B48800", "#258AD1", "#D23581", "#29A097", "#EDE7D4", "#073542", "#DC312F", "#859900", "#B48800", "#268AD2", "#D33682", "#29A198", " #FCF5E2" ],' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "use-badge-color": false,' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "use-cursor-color": false,' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "use-dim-color": false,' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "use-highlight-color": false,' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '    "use-theme-colors": false' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
+			echo '}' >> ~/.config/tilix/schemes/tilix-solarizedlight.json
 			clear && config-apps
 			;;
 		# Negative action
@@ -271,10 +333,10 @@ function config-apps {
 function config-games {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Retroarch?"
-	echo "2) EmulationStation?"
-	echo "3) Warcraft III?"
-	echo "4) StarCraft?"
+	echo "1) Retroarch?        (WIP)"
+	echo "2) EmulationStation? (WIP)"
+	echo "3) Warcraft III?     (WIP)"
+	echo "4) StarCraft?        (WIP)"
 	echo
 	echo "r) Return?"
 	echo
@@ -288,7 +350,7 @@ function config-games {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			echo "asd"
+			echo "Yes!"
 			clear && config-games
 			;;
 		# Negative action
