@@ -820,8 +820,9 @@ function cleanup {
 	echo "1) Remove orphaned packages?"
 	echo "2) Clean package cache?"
 	echo "3) Optimise pacman database?"
-	echo "4) List locally installed packages?"
-	echo "5) List manually installed packages?"
+	echo "4) List manually installed packages?"
+	echo "5) List locally installed packages?"
+	echo "6) Compare AUR backed up packages?"
 	echo
 	echo "r) Return?"
 	echo
@@ -859,18 +860,28 @@ function cleanup {
 		echo
 		cleanup
 		;;
-	# List locally installed packages
+	# List manually installed packages
 	4)
+		show_info 'Listing packages...'
+		sudo pacman -Qet
+		show_success 'Done.'
+		echo
+		cleanup
+		;;
+	# List locally installed packages
+	5)
 		show_info 'Listing packages...'
 		sudo pacman -Qm
 		show_success 'Done.'
 		echo
 		cleanup
 		;;
-	# List manually installed packages
-	5)
+	# Compare AUR backed up packages
+	6)
 		show_info 'Listing packages...'
-		sudo pacman -Qet
+		sudo pacman -Qm | awk '{ gsub(" ","-"); print $0 }' > /tmp/local-list.txt
+		ls -R $HOME/Downloads/Software/Installers/aur | awk '/pkg.*/ { gsub("-x86_64.*",""); gsub("-any.*",""); print $0}' | sort > /tmp/backup-list.txt
+		colordiff /tmp/local-list.txt /tmp/backup-list.txt
 		show_success 'Done.'
 		echo
 		cleanup
@@ -918,7 +929,6 @@ function main {
 		3) clear && dconf-settings;; # Dconf config
 		5) clear && hardware;;       # Hardware info
 		6) clear && cleanup;;        # System cleanup
-		gsr) clear && nohup gnome-shell --replace & ;; # gnome-shell --replace
 		[Ee]* ) exit 99;;            # Quit
 		[Qq]* ) exit 99;;            # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
