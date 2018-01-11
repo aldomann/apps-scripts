@@ -29,11 +29,12 @@ echo "#--------------------------------------------#"
 function config-general {
 	show_info 'What would you like to do?'
 	echo
-	echo "1) Change pacman.conf?      (system)"
-	echo "2) Change journald.conf?    (system)"
-	echo "3) Create .makepkg.conf?    (local)"
-	echo "4) Set up Qt5 integration?  (system)"
-	echo "5) Set up Qt5 integration?  (local)"
+	echo "1) Change pacman.conf?                     (system)"
+	echo "2) Change journald.conf?                   (system)"
+	echo "3) Create .makepkg.conf?                   (local)"
+	echo "4) Set up Qt5 integration?                 (system)"
+	echo "5) Set up Qt5 integration?                 (local)"
+	echo "6) Don't suspend when latop lid is closed? (system)"
 	echo
 	echo "8) Symlink zshrc and zsh_history?"
 	echo "9) Symlink bashrc and bash_profile?"
@@ -165,6 +166,29 @@ function config-general {
 				fi
 			fi
 			# TODO: modify qt5ct.conf
+			clear && config-general
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-general
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-general
+			;;
+		esac
+		;;
+	# Create makepkg.conf (local)
+	6)
+		show_info 'Changing /etc/systemd/logind.conf...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			if ! grep -q "HandleLidSwitch=ignore" "/etc/systemd/logind.conf"; then
+				sudo bash -c "echo "HandleLidSwitch=ignore" >> /etc/systemd/logind.conf"
+			fi
 			clear && config-general
 			;;
 		# Negative action
