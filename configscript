@@ -178,7 +178,7 @@ function config-general {
 			;;
 		esac
 		;;
-	# Create makepkg.conf (local)
+	# Don't suspend when latop lid is closed (system)
 	6)
 		show_info 'Changing /etc/systemd/logind.conf...'
 		echo
