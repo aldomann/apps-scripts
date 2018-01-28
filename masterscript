@@ -328,9 +328,10 @@ function fix-apps {
 	echo "2) Enable smooth fonts in Wine?"
 	echo "3) Enable coloured emojis?"
 	echo
-	echo "4) Add extra and hidden .desktop files?"
-	echo "5) Set up GNOME Shell app folders?"
-	echo "6) Replace Synaptics for libinput?"
+	echo "4) Add hidden .desktop files?"
+	echo "5) Add extra .desktop files?"
+	echo "6) Set up GNOME Shell app folders?"
+	echo "7) Replace Synaptics for libinput?"
 	echo
 	echo "r) Return?"
 	echo
@@ -478,7 +479,7 @@ function fix-apps {
 			;;
 		esac
 		;;
-	# Desktop files
+	# Hidden desktop files
 	4)
 		show_info 'Adding hidden desktop files...'
 		echo
@@ -486,12 +487,6 @@ function fix-apps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			# Extra Desktops
-				cd /tmp
-				wget https://www.dropbox.com/s/h48ukig4kyb3kjs/changed-apps.tar.xz
-				tar xf changed-apps.tar.xz
-				cd changed-apps
-				cp -r *.desktop $HOME/.local/share/applications
 			# Hidden Desktops
 				cd /tmp
 				wget https://www.dropbox.com/s/ic9uim3efnkuxpa/hidden-apps.tar.xz
@@ -511,8 +506,35 @@ function fix-apps {
 			;;
 		esac
 		;;
-	# GNOME Shell app folders
+	# Extra desktop files
 	5)
+		show_info 'Adding hidden desktop files...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Extra Desktops
+				cd /tmp
+				wget https://www.dropbox.com/s/h48ukig4kyb3kjs/changed-apps.tar.xz
+				tar xf changed-apps.tar.xz
+				cd changed-apps
+				cp -r *.desktop $HOME/.local/share/applications
+			gtk-update-icon-cache
+			clear && fix-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fix-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && fix-apps
+			;;
+		esac
+		;;
+	# GNOME Shell app folders
+	6)
 		show_info 'Changing dconf files...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -569,7 +591,7 @@ function fix-apps {
 		esac
 		;;
 	# Replace Synaptics for libinput
-	6)
+	7)
 		show_info 'Replacing Synaptics for libinput...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
