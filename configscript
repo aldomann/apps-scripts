@@ -254,7 +254,7 @@ function config-apps {
 		# Positive action
 		[Yy]* )
 			if [ ! -d ~/.rstudio-desktop/monitored/user-settings ]; then
-				mkdir ~/.rstudio-desktop/monitored/user-settings
+				mkdir -p ~/.rstudio-desktop/monitored/user-settings
 			fi
 			echo 'alwaysSaveHistory="1"' > ~/.rstudio-desktop/monitored/user-settings/user-settings
 			echo 'cleanTexi2DviOutput="1"' >> ~/.rstudio-desktop/monitored/user-settings/user-settings
@@ -354,7 +354,7 @@ function config-apps {
 		# Positive action
 		[Yy]* )
 			if [ ! -d ~/.config/tilix/schemes ]; then
-				mkdir ~/.config/tilix/schemes
+				mkdir -p ~/.config/tilix/schemes
 			fi
 			# True Solarized Dark
 			echo '{' > ~/.config/tilix/schemes/tilix-solarized-dark.json
