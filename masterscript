@@ -51,9 +51,10 @@ function applications {
 	echo "4) Install exclusive games?   [5]"
 	echo
 	echo "5) Install GDM?"
-	echo "6) Install Wine?"
-	echo "7) Install Sublime Text?"
-	echo "8) Install TeXLive?"
+	echo "6) Install Oh My Zsh?"
+	echo "8) Install Sublime Text?"
+	echo "7) Install Wine?"
+	echo "9) Install TeXLive?"
 	echo
 	echo "u) Uninstall unused apps?     [15]"
 	echo
@@ -214,18 +215,17 @@ function applications {
 			;;
 		esac
 		;;
-	# Install Wine
+	# Install Oh My Zsh
 	6)
-		show_info 'Installing Wine...'
-		echo
-		echo "Current package list: wine wine-mono wine_gecko winetricks"
+		show_info 'Installing Oh My Zsh...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S wine wine-mono wine_gecko winetricks --needed
-			notify-send "Installation was successful"
+			# SRC: https://github.com/robbyrussell/oh-my-zsh
+			sudo pacman -S zsh --needed
+			sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 			clear && applications
 			;;
 		# Negative action
@@ -262,8 +262,32 @@ function applications {
 			;;
 		esac
 		;;
-	# Install TeXLive
+	# Install Wine
 	8)
+		show_info 'Installing Wine...'
+		echo
+		echo "Current package list: wine wine-mono wine_gecko winetricks"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S wine wine-mono wine_gecko winetricks --needed
+			notify-send "Installation was successful"
+			clear && applications
+			;;
+		# Negative action
+		[Nn]* )
+			clear && applications
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && applications
+			;;
+		esac
+		;;
+	# Install TeXLive
+	9)
 		show_info 'Installing TeXLive...'
 		echo
 		echo "Current package list: texlive-most"
