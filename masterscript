@@ -944,7 +944,7 @@ function cleanup {
 	6)
 		show_info 'Listing packages...'
 		sudo pacman -Qm | awk '{ gsub(" ","-"); print $0 }' > /tmp/local-list.txt
-		ls -R $HOME/Downloads/Software/Installers/aur | awk '/pkg.*/ { gsub("-x86_64.*",""); gsub("-any.*",""); print $0}' | sort > /tmp/backup-list.txt
+		ls -R $HOME/Downloads/Software/Installers/aur | awk '/pkg.*/ { gsub("-x86_64.*",""); gsub("-any.*",""); gsub(".pkg.*",""); print $0}' | sort > /tmp/backup-list.txt
 		colordiff /tmp/local-list.txt /tmp/backup-list.txt | less
 		show_success 'Done.'
 		echo
