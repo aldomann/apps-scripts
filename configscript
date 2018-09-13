@@ -316,13 +316,15 @@ function config-apps {
 			if [ ! -d ~/.config/mpv ]; then
 				mkdir ~/.config/mpv
 			fi
-			echo 'osd-font="Roboto"' > ~/.config/mpv/mpv.conf
+			echo 'osd-font="Roboto"' > ~/.config/mpv/mpv.conpf
 			echo 'sub-font="Myriad Pro"' >> ~/.config/mpv/mpv.conf
 			echo '#sub-font="Helvetica Neue LT Std"' >> ~/.config/mpv/mpv.conf
 			echo 'sub-font-size=60' >> ~/.config/mpv/mpv.conf
 			echo 'sub-color="#FFFFFFFF"' >> ~/.config/mpv/mpv.conf
 			echo 'sub-border-color="#FF171717"' >> ~/.config/mpv/mpv.conf
 			echo 'screenshot-directory="~/Pictures/mpv"' >> ~/.config/mpv/mpv.conf
+			echo 'screenshot-template=mpv-%F-shot%n-%p' >> ~/.config/mpv/mpv.conf
+			echo 'ytdl-format=bestvideo[height<=?1080][fps<=?60][vcodec!=?vp9]+bestaudio/best' >> ~/.config/mpv/mpv.conf
 			# OSC settings
 			if [ ! -d ~/.config/mpv/lua-settings ]; then
 				mkdir ~/.config/mpv/lua-settings
