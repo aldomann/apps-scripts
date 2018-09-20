@@ -883,10 +883,9 @@ function cleanup {
 	echo
 	echo "1) Remove orphaned packages?"
 	echo "2) Clean package cache?"
-	echo "3) Optimise pacman database?"
-	echo "4) List manually installed packages?"
-	echo "5) List locally installed packages?"
-	echo "6) Compare AUR backed up packages?"
+	echo "3) List manually installed packages?"
+	echo "4) List locally installed packages?"
+	echo "5) Compare AUR backed up packages?"
 	echo
 	echo "r) Return?"
 	echo
@@ -916,16 +915,8 @@ function cleanup {
 		echo
 		cleanup
 		;;
-	# Optimise pacman database
-	3)
-		show_info 'Optimising pacman database...'
-		sudo pacman-optimize
-		show_success 'Done.'
-		echo
-		cleanup
-		;;
 	# List manually installed packages
-	4)
+	3)
 		show_info 'Listing packages...'
 		sudo pacman -Qet
 		show_success 'Done.'
@@ -933,7 +924,7 @@ function cleanup {
 		cleanup
 		;;
 	# List locally installed packages
-	5)
+	4)
 		show_info 'Listing packages...'
 		sudo pacman -Qm
 		show_success 'Done.'
@@ -941,7 +932,7 @@ function cleanup {
 		cleanup
 		;;
 	# Compare AUR backed up packages
-	6)
+	5)
 		show_info 'Listing packages...'
 		sudo pacman -Qm | awk '{ gsub(" ","-"); print $0 }' > /tmp/local-list.txt
 		ls -R $HOME/Downloads/Software/Installers/aur | awk '/pkg.*/ { gsub("-x86_64.*",""); gsub("-any.*",""); gsub(".pkg.*",""); print $0}' | sort > /tmp/backup-list.txt
