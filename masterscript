@@ -68,9 +68,9 @@ function apps-standard {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [26]"
+	echo "1) Install basic apps?        [24]"
 	echo "2) Install basic games?       [4]"
-	echo "3) Install exclusive apps?    [28]"
+	echo "3) Install exclusive apps?    [29]"
 	echo "4) Install exclusive games?   [5]"
 	echo
 	echo "5) Install GDM?"
@@ -115,15 +115,15 @@ function apps-standard {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli  aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es"
+		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es"
 		# [Not in Arch repos]: hunspell-ca hyphen-ca
-		# [Not installed]: gbrainy skype sound-juicer
+		# [Not installed]: gbrainy sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli  aspell-ca aspell-en aspell-es hunspell-en hunspell-es hyphen-en hyphen-es --needed
+			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -165,14 +165,14 @@ function apps-standard {
 	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
 		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -273,6 +273,8 @@ function apps-standard {
 			curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 			# Enable Stable Channel
 			echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+			sudo pacman -Syy
+			sudo pacman -S sublime-text
 			clear && apps-standard
 			;;
 		# Negative action
