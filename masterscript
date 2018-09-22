@@ -70,7 +70,7 @@ function apps-standard {
 	echo
 	echo "1) Install basic apps?        [25]"
 	echo "2) Install basic games?       [4]"
-	echo "3) Install exclusive apps?    [29]"
+	echo "3) Install exclusive apps?    [32]"
 	echo "4) Install exclusive games?   [5]"
 	echo
 	echo "5) Install GDM?"
@@ -165,14 +165,14 @@ function apps-standard {
 	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
 		# [Not installed]: adobe-source-han-sans-otc-fonts
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr colordiff dconf-editor fdupes filemanager-actions flatpak fluidsynth gaupol gimp git gnome-boxes gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli polari python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
