@@ -68,7 +68,7 @@ function apps-standard {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [24]"
+	echo "1) Install basic apps?        [25]"
 	echo "2) Install basic games?       [4]"
 	echo "3) Install exclusive apps?    [29]"
 	echo "4) Install exclusive games?   [5]"
@@ -115,7 +115,7 @@ function apps-standard {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es"
+		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es"
 		# [Not in Arch repos]: hunspell-ca hyphen-ca
 		# [Not installed]: gbrainy sound-juicer
 		echo
@@ -123,7 +123,7 @@ function apps-standard {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es --needed
+			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-es_es --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
