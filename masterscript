@@ -165,14 +165,13 @@ function apps-standard {
 	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
-		# [Not installed]: adobe-source-han-sans-otc-fonts
+		echo "Current package list: adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass transmission-cli vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -291,13 +290,13 @@ function apps-standard {
 	8)
 		show_info 'Installing Wine...'
 		echo
-		echo "Current package list: wine wine-mono wine_gecko winetricks"
+		echo "Current package list: wine-staging wine-mono wine_gecko winetricks"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S wine wine-mono wine_gecko winetricks --needed
+			sudo pacman -S wine-staging wine-mono wine_gecko winetricks --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
