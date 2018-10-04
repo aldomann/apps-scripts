@@ -79,7 +79,7 @@ function apps-standard {
 	echo "7) Install Wine?"
 	echo "9) Install TeXLive?"
 	echo
-	echo "u) Uninstall unused apps?     [15]"
+	echo "u) Uninstall unused apps?     [16]"
 	echo
 	echo "r) Return?"
 	echo
@@ -165,13 +165,13 @@ function apps-standard {
 	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal gaupol gimp git gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -338,7 +338,7 @@ function apps-standard {
 	[Uu]*)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo "Current package list: brasero gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
+		echo "Current package list: brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
 		# EXCLUSIVE: gedit sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -346,7 +346,7 @@ function apps-standard {
 		# Positive action
 		[Yy]* )
 			sudo pacman -R antergos-common-meta antergos-gnome-meta;
-			sudo pacman -Rncs brasero gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
+			sudo pacman -Rncs brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
 			notify-send "Uninstallation was successful"
 			clear && apps-standard
 			;;
