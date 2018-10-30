@@ -398,7 +398,7 @@ function apps-flatpak {
 	echo
 	echo "0) Set up Flatpak repositories?"
 	echo
-	echo "1) Install basic apps?    [4]"
+	echo "1) Install basic apps?    [6]"
 	echo "2) Uninstall unused apps?"
 	echo
 	echo "r) Return?"
@@ -438,7 +438,13 @@ function apps-flatpak {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			flatpak install flathub com.discordapp.Discord com.googleplaymusicdesktopplayer.GPMDP com.skype.Client org.gnome.Podcasts
+			flatpak install flathub \
+			com.discordapp.Discord \
+			com.elsevier.MendeleyDesktop \
+			com.github.needleandthread.vocal \
+			com.googleplaymusicdesktopplayer.GPMDP \
+			com.skype.Client \
+			org.gnome.Podcasts
 			notify-send "Installation was successful"
 			clear && apps-flatpak
 			;;
