@@ -32,7 +32,7 @@ function sysupgrade {
 	# Perform system upgrade
 	echo
 	show_info 'Performing system upgrade...'
-	yaourt -Syua --noconfirm
+	yay -Syyu --combinedupgrade
 	if [ -a /var/lib/pacman/db.lck ]; then
 		sudo rm /var/lib/pacman/db.lck
 	fi
@@ -66,22 +66,23 @@ function applications {
 function apps-standard {
 	show_info 'What would you like to do?'
 	echo
-	echo "0) Set up Pacman configuration?"
+	echo " 0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [26]"
-	echo "2) Install basic games?       [4]"
-	echo "3) Install exclusive apps?    [39]"
-	echo "4) Install exclusive games?   [5]"
+	echo " 1) Install basic apps?        [27]"
+	echo " 2) Install basic games?       [4]"
+	echo " 3) Install development tools? [7]"
+	echo " 4) Install exclusive apps?    [35]"
+	echo " 5) Install exclusive games?   [5]"
 	echo
-	echo "5) Install GDM?"
-	echo "6) Install Oh My Zsh?"
-	echo "8) Install Sublime Text?"
-	echo "7) Install Wine?"
-	echo "9) Install TeXLive?"
+	echo " 6) Install GDM?"
+	echo " 7) Install Oh My Zsh?"
+	echo " 8) Install Sublime Text?"
+	echo " 9) Install Wine?"
+	echo "10) Install TeXLive?"
 	echo
-	echo "u) Uninstall unused apps?     [16]"
+	echo " u) Uninstall unused apps?     [16]"
 	echo
-	echo "r) Return?"
+	echo " r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
@@ -115,14 +116,14 @@ function apps-standard {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es"
+		echo "Current package list: arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es"
 		# [Not installed]: gbrainy sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es --needed
+			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -160,17 +161,41 @@ function apps-standard {
 			;;
 		esac
 		;;
-	# Install exclusive apps
+	# Install development tools
 	3)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp git gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: android-tools base-devel bzr gcc-fortran gdal git ruby"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts android-tools bzr colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp git gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus ruby sigil soundfont-fluid sshpass vnstat virtualbox virtualbox-host-modules-arch virtualbox-guest-modules-arch youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S android-tools base-devel bzr gcc-fortran gdal git ruby --needed
+			notify-send "Installation was successful"
+			clear && apps-standard
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard
+			;;
+		esac
+		;;
+	# Install exclusive apps
+	4)
+		show_info 'Installing exclusive apps...'
+		echo
+		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
@@ -185,7 +210,7 @@ function apps-standard {
 		esac
 		;;
 	# Install exclusive games
-	4)
+	5)
 		show_info 'Installing exclusive games...'
 		echo
 		echo "Current package list: dolphin-emu gameconqueror retroarch steam steam-native-runtime"
@@ -209,7 +234,7 @@ function apps-standard {
 		esac
 		;;
 	# Install GDM
-	5)
+	6)
 		show_info 'Installing GDM...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -237,7 +262,7 @@ function apps-standard {
 		esac
 		;;
 	# Install Oh My Zsh
-	6)
+	7)
 		show_info 'Installing Oh My Zsh...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -260,7 +285,7 @@ function apps-standard {
 		esac
 		;;
 	# Install Sublime Text
-	7)
+	8)
 		show_info 'Installing Sublime Text...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -286,7 +311,7 @@ function apps-standard {
 		esac
 		;;
 	# Install Wine
-	8)
+	9)
 		show_info 'Installing Wine...'
 		echo
 		echo "Current package list: wine-staging wine-mono wine_gecko winetricks"
@@ -310,7 +335,7 @@ function apps-standard {
 		esac
 		;;
 	# Install TeXLive
-	9)
+	10)
 		show_info 'Installing TeXLive...'
 		echo
 		echo "Current package list: texlive-most"
