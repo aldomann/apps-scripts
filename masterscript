@@ -491,6 +491,7 @@ function apps-flatpak {
 function fix-apps {
 	show_info 'What would you like to do?'
 	echo
+	echo "0) Fix GDM scaling factor?"
 	echo "1) Use symbolic icons in Inkscape?"
 	echo "2) Enable smooth fonts in Wine?"
 	echo "3) Enable coloured emojis?"
@@ -504,6 +505,29 @@ function fix-apps {
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
+	# GDM scaling factor
+	0)
+		show_info 'Applying fix for GDM...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo awk -v RS="\0" -v ORS="" '{gsub("<key name=\"scaling-factor\" type=\"u\">\n      <default>2</default>", "<key name=\"scaling-factor\" type=\"u\">\n      <default>1</default>")}7' /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
+			sudo glib-compile-schemas /usr/share/glib-2.0/schemas
+			notify-send "GDM" "Scaling factor has been fixed" -i system-lock-screen
+			clear && fix-apps
+			;;
+		# Negative action
+		[Nn]* )
+			clear && fix-apps
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && fix-apps
+			;;
+		esac
+		;;
 	# Inkscape icons
 	1)
 		show_info 'Applying fix for Inkscape...'
