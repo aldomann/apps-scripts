@@ -37,8 +37,8 @@ function config-general {
 	echo "5) Set up Qt5 integration?                 (local)"
 	echo "6) Don't suspend when latop lid is closed? (system)"
 	echo
-	echo "8) Symlink zshrc and zsh_history?"
-	echo "9) Symlink bashrc and bash_profile?"
+	echo "8) Symlink zshrc and zsh_history?          (WIP)"
+	echo "9) Symlink bashrc and bash_profile?        (WIP)"
 	echo
 	echo "r) Return?"
 	echo
@@ -216,7 +216,7 @@ function config-apps {
 	echo
 	echo "1) Create .Rprofile?        (local)"
 	echo "2) Change RStudio settings? (local)"
-	echo "3) Sublime Text? (WIP)"
+	echo "3) Sublime Text?            (WIP)"
 	echo "4) Change mpv config files? (local)"
 	echo "5) True Solarized Tilix?    (local)"
 	echo
@@ -232,7 +232,8 @@ function config-apps {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			echo '.libPaths("~/.R/x86_64-pc-linux-gnu-library/3.4")' > ~/.Rprofile
+			echo '.libPaths( c("~/.R/x86_64-pc-linux-gnu-library/3.5", .libPaths()) )
+' > ~/.Rprofile
 			clear && config-apps
 			;;
 		# Negative action
