@@ -49,7 +49,7 @@ function applications {
 	echo "2) Install Flatpak applications?"
 	echo "3) Install AUR applications?"
 	echo
-	echo "r) Exit?"
+	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
