@@ -35,7 +35,6 @@ function config-general {
 	echo "3) Create .makepkg.conf?                   (local)"
 	echo "4) Set up Qt5 integration?                 (system)"
 	echo "5) Set up Qt5 integration?                 (local)"
-	echo "6) Don't suspend when latop lid is closed? (system)"
 	echo
 	echo "8) Symlink zshrc and zsh_history?          (WIP)"
 	echo "9) Symlink bashrc and bash_profile?        (WIP)"
@@ -179,8 +178,78 @@ function config-general {
 			;;
 		esac
 		;;
+	# Return
+	[Rr]*)
+		clear && main;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && config-general;;
+	esac
+}
+# ----------------------------------------------------------------------
+function config-hardware {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Add mappings for extra mouse buttons?    (local)"
+	echo "2) Fix F11 and F12 special buttons on T480? (system)"
+	echo "3) Don't suspend when latop lid is closed?  (system)"
+	echo
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Mappings for extra mouse buttons
+	1)
+		show_info 'Adding mappings for extra mouse buttons...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S xbindkeys xautomation --needed
+			clear && config-hardware
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-hardware
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-hardware
+			;;
+		esac
+		;;
+	# Fix F11 and F12 special buttons on T480
+	2)
+		show_info 'Fixing F11 and F12 special buttons...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			if [ ! -f /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb ]; then
+				echo "evdev:name:ThinkPad Extra Buttons:dmi:bvn*:bvr*:bd*:svnLENOVO*:pn*" | sudo tee /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb
+				echo "  KEYBOARD_KEY_45=prog2" | sudo tee --append /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb
+				echo "  KEYBOARD_KEY_49=prog1" | sudo tee --append /etc/udev/hwdb.d/90-thinkpad-keyboard.hwdb
+			else
+				show_info "The config file already exists"
+			fi
+			sudo udevadm hwdb --update
+			sudo udevadm trigger --sysname-match="event*"
+			clear && config-hardware
+			;;
+		# Negative action
+		[Nn]* )
+			clear && config-hardware
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && config-hardware
+			;;
+		esac
+		;;
 	# Don't suspend when latop lid is closed (system)
-	6)
+	3)
 		show_info 'Changing /etc/systemd/logind.conf...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -190,15 +259,15 @@ function config-general {
 			if ! grep -q "HandleLidSwitch=ignore" "/etc/systemd/logind.conf"; then
 				sudo bash -c "echo "HandleLidSwitch=ignore" >> /etc/systemd/logind.conf"
 			fi
-			clear && config-general
+			clear && config-hardware
 			;;
 		# Negative action
 		[Nn]* )
-			clear && config-general
+			clear && config-hardware
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && config-general
+			clear && show_error 'Sorry, try again.' && config-hardware
 			;;
 		esac
 		;;
@@ -207,7 +276,7 @@ function config-general {
 		clear && main;;
 	# Invalid choice
 	* )
-		clear && show_error 'Not an option, try again.' && config-general;;
+		clear && show_error 'Not an option, try again.' && config-hardware;;
 	esac
 }
 # ----------------------------------------------------------------------
@@ -478,18 +547,20 @@ function main {
 	show_info 'What would you like to do?'
 	echo
 	echo "1) Change general config files?"
-	echo "2) Change apps config files?"
-	echo "3) Change games config files?"
+	echo "2) Change hardware config files?"
+	echo "3) Change apps config files?"
+	echo "4) Change games config files?"
 	echo
 	echo "e) Exit?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		1) clear && config-general;; # General
-		2) clear && config-apps;;    # Apps
-		3) clear && config-games;;   # Games
-		[Ee]* ) exit 99;;            # Quit
-		[Qq]* ) exit 99;;            # Quit
+		1) clear && config-general;;  # General
+		2) clear && config-hardware;; # Hardware
+		3) clear && config-apps;;     # Apps
+		4) clear && config-games;;    # Games
+		[Ee]* ) exit 99;;             # Quit
+		[Qq]* ) exit 99;;             # Quit
 		* ) clear && show_error 'Not an option, try again.' && main;;
 	esac
 }
