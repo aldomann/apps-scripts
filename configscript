@@ -206,7 +206,30 @@ function config-hardware {
 		case $REPLY in
 		# Positive action
 		[Yy]* )
+			# Install packages
 			sudo pacman -S xbindkeys xautomation --needed
+			# Create config file
+			if [ ! -f $HOME/.xbindkeysrc ]; then
+				echo "# forward button => workspace up"  > $HOME/.xbindkeysrc
+				echo "\"xte 'keydown Super_L' 'key Page_Up' 'keyup Super_L'\"" >> $HOME/.xbindkeysrc
+				echo "	b:9" >> $HOME/.xbindkeysrc
+				echo "" >> $HOME/.xbindkeysrc
+				echo "# backward button => workspace down" >> $HOME/.xbindkeysrc
+				echo "\"xte 'keydown Super_L' 'key Page_Down' 'keyup Super_L'\"" >> $HOME/.xbindkeysrc
+				echo "	b:8" >> $HOME/.xbindkeysrc
+				echo "" >> $HOME/.xbindkeysrc
+				echo "# Shift + forward button => move window up" >> $HOME/.xbindkeysrc
+				echo "\"xte 'keydown Super_L' 'keydown Shift_L' 'key Page_Up' 'keyup Shift_L' 'keyup Super_L'\"" >> $HOME/.xbindkeysrc
+				echo "	Shift + b:9" >> $HOME/.xbindkeysrc
+				echo "" >> $HOME/.xbindkeysrc
+				echo "# Shift + backward button => move window down" >> $HOME/.xbindkeysrc
+				echo "\"xte 'keydown Super_L' 'keydown Shift_L' 'key Page_Down' 'keyup Shift_L' 'keyup Super_L'\"" >> $HOME/.xbindkeysrc
+				echo "	Shift + b:8" >> $HOME/.xbindkeysrc
+			else
+				show_info "The config file already exists"
+			fi
+			# Start process
+			pkill xbindkeys ; xbindkeys
 			clear && config-hardware
 			;;
 		# Negative action
