@@ -71,7 +71,7 @@ function apps-standard {
 	echo " 1) Install basic apps?        [27]"
 	echo " 2) Install basic games?       [4]"
 	echo " 3) Install development tools? [7]"
-	echo " 4) Install exclusive apps?    [35]"
+	echo " 4) Install exclusive apps?    [36]"
 	echo " 5) Install exclusive games?   [5]"
 	echo
 	echo " 6) Install GDM?"
@@ -189,13 +189,13 @@ function apps-standard {
 	4)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard
 			;;
