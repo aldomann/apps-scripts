@@ -45,44 +45,40 @@ function applications {
 	show_info 'What would you like to do?'
 	echo
 	# echo "0) Perform system update and upgrade?"
-	echo "1) Install standard applications?"
-	echo "2) Install Flatpak applications?"
-	echo "3) Install AUR applications?"
+	echo "1) Install standard application groups?"
+	echo "2) Install standard standalone applications?"
+	echo "3) Install Flatpak applications?"
+	echo "4) Install AUR applications?"
 	echo
 	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
-		1) clear && apps-standard;; # Install standard apps
-		2) clear && apps-flatpak;;  # Install Flatpak apps
-		3) clear && apps-aur;;      # Install AUR apps
-		[Rr]*) clear && main;;      # Return
+		1) clear && apps-standard-groups;;     # Install standard apps
+		2) clear && apps-standard-standalone;; # Install standard apps
+		3) clear && apps-flatpak;;             # Install Flatpak apps
+		4) clear && apps-aur;;                 # Install AUR apps
+		[Rr]*) clear && main;;                 # Return
 		# Invalid choice
 		* ) clear && show_error 'Not an option, try again.' && applications;;
 	esac
 }
 
 # ----------------------------------------------------------------------
-function apps-standard {
+function apps-standard-groups {
 	show_info 'What would you like to do?'
 	echo
-	echo " 0) Set up Pacman configuration?"
+	echo "0) Set up Pacman configuration?"
 	echo
-	echo " 1) Install basic apps?        [27]"
-	echo " 2) Install basic games?       [4]"
-	echo " 3) Install development tools? [7]"
-	echo " 4) Install exclusive apps?    [36]"
-	echo " 5) Install exclusive games?   [5]"
+	echo "1) Install basic apps?        [27]"
+	echo "2) Install basic games?       [4]"
+	echo "3) Install development tools? [7]"
+	echo "4) Install exclusive apps?    [38]"
+	echo "5) Install exclusive games?   [5]"
 	echo
-	echo " 6) Install GDM?"
-	echo " 7) Install Oh My Zsh?"
-	echo " 8) Install Sublime Text?"
-	echo " 9) Install Wine?"
-	echo "10) Install TeXLive?"
+	echo "u) Uninstall unused apps?     [16]"
 	echo
-	echo " u) Uninstall unused apps?     [16]"
-	echo
-	echo " r) Return?"
+	echo "r) Return?"
 	echo
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
@@ -100,15 +96,15 @@ function apps-standard {
 			fi
 			sudo sed -i 's@#Color@Color@g' /etc/pacman.conf
 			sudo sed -i ':a;N;$!ba;s@#\[multilib\]\n#Include = /etc/pacman.d/mirrorlist@\[multilib\]\nInclude = /etc/pacman.d/mirrorlist@g' /etc/pacman.conf
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -125,15 +121,15 @@ function apps-standard {
 		[Yy]* )
 			sudo pacman -S arc-gtk-theme bleachbit chrome-gnome-shell ffmpegthumbnailer gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji onlyoffice p7zip pepper-flash reflector simple-scan subdl tilix transmission-cli yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es --needed
 			notify-send "Installation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -149,15 +145,15 @@ function apps-standard {
 		[Yy]* )
 			sudo pacman -S aisleriot gnome-mahjongg gnome-mines quadrapassel --needed
 			notify-send "Installation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -173,15 +169,15 @@ function apps-standard {
 		[Yy]* )
 			sudo pacman -S android-tools base-devel bzr gcc-fortran gdal git ruby --needed
 			notify-send "Installation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -189,23 +185,23 @@ function apps-standard {
 	4)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -221,140 +217,15 @@ function apps-standard {
 		[Yy]* )
 			sudo pacman -S dolphin-emu gameconqueror retroarch steam steam-native-runtime --needed
 			notify-send "Installation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
-			;;
-		esac
-		;;
-	# Install GDM
-	6)
-		show_info 'Installing GDM...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# SRC: http://drunkensloth.weebly.com/home/how-to-switch-from-lightdm-to-gdm-or-any-other-display-manager-on-antergos-or-arch-linux
-			sudo pacman -S gdm --needed
-			sudo systemctl disable lightdm.service
-			sudo systemctl enable gdm.service
-			PKG="lightdm"
-			if [[ -n $(pacman -Qs $PKG) ]]; then
-				sudo pacman -Rncs $PKG
-			fi
-			clear && apps-standard
-			;;
-		# Negative action
-		[Nn]* )
-			clear && apps-standard
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
-			;;
-		esac
-		;;
-	# Install Oh My Zsh
-	7)
-		show_info 'Installing Oh My Zsh...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# SRC: https://github.com/robbyrussell/oh-my-zsh
-			sudo pacman -S zsh --needed
-			sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-			clear && apps-standard
-			;;
-		# Negative action
-		[Nn]* )
-			clear && apps-standard
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
-			;;
-		esac
-		;;
-	# Install Sublime Text
-	8)
-		show_info 'Installing Sublime Text...'
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			# Install the GPG key
-			curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
-			# Enable Stable Channel
-			echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-			sudo pacman -Syy
-			sudo pacman -S sublime-text
-			clear && apps-standard
-			;;
-		# Negative action
-		[Nn]* )
-			clear && apps-standard
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
-			;;
-		esac
-		;;
-	# Install Wine
-	9)
-		show_info 'Installing Wine...'
-		echo
-		echo "Current package list: wine-staging wine-mono wine_gecko winetricks"
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo pacman -S wine-staging wine-mono wine_gecko winetricks --needed
-			notify-send "Installation was successful"
-			clear && apps-standard
-			;;
-		# Negative action
-		[Nn]* )
-			clear && apps-standard
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
-			;;
-		esac
-		;;
-	# Install TeXLive
-	10)
-		show_info 'Installing TeXLive...'
-		echo
-		echo "Current package list: texlive-most"
-		echo
-		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
-		case $REPLY in
-		# Positive action
-		[Yy]* )
-			sudo pacman -S texlive-most
-			notify-send "Installation was successful"
-			clear && apps-standard
-			;;
-		# Negative action
-		[Nn]* )
-			clear && apps-standard
-			;;
-		# Error
-		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -372,15 +243,15 @@ function apps-standard {
 			sudo pacman -R antergos-common-meta antergos-gnome-meta;
 			sudo pacman -Rncs brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
 			notify-send "Uninstallation was successful"
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Negative action
 		[Nn]* )
-			clear && apps-standard
+			clear && apps-standard-groups
 			;;
 		# Error
 		* )
-			clear && show_error 'Sorry, try again.' && apps-standard
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
 			;;
 		esac
 		;;
@@ -389,7 +260,180 @@ function apps-standard {
 		clear && applications;;
 	# Invalid choice
 	* )
-		clear && show_error 'Not an option, try again.' && apps-standard;;
+		clear && show_error 'Not an option, try again.' && apps-standard-groups;;
+	esac
+}
+# ----------------------------------------------------------------------
+function apps-standard-standalone {
+	show_info 'What would you like to do?'
+	echo
+	echo "1) Install GDM?"
+	echo "2) Install Oh My Zsh?"
+	echo "3) Install Sublime Text?"
+	echo "4) Install Wine?"
+	echo "5) Install TeXLive?"
+	echo
+	echo "r) Return?"
+	echo
+	show_info 'Enter your choice:' && read REPLY
+	case $REPLY in
+	# Install GDM
+	1)
+		show_info 'Installing GDM...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# SRC: http://drunkensloth.weebly.com/home/how-to-switch-from-lightdm-to-gdm-or-any-other-display-manager-on-antergos-or-arch-linux
+			sudo pacman -S gdm --needed
+			sudo systemctl disable lightdm.service
+			sudo systemctl enable gdm.service
+			PKG="lightdm"
+			if [[ -n $(pacman -Qs $PKG) ]]; then
+				sudo pacman -Rncs $PKG
+			fi
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Install Oh My Zsh
+	2)
+		show_info 'Installing Oh My Zsh...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# SRC: https://github.com/robbyrussell/oh-my-zsh
+			sudo pacman -S zsh --needed
+			sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Install Sublime Text
+	3)
+		show_info 'Installing Sublime Text...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			# Install the GPG key
+			curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+			# Enable Stable Channel
+			echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+			sudo pacman -Syy
+			sudo pacman -S sublime-text
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Install Wine
+	4)
+		show_info 'Installing Wine...'
+		echo
+		echo "Current package list: wine-staging wine-mono wine_gecko winetricks"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S wine-staging wine-mono wine_gecko winetricks --needed
+			notify-send "Installation was successful"
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Install TeXLive
+	5)
+		show_info 'Installing TeXLive...'
+		echo
+		echo "Current package list: texlive-most"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S texlive-most
+			notify-send "Installation was successful"
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Uninstall apps
+	[Uu]*)
+		show_info 'Uninstalling unused apps...'
+		echo
+		echo "Current package list: brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
+		# EXCLUSIVE: gedit sound-juicer
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -R antergos-common-meta antergos-gnome-meta;
+			sudo pacman -Rncs brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
+			notify-send "Uninstallation was successful"
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Return
+	[Rr]*)
+		clear && applications;;
+	# Invalid choice
+	* )
+		clear && show_error 'Not an option, try again.' && apps-standard-standalone;;
 	esac
 }
 # ----------------------------------------------------------------------
