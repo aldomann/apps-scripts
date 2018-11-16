@@ -70,13 +70,15 @@ function apps-standard-groups {
 	echo
 	echo "0) Set up Pacman configuration?"
 	echo
-	echo "1) Install basic apps?        [27]"
-	echo "2) Install basic games?       [4]"
-	echo "3) Install development tools? [7]"
-	echo "4) Install exclusive apps?    [38]"
-	echo "5) Install exclusive games?   [5]"
+	echo "1) Install basic apps?         [27]"
+	echo "2) Install basic games?        [4]"
+	echo "3) Install development tools?  [7]"
+	echo "4) Install exclusive apps?     [29]"
+	echo "5) Install exclusive games?    [5]"
+	echo "6) Install energy saving apps? [5]"
+	echo "7) Install Qt config tools?    [3]"
 	echo
-	echo "u) Uninstall unused apps?     [16]"
+	echo "u) Uninstall unused apps?      [16]"
 	echo
 	echo "r) Return?"
 	echo
@@ -185,13 +187,13 @@ function apps-standard-groups {
 	4)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins"
+		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass vnstat youtube-dl"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch vnstat youtube-dl powertop tlp tlp-rdw acpi_call-dkms kde-gtk-config qt5ct qt5-styleplugins --needed
+			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape kompare mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass vnstat youtube-dl --needed
 			notify-send "Installation was successful"
 			clear && apps-standard-groups
 			;;
@@ -216,6 +218,54 @@ function apps-standard-groups {
 		# Positive action
 		[Yy]* )
 			sudo pacman -S dolphin-emu gameconqueror retroarch steam steam-native-runtime --needed
+			notify-send "Installation was successful"
+			clear && apps-standard-groups
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-groups
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
+			;;
+		esac
+		;;
+	# Install energy saving apps
+	6)
+		show_info 'Installing energy saving apps...'
+		echo
+		echo "Current package list: gnome-power-manager powertop tlp tlp-rdw acpi_call-dkms"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S gnome-power-manager powertop tlp tlp-rdw acpi_call-dkms --needed
+			notify-send "Installation was successful"
+			clear && apps-standard-groups
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-groups
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-groups
+			;;
+		esac
+		;;
+	# Install Qt config tools
+	7)
+		show_info 'Installing Qt config tools...'
+		echo
+		echo "Current package list: kde-gtk-config qt5ct qt5-styleplugins"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S kde-gtk-config qt5ct qt5-styleplugins --needed
 			notify-send "Installation was successful"
 			clear && apps-standard-groups
 			;;
@@ -272,6 +322,7 @@ function apps-standard-standalone {
 	echo "3) Install Sublime Text?"
 	echo "4) Install Wine?"
 	echo "5) Install TeXLive?"
+	echo "6) Install VirtualBox?"
 	echo
 	echo "r) Return?"
 	echo
@@ -389,6 +440,30 @@ function apps-standard-standalone {
 		# Positive action
 		[Yy]* )
 			sudo pacman -S texlive-most
+			notify-send "Installation was successful"
+			clear && apps-standard-standalone
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-standard-standalone
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-standard-standalone
+			;;
+		esac
+		;;
+	# Install VirtualBox
+	6)
+		show_info 'Installing VirtualBox...'
+		echo
+		echo "Current package list: virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch"
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			sudo pacman -S virtualbox virtualbox-guest-modules-arch virtualbox-host-modules-arch --needed
 			notify-send "Installation was successful"
 			clear && apps-standard-standalone
 			;;
