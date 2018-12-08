@@ -72,7 +72,7 @@ function apps-standard-groups {
 	echo
 	echo "1) Install basic apps?         [27]"
 	echo "2) Install basic games?        [4]"
-	echo "3) Install development tools?  [7]"
+	echo "3) Install development tools?  [8]"
 	echo "4) Install exclusive apps?     [29]"
 	echo "5) Install exclusive games?    [5]"
 	echo "6) Install energy saving apps? [5]"
@@ -161,15 +161,15 @@ function apps-standard-groups {
 		;;
 	# Install development tools
 	3)
-		show_info 'Installing exclusive apps...'
+		show_info 'Installing development tools...'
 		echo
-		echo "Current package list: android-tools base-devel bzr gcc-fortran gdal git ruby"
+		echo "Current package list: android-tools base-devel bzr gcc-fortran gdal git ruby ruby-rdoc"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools base-devel bzr gcc-fortran gdal git ruby --needed
+			sudo pacman -S android-tools base-devel bzr gcc-fortran gdal git ruby ruby-rdoc --needed
 			notify-send "Installation was successful"
 			clear && apps-standard-groups
 			;;
