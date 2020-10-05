@@ -56,9 +56,9 @@ function applications {
 	case $REPLY in
 		1) clear && apps-groups;;     # Install standard apps
 		2) clear && apps-standalone;; # Install standard apps
-		3) clear && apps-flatpak;;             # Install Flatpak apps
-		4) clear && apps-aur;;                 # Install AUR apps
-		[Rr]*) clear && main;;                 # Return
+		3) clear && apps-flatpak;;    # Install Flatpak apps
+		4) clear && apps-aur;;        # Install AUR apps
+		[Rr]*) clear && main;;        # Return
 		# Invalid choice
 		* ) clear && show_error 'Not an option, try again.' && applications;;
 	esac
@@ -72,7 +72,7 @@ function apps-groups {
 	echo
 	echo "1) Install basic apps?         [27]"
 	echo "2) Install basic games?        [4]"
-	echo "3) Install development tools?  [8]"
+	echo "3) Install development tools?  [11]"
 	echo "4) Install exclusive apps?     [29]"
 	echo "5) Install exclusive games?    [5]"
 	echo "6) Install energy saving apps? [5]"
@@ -163,13 +163,13 @@ function apps-groups {
 	3)
 		show_info 'Installing development tools...'
 		echo
-		echo "Current package list: android-tools base-devel bzr gcc-fortran gdal git ruby ruby-rdoc"
+		echo "Current package list: android-tools base-devel bzr fiji-bin gcc-fortran gdal git rstudio-desktop sublime-merge sublime-text vim"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S android-tools base-devel bzr gcc-fortran gdal git ruby ruby-rdoc --needed
+			sudo pacman -S android-tools base-devel bzr fiji-bin gcc-fortran gdal git rstudio-desktop sublime-merge sublime-text vim --needed
 			notify-send "Installation was successful"
 			clear && apps-groups
 			;;
