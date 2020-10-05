@@ -517,7 +517,7 @@ function apps-flatpak {
 	echo
 	echo "0) Set up Flatpak repositories?"
 	echo
-	echo "1) Install basic apps?    [6]"
+	echo "1) Install basic apps?    [4]"
 	echo "2) Uninstall unused apps?"
 	echo
 	echo "r) Return?"
@@ -551,19 +551,17 @@ function apps-flatpak {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: com.discordapp.Discord com.googleplaymusicdesktopplayer.GPMDP com.skype.Client org.gnome.Podcasts"
+		echo "Current package list: org.DolphinEmu.dolphin-emu com.spotify.Client com.elsevier.MendeleyDesktop com.github.junrrein.PDFSlicer org.onlyoffice.desktopeditors"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			flatpak install flathub \
-			com.discordapp.Discord \
+			flatpak --system install flathub \
+			org.DolphinEmu.dolphin-emu \
+			com.spotify.Client \
 			com.elsevier.MendeleyDesktop \
-			com.github.needleandthread.vocal \
-			com.googleplaymusicdesktopplayer.GPMDP \
-			com.skype.Client \
-			org.gnome.Podcasts
+			org.onlyoffice.desktopeditors
 			notify-send "Installation was successful"
 			clear && apps-flatpak
 			;;
