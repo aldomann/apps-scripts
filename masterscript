@@ -73,7 +73,7 @@ function apps-groups {
 	echo "1) Install basic apps?         [27]"
 	echo "2) Install basic games?        [4]"
 	echo "3) Install development tools?  [11]"
-	echo "4) Install exclusive apps?     [29]"
+	echo "4) Install exclusive apps?     [39]"
 	echo "5) Install exclusive games?    [5]"
 	echo "6) Install energy saving apps? [5]"
 	echo "7) Install Qt config tools?    [3]"
@@ -187,13 +187,13 @@ function apps-groups {
 	4)
 		show_info 'Installing exclusive apps...'
 		echo
-		echo "Current package list: adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape mkvtoolnix-cli pdftk pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass vnstat youtube-dl"
+		echo "Current package list: authy colordiff dconf-editor discord fdupes feedreader filemanager-actions flatpak flatpak-builder fluidsynth foliate fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-sound-recorder gparted gpick hexchat htop inkscape masterpdfeditor-free megasync mkvtoolnix-cli pamac-aur pdfslicer peek pngquant sigil soundfont-fluid sshpass stremio teamviewer telegram-desktop tor-browser whatsapp-nativefier youtube-dl"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S adobe-source-han-sans-otc-fonts colordiff dconf-editor dosbox fdupes filemanager-actions flatpak flatpak-builder fluidsynth fractal fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-usage hamster-time-tracker inkscape mkvtoolnix-cli pngquant pulseeffects python2-nautilus sigil soundfont-fluid sshpass vnstat youtube-dl --needed
+			sudo pacman -S authy colordiff dconf-editor discord fdupes feedreader filemanager-actions flatpak flatpak-builder fluidsynth foliate fwupd gaupol gimp gnome-characters gnome-clocks gnome-epub-thumbnailer gnome-sound-recorder gparted gpick hexchat htop inkscape masterpdfeditor-free megasync mkvtoolnix-cli pamac-aur pdfslicer peek pngquant sigil soundfont-fluid sshpass stremio teamviewer telegram-desktop tor-browser whatsapp-nativefier youtube-dl --needed
 			notify-send "Installation was successful"
 			clear && apps-groups
 			;;
