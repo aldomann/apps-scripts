@@ -68,7 +68,8 @@ function applications {
 function apps-groups {
 	show_info 'What would you like to do?'
 	echo
-	echo "0) Set up Pacman configuration?"
+	echo "p) Set up Pacman configuration?"
+	echo "y) Set up Yay configuration?"
 	echo
 	echo "1) Install basic apps?         [27]"
 	echo "2) Install basic games?        [4]"
@@ -85,7 +86,7 @@ function apps-groups {
 	show_info 'Enter your choice:' && read REPLY
 	case $REPLY in
 	# Set up Pacman configuration
-	0)
+	p)
 		show_info 'Seting up Pacman configuration...'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
@@ -98,6 +99,27 @@ function apps-groups {
 			fi
 			sudo sed -i 's@#Color@Color@g' /etc/pacman.conf
 			sudo sed -i ':a;N;$!ba;s@#\[multilib\]\n#Include = /etc/pacman.d/mirrorlist@\[multilib\]\nInclude = /etc/pacman.d/mirrorlist@g' /etc/pacman.conf
+			clear && apps-groups
+			;;
+		# Negative action
+		[Nn]* )
+			clear && apps-groups
+			;;
+		# Error
+		* )
+			clear && show_error 'Sorry, try again.' && apps-groups
+			;;
+		esac
+		;;
+	# Set up Yay configuration
+	y)
+		show_info 'Seting up Yay configuration...'
+		echo
+		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
+		case $REPLY in
+		# Positive action
+		[Yy]* )
+			yay --editmenu --nodiffmenu --combinedupgrade --save
 			clear && apps-groups
 			;;
 		# Negative action
@@ -558,7 +580,6 @@ function apps-flatpak {
 		# Positive action
 		[Yy]* )
 			flatpak --system install flathub \
-			org.DolphinEmu.dolphin-emu \
 			com.spotify.Client \
 			com.elsevier.MendeleyDesktop \
 			org.onlyoffice.desktopeditors
