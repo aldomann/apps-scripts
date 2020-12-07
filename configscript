@@ -409,7 +409,7 @@ function config-apps {
 			if [ ! -d ~/.config/mpv ]; then
 				mkdir ~/.config/mpv
 			fi
-			echo 'osd-font="Roboto"' > ~/.config/mpv/mpv.conpf
+			echo 'osd-font="Roboto"' > ~/.config/mpv/mpv.conf
 			echo 'sub-font="Myriad Pro"' >> ~/.config/mpv/mpv.conf
 			echo '#sub-font="Helvetica Neue LT Std"' >> ~/.config/mpv/mpv.conf
 			echo 'sub-font-size=60' >> ~/.config/mpv/mpv.conf
