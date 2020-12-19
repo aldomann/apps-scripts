@@ -72,15 +72,15 @@ function apps-groups {
 	echo "p) Set up Pacman configuration?"
 	echo "y) Set up Yay configuration?"
 	echo
-	echo "1) Install basic apps?         [27]"
-	echo "2) Install basic games?        [4]"
-	echo "3) Install development tools?  [11]"
-	echo "4) Install exclusive apps?     [41]"
-	echo "5) Install exclusive games?    [5]"
-	echo "6) Install energy saving apps? [5]"
-	echo "7) Install Qt config tools?    [3]"
+	echo "1) Install basic apps?                  [27]"
+	echo "2) Install basic games?                 [4]"
+	echo "3) Install development tools?           [11]"
+	echo "4) Install exclusive apps?              [41]"
+	echo "5) Install exclusive games?             [5]"
+	echo "6) Install energy saving apps?          [5]"
+	echo "7) Install Qt config tools?             [3]"
 	echo
-	echo "u) Uninstall unused apps?      [16]"
+	echo "u) Uninstall unused apps?               [52]"
 	echo
 	echo "r) Return?"
 	echo
@@ -306,15 +306,16 @@ function apps-groups {
 	[Uu]*)
 		show_info 'Uninstalling unused apps...'
 		echo
-		echo "Current package list: brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
-		# EXCLUSIVE: gedit sound-juicer
+		# Antergos list
+		# echo "Current package list: brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem"
+		# ArcoLinux D list
+		echo "Current package list: accerciser arandr arcolinux-wallpapers-git arcolinux-welcome-app-git devhelp epiphany five-or-more four-in-a-row gedit ghex gksu glade gnome-books gnome-boxes gnome-builder gnome-chess gnome-contacts gnome-documents gnome-klotski gnome-mahjongg gnome-maps gnome-mines gnome-multi-writer gnome-music gnome-nibbles gnome-photos gnome-recipes gnome-robots gnome-shell-extensions gnome-software gnome-sudoku gnome-taquin gnome-terminal gnome-tetravex gnome-todo gnome-usage gnome-weather hitori iagno lightsoff polari quadrapassel rxvt-unicode swell-foop tali termite totem urxvt-perls urxvt-resize-font-git volumeicon yelp whois"
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -R antergos-common-meta antergos-gnome-meta;
-			sudo pacman -Rncs brasero chromium gedit gnome-contacts gnome-documents gnome-maps gnome-music gnome-photos gnome-sound-recorder gnome-weather htop numix-frost-themes numix-icon-theme numix-icon-theme-square polari totem
+			sudo pacman -R accerciser arandr arcolinux-wallpapers-git arcolinux-welcome-app-git devhelp epiphany five-or-more four-in-a-row gedit ghex gksu glade gnome-books gnome-boxes gnome-builder gnome-chess gnome-contacts gnome-documents gnome-klotski gnome-mahjongg gnome-maps gnome-mines gnome-multi-writer gnome-music gnome-nibbles gnome-photos gnome-recipes gnome-robots gnome-shell-extensions gnome-software gnome-sudoku gnome-taquin gnome-terminal gnome-tetravex gnome-todo gnome-usage gnome-weather hitori iagno lightsoff polari quadrapassel rxvt-unicode swell-foop tali termite totem urxvt-perls urxvt-resize-font-git volumeicon yelp whois
 			notify-send "Uninstallation was successful"
 			clear && apps-groups
 			;;
@@ -542,7 +543,7 @@ function apps-flatpak {
 	echo
 	echo "0) Set up Flatpak repositories?"
 	echo
-	echo "1) Install basic apps?    [4]"
+	echo "1) Install basic apps?                  [4]"
 	echo "2) Uninstall unused apps?"
 	echo
 	echo "r) Return?"
@@ -1216,7 +1217,7 @@ function cleanup {
 		echo
 		cleanup
 		;;
-	# Clean package cache (yay)
+	# Clean package cache (paru)
 	2)
 		show_info 'Cleaning package cache...'
 		paru -Sc
