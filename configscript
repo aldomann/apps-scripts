@@ -308,7 +308,6 @@ function config-apps {
 	echo
 	echo "1) Create .Rprofile?        (local)"
 	echo "2) Change RStudio settings? (local)"
-	echo "3) Sublime Text?            (WIP)"
 	echo "4) Change mpv config files? (local)"
 	echo "5) True Solarized Tilix?    (local)"
 	echo
@@ -399,7 +398,7 @@ function config-apps {
 	# Change mpv config files
 	4)
 		show_info 'Changing mpv config files...'
-		show_info 'This will create/modify mpv.conf & lua-settings/osc.conf'
+		show_info 'This will create/modify mpv.conf & script-opts/osc.conf'
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
@@ -419,15 +418,15 @@ function config-apps {
 			echo 'screenshot-template=mpv-%F-shot%n-%p' >> ~/.config/mpv/mpv.conf
 			echo 'ytdl-format=bestvideo[height<=?1080][fps<=?60][vcodec!=?vp9]+bestaudio/best' >> ~/.config/mpv/mpv.conf
 			# OSC settings
-			if [ ! -d ~/.config/mpv/lua-settings ]; then
-				mkdir ~/.config/mpv/lua-settings
+			if [ ! -d ~/.config/mpv/script-opts ]; then
+				mkdir ~/.config/mpv/script-opts
 			fi
-			echo '#layout=box' > ~/.config/mpv/lua-settings/osc.conf
-			echo '#seekbarstyle=slider' >> ~/.config/mpv/lua-settings/osc.conf
-			echo 'deadzonesize=0' >> ~/.config/mpv/lua-settings/osc.conf
-			echo 'minmousemove=10' >> ~/.config/mpv/lua-settings/osc.conf
-			echo '#scalewindowed=1.5' >> ~/.config/mpv/lua-settings/osc.conf
-			echo 'scalefullscreen=1.2' >> ~/.config/mpv/lua-settings/osc.conf
+			echo '#layout=box' > ~/.config/mpv/script-opts/osc.conf
+			echo '#seekbarstyle=slider' >> ~/.config/mpv/script-opts/osc.conf
+			echo 'deadzonesize=0' >> ~/.config/mpv/script-opts/osc.conf
+			echo 'minmousemove=10' >> ~/.config/mpv/script-opts/osc.conf
+			echo '#scalewindowed=1.5' >> ~/.config/mpv/script-opts/osc.conf
+			echo 'scalefullscreen=1.2' >> ~/.config/mpv/script-opts/osc.conf
 			clear && config-apps
 			;;
 		# Negative action
