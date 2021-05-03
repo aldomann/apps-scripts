@@ -72,7 +72,7 @@ function apps-groups {
 	echo "p) Set up Pacman configuration?"
 	echo "y) Set up Yay configuration?"
 	echo
-	echo "1) Install basic apps?                  [27]"
+	echo "1) Install basic apps?                  [28]"
 	echo "2) Install basic games?                 [4]"
 	echo "3) Install development tools?           [11]"
 	echo "4) Install exclusive apps?              [41]"
@@ -137,14 +137,14 @@ function apps-groups {
 	1)
 		show_info 'Installing basic apps...'
 		echo
-		echo "Current package list: bleachbit calibre chrome-gnome-shell ffmpegthumbnailer google-chrome gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan tilix transmission-cli transmission-gtk yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es"
+		echo "Current package list: bleachbit calibre chrome-gnome-shell ffmpegthumbnailer google-chrome gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-cjk noto-fonts-emoji p7zip pepper-flash reflector simple-scan tilix transmission-cli transmission-gtk yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es"
 		# [Not installed]: gbrainy sound-juicer
 		echo
 		show_info 'Proceed? (Y)es, (N)o :' && read REPLY
 		case $REPLY in
 		# Positive action
 		[Yy]* )
-			sudo pacman -S bleachbit calibre chrome-gnome-shell ffmpegthumbnailer google-chrome gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-emoji p7zip pepper-flash reflector simple-scan tilix transmission-cli transmission-gtk yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es --needed
+			sudo pacman -S bleachbit calibre chrome-gnome-shell ffmpegthumbnailer google-chrome gvfs-goa gvfs-google icedtea-web jre8-openjdk libappindicator-gtk3 mlocate mpv noto-fonts-cjk noto-fonts-emoji p7zip pepper-flash reflector simple-scan tilix transmission-cli transmission-gtk yay aspell-ca aspell-en aspell-es hunspell-en_GB hunspell-en_US hunspell-es_es --needed
 			notify-send "Installation was successful"
 			clear && apps-groups
 			;;
